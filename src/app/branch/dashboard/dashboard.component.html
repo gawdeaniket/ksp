@@ -1,0 +1,28 @@
+
+
+
+
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container" >
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+               (closed)="events.push('close!')">
+    Sidenav content
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+    <p>Events:</p>
+    <div class="example-events">
+      <div *ngFor="let e of events">{{e}}</div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
