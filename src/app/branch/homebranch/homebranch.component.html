@@ -1,0 +1,279 @@
+
+
+<!-- <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
+ -->
+
+
+<div *ngIf="alertBox" class="alert alert-success alert-dismissible">
+    
+    <strong style="font-size: 18px;">Alert!!...</strong><br> You have {{failures.length}} Failures Results.<br>and {{success.length}} Success Results
+    
+    <button  data-dismiss="alert" (click)="reload()" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    OK</button>
+    
+  </div>
+
+  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;">
+    
+    <strong style="font-size: 18px;">You have {{markItem}} order mark as received <br>are you sure  you want to mark recived</strong><br> 
+    <div style="width: 100%;">
+    <button  data-dismiss="alert" (click)="markReceived()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+        OK</button>
+    <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    CANCEL</button>
+    </div>
+    
+  </div>
+  
+
+
+
+  <br><br>
+<!-- card -->
+
+ 
+  
+  <div class="card-columns">
+    <div class="card " >
+      <div class="card-body text-center">
+          <p class="card-text textnumber" style="font-size:20px;">{{glpCount }}</p>
+          <p class="card-text">Branch Not Received</p>
+      </div>
+    </div>
+    <!-- <div class="card centerline">
+        </div>
+        <span class="glyphicon glyphicon-play icons"></span> -->
+    <div class="card  right ">
+      <div class="card-body text-center">
+          <p class="card-text textnumber" style="font-size:20px;" color="primary">{{receivedCount}}</p>
+          <p class="card-text">Branch Received</p>
+      </div>
+    </div>
+</div>
+
+<!-- Search bar  received-->
+<div style="width: 100%;margin-top: 6vh;" *ngIf="recivedactive">
+  <div class="container" style="padding:0px;">
+  <div class="search-container">
+      
+      <input type="text" style="font-size: 12px;" [(ngModel)]="receivedSearchText" autocomplete="off" placeholder="Search by invoice Id" name="search" style="border:none;">
+      <button type="submit" style="border-radius:10px;background-color: #eeeeee;border:none;">Submit</button>
+   
+  </div>
+  </div>
+  
+  <!-- <div class="row" style="width: 90%;margin-left: 5%;margin-right: 5%;">
+      <div class="col-xs-4 col-sm-4 col-lg-2 text-style" style="text-align: center;">Order Date</div>
+        <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+          <input  style="border:none;width: 80%;margin: 0px;"
+                 placeholder="Start Date"
+                 ngModel
+                 #recstart="bsDatepicker"
+                 bsDatepicker [(ngModel)]="received_startDate"
+                 >
+                 <i class="material-icons" (click)="recstart.toggle()" style="float:right;padding-top: 0.4vh;" >date_range</i>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-1 text-style" style="cursor: pointer;text-align: center;font-size: 16px;"> TO</div>
+        <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+          <input  style="border:none;width: 80%;margin: 0px;"
+                 placeholder="End Date"
+                 ngModel
+                 #resend="bsDatepicker"
+                 bsDatepicker [(ngModel)]="received_endDate"
+                 >
+                 <i class="material-icons" (click)="resend.toggle()"  style="float:right;padding-top: 0.4vh;" >date_range</i>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-2" style="cursor: pointer;padding: 0.4vh;margin-left:1vw;">
+            <button type="button" class="btn btn-primary" (click)="DateFilter()">Submit</button>
+        </div>
+      </div> -->
+    </div>
+
+<!-- Search bar  not received-->
+<div style="width: 100%;margin-top: 6vh;" *ngIf="notrecivedactive">
+  <div class="container" style="padding:0px;" >
+  <div class="search-container">
+      
+      <input type="text" [(ngModel)]="notreceivedSearchText" autocomplete="off" placeholder="Search By Customer Name" name="search" style="border:none;">
+      <button type="submit" style="cursor: pointer;border-radius:10px;background-color: #eeeeee;border:none;">Submit</button>
+   
+  </div>
+  </div>
+  <br><br>
+  <!-- <div class="row" style="width: 90%;margin-left: 5%;margin-right: 5%;">
+    <div class="col-xs-4 col-sm-4 col-lg-2 text-style" style="text-align: center;">Order Date</div>
+      <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows cursor" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+        <input  style="border:none;width: 80%;margin: 0px;cursor: pointer;"
+               placeholder="Start Date"
+               ngModel
+               #notResStart="bsDatepicker"
+               bsDatepicker [(ngModel)]="notreceived_startDate"
+               >
+               <i class="material-icons"  (click)="notResStart.toggle()" style="float:right;padding-top: 0.4vh;" >date_range</i>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-1 text-style" style="text-align: center;font-size: 16px;"> TO</div>
+      <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+        <input  style="border:none;width: 80%;margin: 0px;cursor: pointer;"
+               placeholder="End Date"
+               ngModel
+               #notResEnd="bsDatepicker"
+               bsDatepicker [(ngModel)]="notreceived_endDate"
+               >
+               <i class="material-icons" (click)="notResEnd.toggle()"  style="float:right;padding-top: 0.4vh;" >date_range</i>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-2" style="cursor: pointer;padding: 0.4vh;margin-left:1vw;">
+          <button type="button" class="btn btn-primary" (click)="DateFilter()">Submit</button>
+      </div>
+    </div> -->
+  <!-- <div class="container" >
+    <div class="center-block" >
+      <label for="dateOfBirth" style="display:inline;float:left;margin-top:2vh;" >Not Received Date &nbsp;</label>
+     <div style="display: inline;float: left;width:40%;padding:5px;margin-left:15px;border:none;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);background-color: #ffffff;">
+      <input id="dateOfBirth" placeholder="Select Date" type="text" 
+              bsDaterangepicker [bsConfig]="datePickerConfig" [(ngModel)]="notrecvieddate" [isOpen]="isOpen" style="width:80% !important;padding:5px;border:none; " />
+              <i class="material-icons"  style="float:right;padding-top: 0.4vh;" >date_range</i> 
+     </div>
+            </div>
+    </div> -->
+    </div>
+
+<!-- Tabs -->
+  <div class="container box-shadows" style="margin-top:3vh;padding: 0px;margin-bottom: 6vh;"> 
+      <div class="panel with-nav-tabs panel-default cursor" style="margin:0px;">
+        <div class="panel-heading">
+                <ul class="nav nav-tabs cursor">
+                    <li class="active"(click)="tabcheck('Received')" style="cursor: pointer;">
+                      <a href="#tab1default" data-toggle="tab">Received</a>
+                    </li>
+                    <li>
+                      <a href="#tab2default" (click)="tabcheck('NotReceived')" data-toggle="tab">Not Received</a>
+                    </li>
+                    
+                  
+                </ul>
+        </div>
+        <div class="panel-body" >
+            <div class="tab-content" >
+                <div class="tab-pane fade in active cursor" id="tab1default" *ngIf="recivedactive">
+                    <div style="overflow:auto;padding-bottom: 2vh;">
+                  <table >
+                    <tr>
+                      <th (click)="Received_setOrder('invoice_id')">Invoice ID</th>
+                      <th (click)="sortByDate()">Order Date</th>
+                      <th (click)="Received_setOrder('order_date')">Product Name</th>
+                      <th (click)="Received_setOrder('product_name')">Branch Id</th>
+                      <th (click)="Received_setOrder('branch_id')">Status</th>
+                      <th (click)="Received_setOrder('status')">Name</th>
+                      <th (click)="Received_setOrder('name')">Phone Number</th>
+                      <th (click)="Received_setOrder('phone_number')">Email</th>
+                      <th >Address</th>
+                      <th >City</th>
+                      <th >State</th>
+                      <th >Pincode</th>
+                      <th >Country</th>
+                      <th (click)="Received_setOrder('client_id')">Client Id</th>
+                      <th (click)="Received_setOrder('approval_id')">Approal Id</th>
+                      
+                    </tr>
+                    <tr *ngIf="recived.length == 0 ">
+                      <td colspan="15" style="padding-left:40vw;">
+                        No Data Available
+                        </td>
+                    </tr>
+
+                    <tr *ngFor="let item of recived | invoicesearch:receivedSearchText |searchByDate:received_startDate:received_endDate:received_datefiltercheck :'order_date'   | paginate: { itemsPerPage: 5, currentPage: p1  }; let i = index">
+                       
+                            <td >{{item.invoice_id}}</td>
+                            <td >{{item.order_date}}</td>
+                            <td>{{item.product_name}}</td>
+                            <td >{{item.branch_id}}</td>
+                            <td>{{item.status}}</td>
+                            <td>{{item.name}}</td>
+                            <td class="textnumber">{{item.phone_number}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.state}}</td>
+                            <td>{{item.zipcode}}</td>
+                            <td>{{item.country}}</td>
+                            <td>{{item.client_id}}</td>
+                            <td>{{item.approval_id}}</td>
+                            
+                          </tr>
+                    </table>
+                    </div>
+                    <div *ngIf="recived.length == receivedCount">
+                    <pagination-controls  (pageChange)="p1 = $event" ></pagination-controls>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="tab2default" *ngIf="notrecivedactive">
+                  <!-- <button type="button" class="btn btn-default cursor" (click)="selectall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;margin-top: 3vh;">Select All</button>
+  <button type="button" class="btn btn-defaultcursor " (click)="clearall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;margin-top: 3vh;">Clear  All</button>
+   -->
+                    <button type="button" *ngIf="NotRecived.length != 0 " class="btn btn-default" (click)="selectall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;">Select All</button>
+                    <button type="button" *ngIf="NotRecived.length != 0 " class="btn btn-default" (click)="clearall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;">Clear All</button>
+   <div style="overflow:auto;padding-bottom: 2vh;">
+                    <table >
+                        <tr>
+                            <th></th>
+                            <th (click)="Notreceived_setOrder('order_id')">Invoice ID</th>
+                            <th (click)="sortByDate()">Order Date</th>
+                            <th (click)="Notreceived_setOrder('order_date')">Product Name</th>
+                            <th (click)="Notreceived_setOrder('product_name')">Branch Id</th>
+                            <th (click)="Notreceived_setOrder('branch_id')">Status</th>
+                            <th (click)="Notreceived_setOrder('status')">Name</th>
+                            <th (click)="Notreceived_setOrder('name')">Phone Number</th>
+                            <th (click)="Notreceived_setOrder('phone_number')">Email</th>
+                          <th>Email</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>State</th>
+                          <th>Pincode</th>
+                          <th>Country</th>
+                          <th (click)="Received_setOrder('client_id')">Client Id</th>
+                          <th (click)="Received_setOrder('approval_id')">Approal Id</th>
+                          
+                        </tr>
+                        <tr *ngIf="NotRecived.length == 0 ">
+                          <td colspan="15" style="padding-left:40vw;">
+                            No Data Available
+                            </td>
+                        </tr>
+                        <tr *ngFor="let item of NotRecived | invoicesearch:notreceivedSearchText |searchByDate:notreceived_startDate:notreceived_endDate:notreceived_datefiltercheck :'order_date' | paginate: { itemsPerPage: 5, currentPage: p2 }; let i = index">
+                            <td style="min-width:1vw;"><input type="checkbox" [checked]="item.selected" name="item.ProductName" value="item.order_id" (change)="Selected($event,i)" /></td>
+                           
+                                <td>{{item.invoice_id}}</td>
+                                <td >{{item.order_date}}</td>
+                                <td>{{item.product_name}}</td>
+                                <td >{{item.branch_id}}</td>
+                                <td>{{item.status}}</td>
+                                <td>{{item.name}}</td>
+                                <td class="textnumber">{{item.phone_number}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.address}}</td>
+                                <td>{{item.city}}</td>
+                                <td>{{item.state}}</td>
+                                <td>{{item.zipcode}}</td>
+                                <td>{{item.country}}</td>
+                                <td>{{item.client_id}}</td>
+                                <td>{{item.approval_id}}</td>
+                                
+                              </tr>
+                        </table>
+                        </div>
+                        <div style="margin-left:30%;margin-top:1.5vh;margin-bottom: 0%;">
+                          <pagination-controls (pageChange)="p2 = $event"></pagination-controls>
+                       </div>
+                        <button type="button"  (click)="mark()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;margin:0vh 3vh;padding-left: 25px;padding-right: 25px;font-weight: bold;">Mark Received</button>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+  

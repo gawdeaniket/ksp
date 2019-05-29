@@ -1,0 +1,77 @@
+
+
+
+<!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
+    
+    <strong>Alert!!...</strong> You have {{failures.length}} Failures Results.
+    
+    <button  data-dismiss="alert" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    OK</button>
+    
+  </div> -->
+  
+  
+  <!-- Search bar -->
+  
+
+  
+  
+  
+  
+  <!-- Table -->
+  <div class="container" style="overflow:auto;padding-bottom: 2vh;margin-top: 2vh;padding-left: 3vw;height: 90%;padding-bottom: 30vh;">
+      <!-- <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;">Download Data</button>
+         -->
+           
+    
+    <table style="margin-top: 10vh;">
+                         <tr>
+                           <th>STATE</th>
+                           <th>Ordered</th>
+                           <th>GLP Deliverd</th>
+                           <th>MFI Received</th>
+                           <th>Disbursed</th>
+                           
+                         </tr>
+                         <tr *ngFor="let item of stateWise | filter:searchText |searchByDate:date  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                            
+                             <td>{{item.STATE}}</td>
+                             <td>{{item.ORDERED + item.INVOICED}}</td>
+                             <td>{{item.DELIVERED}}</td>
+                             <td>{{item.RECEIVED}}</td>
+                             <td>{{item.DISBURSED}}</td>
+                             <!-- <td>{{item.customer_address}}</td> -->
+                          </tr>
+                          <tr>
+                              <td style="font-weight: bold;color: #000000;">Total</td>
+                              <td style="font-weight: bold;color: #000000;" >{{TotalOrder}}</td>
+                              <td style="font-weight: bold;color: #000000;" >{{TotalDeliverd}}</td>
+                              <td style="font-weight: bold;color: #000000;" >{{TotalReceived }}</td>
+                              <td style="font-weight: bold;color: #000000;">{{TotalDisbursed}}</td>
+                          </tr>
+                         </table>
+                         
+                         <div style="margin-left:30%;margin-top:3vh;">
+                         <pagination-controls (pageChange)="p =$event"></pagination-controls>
+                        </div>
+                        <div class="dropdown"  style="float: right;margin-right:3%;">
+                            <button class="btn btn-primary dropdown-toggle" style="background-color: #fcdb04;color: #000000;padding-left: 2vw;padding-right: 2vw;" type="button" data-toggle="dropdown">Download Data
+                            <span class="caret" ></span></button>
+                            <ul class="dropdown-menu">
+                              <li (click)="statewise()" style="cursor: pointer;padding: 8px;">State wise</li>
+                              <li (click)="branchwise()" style="cursor: pointer;padding: 8px;">Branch wise</li>
+                              <li (click)="customerwise()" style="cursor: pointer;padding: 8px;">Customer wise</li>
+                            </ul>
+                          </div>
+
+
+                      </div>
+                        
+
+                        
+                     
+
+  
+  
+

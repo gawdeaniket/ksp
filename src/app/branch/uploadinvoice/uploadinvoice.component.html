@@ -1,0 +1,44 @@
+
+
+<div class="alert alert-danger alert-dismissible fade in" style="margin-top:2vh;width: 90%;margin-left: 5%;border-radius: 10px;" *ngIf="alerts">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>File Not Upload</strong>&nbsp;&nbsp; Please upload the File.
+  </div>
+
+
+
+<div  class="containers">
+    <span *ngIf="fileToUpload" style="text-align: center;padding-top: 9px;font-size: 16px;margin-top: 8px;background-color: #ffffff;">{{fileToUpload.name}}</span>
+    <input type="file" style="display:none"
+           id="file"
+           (change)="handleFile($event.target.files)">
+           <label for="file" style="float: right;width:30%;height:100%;background-color:#eeeeee;margin: 0px;text-align: center;padding-top: 9px;border-radius: 0px 10px 10px 0px;font-size: 1.3vw">Choose File</label>
+                    
+</div>
+
+<button type="button" class="btn btn-primary" (click)="handleFileInput()" style="width:15%;padding:1vh 2vw;margin-left: 43%;margin-right: auto;margin-top: 3vh;font-size: 1.4vw">Upload File</button>
+   
+<div class="container" style="margin-top:8vh;width: 95%;" *ngIf="failureResponse">
+    <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
+    <div style="margin-top:1vh;" >
+    <table >
+        <tr>
+          <th>LoanProposal ID</th>
+          <th>Status</th>
+          <th>Remarks</th>
+          
+        </tr>
+        <tr *ngFor="let failure of failureResponse">
+          <td>{{failure.LoanProposalID}}</td>
+          <td>{{failure.status}}</td>
+          <td>{{failure.Remarks}}</td>
+          
+          
+        </tr>
+       
+        
+
+       
+      
+      </table>
+      </div>

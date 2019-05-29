@@ -1,0 +1,59 @@
+
+
+
+<!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
+    
+    <strong>Alert!!...</strong> You have {{failures.length}} Failures Results.
+    
+    <button  data-dismiss="alert" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    OK</button>
+    
+  </div> -->
+  
+  
+  <!-- Search bar -->
+  <div class="container" >
+  <span class="text-style"> Branch Wise MSL Values </span>
+
+    
+  
+  </div>
+  <br><br>
+ 
+  
+  <!-- Table -->
+  <div class="justify-content-center" style="overflow:auto;padding-bottom: 2vh;margin-top: 6vh;padding-left: 3vw;">
+      <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;">Download </button>
+      <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File For MSL Values</button>
+        
+    
+    <table >
+                         <tr style="cursor: pointer;"> 
+                           <th style="cursor: pointer">Branch Id</th>
+                           <th style="cursor: pointer">Branch Name</th>
+                           <th style="cursor: pointer">Region</th>
+                           <th style="cursor: pointer">Product</th>
+                           <th style="cursor: pointer">MSL Value</th>
+                           
+                         </tr>
+                         <tr *ngFor="let item of viewAllDelivery | filter:searchText |searchByDate:date  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                            
+                             <td>{{item.invoice_id}}</td>
+                             <td>{{item.product_name}}</td>
+                             <td>{{item.customer_name}}</td>
+                             <td>{{item.customer_phone}}</td>
+                             <td>{{item.customer_address}}</td>
+                          </tr>
+                        
+                         </table>
+                         </div>
+                         <div style="margin-left:30%;margin-top:3vh;">
+                         <pagination-controls (pageChange)="pagechanged($event)"></pagination-controls>
+                        </div>
+              <button type="button" class="btn btn-default" style="background-color: #eeeeee;margin:2vh 3.5vw;padding-left: 20px;padding-right: 20px;">Save</button>
+
+                     
+
+  
+  

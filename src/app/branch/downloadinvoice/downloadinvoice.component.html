@@ -1,0 +1,92 @@
+<!-- Search bar  received-->
+<div style="width: 100%;" >
+    
+    <br><br>
+    <div class="row" style="width: 90%;margin-left: 5%;margin-right: 5%;">
+        <div class="col-xs-4 col-sm-4 col-lg-2 text-style" style="text-align: center;">Order Date</div>
+          <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+            <input  style="border:none;width: 80%;margin: 0px;"
+                   placeholder="Start Date"
+                   
+                   #recstart="bsDatepicker"
+                   bsDatepicker [(ngModel)]="received_startDate"
+                   >
+                   <i class="material-icons" (click)="recstart.toggle()" style="float:right;padding-top: 0.4vh;" >date_range</i>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-lg-1 text-style" style="cursor: pointer;text-align: center;font-size: 16px;"> TO</div>
+          <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
+            <input  style="border:none;width: 80%;margin: 0px;"
+                   placeholder="End Date"
+                   ngModel
+                   #resend="bsDatepicker"
+                   bsDatepicker [(ngModel)]="received_endDate"
+                   >
+                   <i class="material-icons" (click)="resend.toggle()"  style="float:right;padding-top: 0.4vh;" >date_range</i>
+          </div>
+          <div class="col-xs-4 col-sm-4 col-lg-2" style="cursor: pointer;padding: 0.4vh;margin-left:1vw;">
+            <button type="button" class="btn btn-primary" (click)="DateFilter()">Submit</button>
+            <button type="button" class="btn btn-success" style="margin-left: 10px;" (click)="clearDate()">Clear</button> 
+              
+          </div>
+        </div>
+      </div>
+
+      <div class="container"  style="width: 90%;padding: 0px;margin-left: 5%;margin-top: 14vh;">
+    
+          <div class="search-container" style="margin-right: 2vh;">
+              
+              <input type="text" [(ngModel)]="receivedSearchText" autocomplete="off" placeholder="Search By Customer Name" name="search" style="border:none;">
+              <button type="submit" style="border-radius:10px;background-color: #eeeeee;border:none;">Submit</button>
+           
+          </div>
+          </div>     
+<div class="container" style="width: 90%;margin-top: 0vh;">
+    
+      <div style="overflow:auto;padding-bottom: 2vh;">
+        <table >
+            <tr>
+                <th></th>
+                <th (click)="setOrder('order_id')">Invoice ID</th>
+                <th >Product name</th>
+                <th (click)="setOrder('order_date')">Customer Name</th>
+                <th (click)="setOrder('product_name')">Customer Phone</th>
+                <th (click)="setOrder('branch_id')">Customer Address</th>
+                <th (click)="setOrder('status')"> Status</th>
+                <th (click)="setOrder('phone_number')">Recived Date</th>
+                <th (click)="setOrder('phone_number')">Disbursed Date</th>
+                 <th  style="position: sticky;right:0px;min-width: 4vw;;background-color: #ffffff;"></th>
+              
+            </tr>
+            <tr *ngIf=" InvoiceRecords.length == 0 ">
+              <td colspan="15" style="padding-left:40vw;">
+                No Data Available
+                </td>
+            </tr>
+            <tr *ngFor="let item of InvoiceRecords | filter:receivedSearchText |searchByDate:received_startDate:received_endDate:received_datefiltercheck :'received_date'  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                <td style="min-width:1vw;"><input type="checkbox" [checked]="item.selected" name="item.ProductName" value="item.order_id" (change)="Selected($event,i)" /></td>
+               
+                    <td>{{item.invoice_id}}</td>
+                    <td >{{item.product_name}}</td>
+                    <td>{{item.customer_name}}</td>
+                    <td >{{item.customer_phone}}</td>
+                    <td>
+                        <div style="float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 13vw;margin: 0px;">{{item.customer_address}}</div></td>
+                    <td>{{item.status}}</td>
+                    <td class="textnumber">{{item.received_date}}</td>
+                    <td class="textnumber">{{item.disbursal_date}}</td>
+                    <td  style="position: sticky;right:0px;min-width: 4vw;background-color: #ffffff">
+                        <a [href]="item.invoice_url" download="file.pdf" >
+                            <span class="material-icons">
+                                cloud_download
+                            </span>
+                        </a>
+                    </td>
+                    
+                  </tr>
+            </table>
+            </div>
+            <div style="margin-left:30%;margin-top:1.5vh;margin-bottom: 0%;">
+            <pagination-controls *ngIf="InvoiceRecords.length != 0 " (pageChange)="p = $event"></pagination-controls>
+           </div>
+           
+    </div>

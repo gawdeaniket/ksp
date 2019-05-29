@@ -1,0 +1,28 @@
+<div  class="header">
+ 
+    
+  
+      <a  style="height:7vh;margin:0px;padding: 0px;text-align: left ;margin-left: 4vw;">
+        <img src="../../../assets/imgs/logo.png" style="height:100% !important;width:10% !important;">
+      </a>
+     
+     
+    
+    
+  </div>
+
+
+  <div class="container" >
+    <span class="text-style"> Invoice Management </span>
+  <div style="display: block;float: left;width: 100%;margin-top:4vh;">
+     <select (change)="ChangingValue($event)"   style="background-color:#fcdb04;width: 25%;padding:1vh 3vh;color: #000000;font-size: 3vh;">
+          <option value="dis" hidden>Select Your Partner</option>
+          <option  value="satin" style="font-size: 16px;padding:7px;border-bottom: 1px solid #000000;background-color: #fcdb04;">SATIN</option>
+          <option  value="bfil">BFIL</option>
+        </select>
+        
+      <button type="button" class="btn btn-primary" style="cursor: grabbing;display: block;margin-top:10%;width: 10%;background-color:#fcdb04;color: black;" (click)="select()">SUBMIT</button>
+
+
+
+      </div>

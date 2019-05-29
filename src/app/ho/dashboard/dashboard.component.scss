@@ -1,0 +1,39 @@
+.header{
+    background-color: #fcdb04;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: sticky;
+    top:0px;
+    z-index: 1000;
+    height: 5vh;
+   
+}
+
+
+
+.example-container{
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height:100%;
+    width: 19%;
+    padding-top: 2.5vh;
+    padding-left: 15px;
+}
+.btn-group-vertical{
+    background: transparent;
+}
+.btn{
+    float: right;
+    border:1px solid #000000;
+    background: #000000;
+    color: #fcdb04;
+    margin-top: 0px;
+    margin-bottom: 1.5vh;
+}
+a{
+    margin-top: 35px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #9e9e9e;
+}

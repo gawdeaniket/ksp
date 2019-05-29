@@ -2,27 +2,58 @@
 
 
 
-<mat-toolbar color="warn">
-  <mat-toolbar-row>
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+<mat-toolbar  class="header">
+ 
+  <mat-toolbar-row style="height: 100%;">
+
+    <button type="button" style="margin-left:1.5vw;margin-top:0px;margin-right: 0px;" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
+      <mat-icon aria-label="Side nav toggle icon" style="color:#000000;font-weight:bold;font-size:5vh;">menu</mat-icon>
     </button>
+    <a href="#" style="height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 3%;">
+      <img src="../../../assets/imgs/logo.png" style="height:100% !important;width:45% !important;">
+    </a>
     
+    <div style="float: right;margin-left: 50%;margin-top: 0.2vh;">
+      <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;">DELHI NORTH BRANCH</p>
+      <button type="button" class="btn" style="margin-top: 0px;">logout</button>
+      <!-- <span style="padding:2px 3px;border-radius:4px;border:1px solid #000000;font-size:14px;float: right;">Logout</span> -->
+      </div>
+   
   </mat-toolbar-row>
+  
 </mat-toolbar>
 
-<mat-sidenav-container class="example-container" >
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-               (closed)="events.push('close!')">
-    Sidenav content
+
+<mat-sidenav-container  autosize >
+  <mat-sidenav #sidenav mode="side" class="example-container"  [(opened)]="opened" >
+  <br>
+              
+                <a   [routerLink]="[{ outlets: { m2: ['homebranch'] } }]" [routerLinkActive]=" 'activeclass' "  class="text-nowrap display-4" >
+                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
+              </a>
+              <br><br>
+
+              <a   [routerLink]="[{ outlets: { m2: ['downloadinvoice'] } }]" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4">
+                  <span class="material-icons">
+                      cloud_download
+                  </span>&nbsp; Download Invoice
+              </a>
+              <br><br>
+              <a   [routerLink]="[{ outlets: { m2: ['viewallorder'] } }]" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4">
+                <span class="glyphicon glyphicon-home"></span>&nbsp; View all order
+              </a>
+              <br><br>
+             
+
+
+
   </mat-sidenav>
 
-  <mat-sidenav-content>
-    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-    <p>Events:</p>
-    <div class="example-events">
-      <div *ngFor="let e of events">{{e}}</div>
-    </div>
+  <mat-sidenav-content style="min-height:600px;">
+
+
+   <router-outlet name="m2"></router-outlet>
+
+
   </mat-sidenav-content>
 </mat-sidenav-container>

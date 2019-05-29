@@ -1,0 +1,104 @@
+<div  class="header">
+ 
+    
+  
+    <a  style="height:7vh;margin:0px;padding: 0px;text-align: left ;margin-left: 4vw;">
+      <img src="../../../assets/imgs/logo.png" style="height:100% !important;width:10% !important;">
+    </a>
+   
+   
+  
+  
+</div>
+
+  <!-- success alert box -->
+  <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible">
+    
+    <strong style="font-size: 18px;" > You have {{successResponse.length}} Success Results.
+    </strong>
+    <button  data-dismiss="alert" (click)="reload()" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    OK</button>
+    
+  </div>
+
+  <!-- Upload file Alert box -->
+  <div  class="alert alert-danger alert-dismissible fade in" style="margin-top:2vh;width: 90%;margin-left: 5%;border-radius: 10px;padding: 7px;" *ngIf="alerts">
+    <a  class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>File Not Upload</strong>&nbsp;&nbsp; Please upload the File.
+  </div>
+
+
+      <span class="text-style" style="margin-left: 7.5vw;margin-top: 9vh;"> {{heading }} </span>
+     
+      
+
+
+      <div *ngIf="uploadAlert"  class="alert alert-success alert-dismissible alerts" style="left: 35%;border-radius: 10px;">
+          <i class="material-icons" data-dismiss="alert" aria-label="close" style="position: absolute;top:1px;right:1px;background-color:#000000;color:#fcdb04;cursor: pointer;">
+              clear
+              </i>
+        <strong style="font-size: 18px;">Upload  Excel File</strong><br> 
+        
+        <div style="width: 100%;margin-top: 4vh;">
+          <input type="file" #file style="display:none" (change)="handleFile($event.target.files)"
+           id="file"
+           >
+           <div style="height: 10vh;padding-top: 2vh;width: 100%;border: 1px solid #000000;overflow: hidden;">
+            <span *ngIf="fileToUpload" style="background: transparent;text-align: center;font-size:14px;">{{fileToUpload.name}}</span>
+          </div>
+           <div style="width: 100%;">
+        <button   (click)="file.click()"  style="display:inline;float: left;width:50%;margin-left:1%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;">
+        Choose File</button>
+        <button   (click)="handleFileInput()"  style="display:inline;float: left;width:40%;margin-left:4%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+        Upload</button>
+        </div>
+        </div>
+        
+      </div>
+
+
+
+
+
+
+
+<div   style="margin-top:9vh;margin-left: 35%;margin-top: 30vh;width: 30%;">
+ 
+  
+      <div (click)="upload()" style="width: 90% !important;height:20% !important;border:1px solid #000000;padding: 5vh;border-radius: 10px;text-align: center;font-weight: bold;font-size: 16px; background-color:#fcdb04 ;cursor: pointer;
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);">
+        Upload  Excel File
+         
+      </div>
+     <div style="text-align: center;font-size:20px;width:90%;margin-top:6vh;">
+       <a>Download Template File</a>
+       </div>
+
+  </div>
+
+  <div class="container" style="margin-top:8vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
+    <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
+    <div style="margin-top:1vh;" >
+    <table >
+        <tr>
+          <th>LoanProposal ID</th>
+          <th>Status</th>
+          <th>Remarks</th>
+          
+        </tr>
+        <tr *ngFor="let failure of failureResponse">
+          <td>{{failure.OrderID}}</td>
+          <td>{{failure.status}}</td>
+          <td>{{failure.Remarks}}</td>
+          
+          
+        </tr>
+       
+        
+
+       
+      
+      </table>
+      </div>
+      </div>
