@@ -54,5 +54,38 @@ export class ApprovalService {
   }
 
 
+  uploadApprove(fileToUpload){
+    
+     
+      console.log(fileToUpload);
+     
+      const formData: FormData = new FormData();
+     var endpoint = this.commonValue.endpoint+'mfi-branch/v1.0/upload-approval-file/'+this.commonValue.client_id;
+         formData.append('approval_file', fileToUpload);
+  
+      let headers: HttpHeaders = new HttpHeaders();
+  headers = headers.append('Accept', 'application/json');
+  
+        return new Promise((resolve, reject) => {
+             
+          this.httpClient.post(endpoint, formData, { headers: headers })
+          .subscribe((data)=>{
+             resolve(data);
+          },
+          (error)=>{
+           
+            reject(error);
+          })
+  
+        })
+  
+    
+       
+  
+  }
+
+
+
+
 
 }

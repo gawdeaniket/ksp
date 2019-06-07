@@ -1,9 +1,11 @@
 <div  class="header">
  
     
+    <button type="button" (click)="home()"  class="btn btn-default" style="background-color: #000000;color: #fcdb04;padding-left: 2vw;padding-right: 2vw;font-weight: bold;margin-left: 6vw;margin-top: 1vh;border: none;" >Home</button>
+        
   
-    <a  style="height:7vh;margin:0px;padding: 0px;text-align: left ;margin-left: 4vw;">
-      <img src="../../../assets/imgs/logo.png" style="height:100% !important;width:10% !important;">
+    <a  style="height:5vh;margin:0px;padding: 0px;text-align: left ;margin-left: 2vw;padding-top:15px; ">
+      <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:80% !important;width:10% !important;margin-top: 5px;">
     </a>
    
    
@@ -22,11 +24,24 @@
     
   </div>
 
+  <!-- <div *ngIf="alerts" class="alert alertss alert-success alert-dismissible" style="left:42%;padding: 10px 45px;top:25%;">
+    
+      <strong style="font-size: 18px;" > File Not Upload<br> Please upload the File.
+      </strong>
+      <button  data-dismiss="alert"  aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+      
+      OK</button>
+      
+    </div> -->
+
+
+
+
   <!-- Upload file Alert box -->
-  <div  class="alert alert-danger alert-dismissible fade in" style="margin-top:2vh;width: 90%;margin-left: 5%;border-radius: 10px;padding: 7px;" *ngIf="alerts">
+  <!-- <div  class="alert alert-danger alert-dismissible fade in" style="margin-top:2vh;width: 90%;margin-left: 5%;border-radius: 10px;padding: 7px;" *ngIf="alerts">
     <a  class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>File Not Upload</strong>&nbsp;&nbsp; Please upload the File.
-  </div>
+  </div> -->
 
 
       <span class="text-style" style="margin-left: 7.5vw;margin-top: 9vh;"> {{heading }} </span>

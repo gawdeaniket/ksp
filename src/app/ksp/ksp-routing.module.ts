@@ -7,6 +7,9 @@ import {SatinInvoiceComponent} from '../ksp/satin-invoice/satin-invoice.componen
 import {UploadInvoiceComponent} from '../ksp/upload-invoice/upload-invoice.component';
 const routes: Routes = [
   { 
+    path:'', redirectTo:'invoicemanagement' , pathMatch:'full'
+   },
+  { 
     path:'invoicemanagement', component:InvoiceManagementComponent,
    },
    {

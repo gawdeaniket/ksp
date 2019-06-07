@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DownloadInvoiceService} from '../../services/branch/download-invoice.service';
-//import { saveAs } from 'file-saver';
+import {Router} from '@angular/router';
+import { saveAs } from 'file-saver';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 @Component({
   selector: 'app-downloadinvoice',
   templateUrl: './downloadinvoice.component.html',
@@ -15,14 +17,48 @@ export class DownloadinvoiceComponent implements OnInit {
   reverse: boolean = false;
   receivedSearchText:any;
   p:number = 1;
-  constructor(private download_service:DownloadInvoiceService) {
+  minDate1:any;
+  maxDate1;any;
+  minDate2:any;
+  maxDate2:any;
+  loaders:boolean = true;
+  bsConfig: Partial<BsDatepickerConfig>;
+  constructor(private download_service:DownloadInvoiceService, private _router:Router) {
+    this.bsConfig = Object.assign({}, { containerClass: 'theme-orange' });
+    var logininfo:any = JSON.parse( localStorage.getItem('loginInfo'));
+    if(!logininfo){
+      this._router.navigate(['home']);
+    }
+    if(logininfo.role !='BRANCH'){
+      this._router.navigate(['home']);
+    }
+  }
 
+
+  dateset(){
+   // console.log(this.received_startDate); 
+    this.minDate2 = this.received_startDate;
+  }
+  datesetend($event){
+    this.maxDate1 = this.received_endDate;
   }
 
 ngOnInit() {
+  this.minDate1 = new Date();
+    this.maxDate1 = new Date();
+  //  this.minDate2 = new Date();
+    this.maxDate2 = new Date();
+   // console.log(this.minDate1);
+    
+   // console.log(this.minDate1);
+    this.maxDate1.setDate(this.maxDate1.getDate() );
+    this.maxDate2.setDate(this.maxDate1.getDate() );
 
   this.download_service.downloadInvoice().then((data:any)=>{
-     console.log(data); 
+   //  console.log(data); 
+     if(!data){
+      this.loaders = false;
+     }
      this.InvoiceRecords = data;
          
      for(let i=0;i<data.length;i++){
@@ -36,7 +72,14 @@ ngOnInit() {
       this.InvoiceRecords[i].product_name = data[i].product_name;
       this.InvoiceRecords[i].received_date = data[i].received_date;
       this.InvoiceRecords[i].selected = false;
-      console.log(this.InvoiceRecords[i].invoice_url);
+      this.InvoiceRecords[i].dateformat_disbursal = data[i].disbursal_date.match(/\d+/g).reverse().join('-');
+      this.InvoiceRecords[i].dateformat_received = data[i].received_date.match(/\d+/g).reverse().join('-');
+      //console.log(this.InvoiceRecords[i].invoice_url);
+      if(i == data.length -1 ){
+    
+        this.loaders = false;
+      //  console.log(this.loaders);
+      }
     }
 
   }).catch((error)=>{
@@ -89,8 +132,8 @@ ngOnInit() {
     }
   }
   setOrder(value: string) {
-    console.log("s "+value);
-    console.log(value);
+   // console.log("s "+value);
+   // console.log(value);
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
@@ -138,16 +181,35 @@ ngOnInit() {
 
 
   // downloadPdf(){
-  // //  var pdfFile = 
-  //   var newBlob = new Blob([x], { type: "application/pdf" });
-  //   if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-  //     window.navigator.msSaveOrOpenBlob(newBlob);
-  //     return;
-  // }
+    
+    
+  //   var links = [
+  //     'https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.exe',
+      
+  //     'https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.jar',
+  //     'https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.dmg'
+  //   ];
+  //   var link = []
+  
+  //   for (var i = 0; i < links.length; i++) {
 
+  //     setTimeout(()=>{
+  //      link[i]= document.createElement('a');
 
-
-
+    
+  //       link[i].style.display = 'none';
+      
+  //       document.body.appendChild(link[i]);
+  //       link[i].setAttribute('download',"value.pdf");
+  //       link[i].setAttribute('href', links[i]);
+  //       link[i].click();
+  //     },1000)
+      
+  //   }
+  
+  //   document.body.removeChild(link);
+  
+  
   // }
 
   }

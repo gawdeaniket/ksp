@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ViewAllOrderService} from '../../services/branch/view-all-order.service';
+import {Router} from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 @Component({
   selector: 'app-viewallorder',
   templateUrl: './viewallorder.component.html',
   styleUrls: ['./viewallorder.component.scss']
 })
 export class ViewallorderComponent implements OnInit {
+  loaders:boolean = true;
    viewAllDelivery:any[] = [];
    DisursedCount:any = 0;
    ReceivedCount:any = 0;
@@ -27,14 +30,45 @@ export class ViewallorderComponent implements OnInit {
   status:any;
   ReceivedDate;
   disbursalDate;
+  minDate1:any;
+  maxDate1;any;
+  minDate2:any;
+  maxDate2:any;
+  bsConfig: Partial<BsDatepickerConfig>;
 
+  constructor(private viewServices:ViewAllOrderService, private _router:Router) {
+    this.bsConfig = Object.assign({}, { containerClass: 'theme-orange' });
+    var logininfo:any = JSON.parse( localStorage.getItem('loginInfo'));
+    if(!logininfo){
+      this._router.navigate(['home']);
+    }
+    
 
-  constructor(private viewServices:ViewAllOrderService) { }
-
+   }
+dateset(){
+  // console.log(this.startDate); 
+  this.minDate2 = this.startDate;
+}
+datesetend($event){
+  this.maxDate1 = this.endDate;
+}
   ngOnInit() {
+    this.minDate1 = new Date();
+    this.maxDate1 = new Date();
+   // this.minDate2 = new Date();
+    this.maxDate2 = new Date();
+    // console.log(this.minDate1);
+    
+    // console.log(this.minDate1);
+    this.maxDate1.setDate(this.maxDate1.getDate() );
+    
+    this.maxDate2.setDate(this.maxDate1.getDate() );
 
     this.viewServices.viewAllOrder().then((data:any)=>{
-      console.log(data);
+      // console.log(data);
+      if(!data){
+        this.loaders = false;
+       }
       this.viewAllDelivery = data;
       for(let i=0;i<data.length;i++){
         this.viewAllDelivery[i].invoice_id = data[i].invoice_id;
@@ -42,10 +76,23 @@ export class ViewallorderComponent implements OnInit {
         this.viewAllDelivery[i].customer_name = data[i].name;
         this.viewAllDelivery[i].customer_phone = data[i].phone_number;
        // this.viewAllDelivery[i].customer_address = 'jksajska sajksajsa jsakjskas skaskas sjaksjas skasks';
-       this.viewAllDelivery[i].customer_address = data[i].customer_address;
+       this.viewAllDelivery[i].address = data[i].address;
         this.viewAllDelivery[i].status = data[i].status;
         this.viewAllDelivery[i].received_date = data[i].received_date;
         this.viewAllDelivery[i].disbursal_date = data[i].disbursal_date;
+        this.viewAllDelivery[i].order_date = data[i].order_date;
+       if(data[i].order_date){
+        this.viewAllDelivery[i].dateformat_order = data[i].order_date.match(/\d+/g).reverse().join('-');
+
+       }
+       if(data[i].disbursal_date){
+        this.viewAllDelivery[i].dateformat_disbursal = data[i].disbursal_date.match(/\d+/g).reverse().join('-');
+
+       }
+       if(data[i].received_date){
+        this.viewAllDelivery[i].dateformat_received = data[i].received_date.match(/\d+/g).reverse().join('-');
+
+       }
         if(this.viewAllDelivery[i].status == "DISBURSED"){
           this.DisursedCount = this.DisursedCount+1;
         }else if(this.viewAllDelivery[i].status == "INVOICE"){
@@ -58,14 +105,20 @@ export class ViewallorderComponent implements OnInit {
         else if(this.viewAllDelivery[i].status == "RECEIVED"){
           this.ReceivedCount = this.ReceivedCount + 1;
         }
+        if(i == data.length -1 ){
+    
+          this.loaders = false;
+          // console.log(this.loaders);
+        }
+        
         
       }
     }).catch((error)=>{
-      console.log(error);
+      // console.log(error);
     })
   }
   ngfor(event){
-    console.log(event);
+    // console.log(event);
   }
   DateFilter(){
     if(this.startDate && this.endDate){
@@ -80,9 +133,9 @@ export class ViewallorderComponent implements OnInit {
     this.endDate = '';
   }
   datechange(event){
-    console.log(event);
-    console.log(this.date[0].toISOString());
-    console.log(typeof this.date[0]);
+    // console.log(event);
+    // console.log(this.date[0].toISOString());
+    // console.log(typeof this.date[0]);
       let startDate = this.date[0].toISOString();
       let endDate = this.date[1].toISOString();
 
@@ -91,7 +144,7 @@ export class ViewallorderComponent implements OnInit {
       );
       this.viewAllDelivery = selectedMembers;
       
-      console.log(selectedMembers);
+      // console.log(selectedMembers);
 
   }
   pagechanged(event){
@@ -101,14 +154,21 @@ export class ViewallorderComponent implements OnInit {
 
 
   setOrder(value: string) {
-    console.log("s "+value);
-    console.log(value);
+    // console.log("s "+value);
+    // console.log(value);
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
    if(this.reverse){
     this.viewAllDelivery.sort(function(a, b){
-     
+       if(a[value] == null || a[value] == undefined)
+      {
+        a[value]= '';
+      }
+      if( b[value]== null || b[value]== undefined)
+      {
+        b[value]= '';
+      }
       var x =  a[value].toLowerCase()  ;
       var y = b[value].toLowerCase()  ;
       if (x < y) {return -1;}
@@ -118,7 +178,14 @@ export class ViewallorderComponent implements OnInit {
   }else {
 
     this.viewAllDelivery.sort(function(a, b){
-    
+      if(a[value] == null || a[value] == undefined)
+      {
+        a[value]= '';
+      }
+      if( b[value]== null || b[value]== undefined)
+      {
+        b[value]= '';
+      }
       var x =  a[value].toLowerCase()  ;
       var y = b[value].toLowerCase()  ;
       if (x > y) {return -1;}

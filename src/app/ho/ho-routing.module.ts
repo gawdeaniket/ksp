@@ -6,28 +6,28 @@ import {UploadMslComponent} from '../ho/upload-msl/upload-msl.component';
 import {UploadOrdersComponent} from '../ho/upload-orders/upload-orders.component';
 import {HomeHoComponent} from '../ho/home-ho/home-ho.component';
 const routes: Routes = [
-  {path:'dashboardHo', component:DashboardHoComponent,
+  {path:'', component:DashboardHoComponent,
   
-    children:[
-    {
-      path:'', component:HomeHoComponent,outlet:'m3'
-    },
-    {
-     path:'homeho',component:HomeHoComponent, outlet:'m3'
-    },
-    {
-     path:'uploadMsl',component:UploadMslComponent, outlet:'m3'
-    },
-    {
-      path:'uploadOrders', component:UploadOrdersComponent,outlet:'m3'
-    }
-]},
+  children:[
+  {
+    path:'', redirectTo:'HO_Home',pathMatch:'full'
+  },
+  {
+   path:'HO_Home',component:HomeHoComponent 
+  },
+  {
+   path:'uploadMsl',component:UploadMslComponent
+  },
+  {
+    path:'ApproveOrders', component:UploadOrdersComponent
+  }
+]}
  
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes),CommonModule],
+  imports: [RouterModule.forChild(routes)],
   exports: [ RouterModule   ]
   
 })

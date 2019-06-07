@@ -14,6 +14,10 @@ export class InvoiceManagementComponent implements OnInit {
   ngOnInit() {
   }
 
+  // home(){
+  //   this._router.navigate(['invoicemanagement']);
+  // }
+
   ChangingValue(events){
     console.log(events);
     console.log(events.target);
@@ -26,7 +30,7 @@ export class InvoiceManagementComponent implements OnInit {
 
   select(){
  if(this.selectOption == 'satin'){
-  this._router.navigate(['satininvoice']);
+  this._router.navigate(['ksp/satininvoice']);
  }else{
    alert("Please Select Below Mention Option");
  }

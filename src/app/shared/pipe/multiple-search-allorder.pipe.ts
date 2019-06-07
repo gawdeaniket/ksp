@@ -10,7 +10,7 @@ export class MultipleSearchAllorderPipe implements PipeTransform {
   transform(items: any[], invoiceId: any, productName: any, customerName: any,customerPhone:any,customerAddress:any,status:any,ReceivedDate:any,disbursalDate:any){
     let  check:boolean;
    
-console.log(invoiceId +" "+productName +" "+customerName +" "+customerAddress+" "+customerPhone);
+// console.log(invoiceId +" "+productName +" "+customerName +" "+customerAddress+" "+customerPhone);
 
 
     var productNameCheck:boolean= true;
@@ -24,17 +24,22 @@ console.log(invoiceId +" "+productName +" "+customerName +" "+customerAddress+" 
 
 
     if (!invoiceId && !productName && !customerName &&!customerPhone && !customerAddress &&!status && !ReceivedDate && !disbursalDate) {
-      console.log("empty");
+      // console.log("empty");
       return items;
   }
     if (items ){
         return items.filter(item =>{
             
           
-       
+           
             if (invoiceId ){
+              // console.log(item.invoice_id);
+              if(item.invoice_id == null || item.invoice_id == undefined ){
+                invoiceIdCheck = false;
+              }else{
               invoiceIdCheck = item.invoice_id.toLowerCase().startsWith(invoiceId.toLowerCase());
               //   console.log(check);
+              }
             }         
             if (productName  ){
               productNameCheck = item.product_name.toLowerCase().startsWith( productName.toLowerCase() );

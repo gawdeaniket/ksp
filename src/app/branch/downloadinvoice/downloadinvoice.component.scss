@@ -1,3 +1,54 @@
+::-webkit-input-placeholder {
+    // color: peachpuff;
+     font-size: 13px;
+   }
+   ::-moz-placeholder {
+   //  color: peachpuff;
+     font-size: 13px;
+   }
+   :-ms-input-placeholder {
+  //   color: peachpuff;
+     font-size: 13px;
+   }
+   ::placeholder {
+     //color: peachpuff;
+     font-size: 14px;
+   }
+
+
+
+
+
+
+
+.loader {
+    position:absolute;
+    top:30%;
+    left:45%;
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+
+
+
 .search-container {
     
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);

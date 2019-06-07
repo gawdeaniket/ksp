@@ -6,18 +6,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MulipleSearchPipe implements PipeTransform {
 
 
-   transform(items: any[], branchId: any, name: any, region: any,product:any){
+   transform(items: any[], branchId: any, name: any, region: any,product:any,state:any){
     let  check:boolean;
     var branchCheck:boolean = true;
     var nameCheck:boolean = true;
     var regioncheck:boolean= true;
     var productNameCheck:boolean= true;
+    var statecheck:boolean = true
 
-  console.log(items);
-console.log(branchId);
-console.log(name);
-    if (!branchId && !name && !region && !product  ) {
-      console.log("empty");
+  // console.log(state);
+// console.log(branchId);
+// console.log(name);
+    if (!branchId && !name && !region && !product && !state  ) {
+      // console.log("empty");
       return items;
   }
     if (items ){
@@ -27,23 +28,28 @@ console.log(name);
        
             if (branchId  ){
                  branchCheck = item.branch_id.toLowerCase().startsWith(branchId.toLowerCase());
-                 console.log(check);
+                 // console.log(check);
             }         
             if (name  ){
               nameCheck = item.branch_name.toLowerCase().startsWith( name.toLowerCase() );
-              console.log(check);
+              // console.log(check);
               
             }
             if (region   ){
               regioncheck = item.region.toLowerCase().startsWith(region.toLowerCase());
-              console.log(check);
+              // console.log(check);
             }
             if (product){
                productNameCheck = item.product_name.toLowerCase().startsWith(product.toLowerCase());
-               console.log("product name "+productNameCheck);
+               // console.log("product name "+productNameCheck);
+          }
+          if (state  ){
+            // console.log(item.state);
+            statecheck = item.state.toLowerCase().startsWith(state.toLowerCase());
+            // console.log(check);
           }
            
-          if(branchCheck && nameCheck && regioncheck && productNameCheck){
+          if(branchCheck && nameCheck && regioncheck && productNameCheck && statecheck){
           check = true;
           }else{
             check = false;
@@ -51,9 +57,9 @@ console.log(name);
 
         //   if (quantity != item.product_quantity){
         //     check = false;
-        //     console.log(check);
+        //     // console.log(check);
         // }
-          console.log(check);
+          // console.log(check);
             return check;
             
        })

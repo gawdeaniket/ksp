@@ -1,5 +1,17 @@
 
-
+<div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">
+      
+  <strong style="font-size: 18px;">Are you sure you want to logout?</strong><br> 
+  <div style="width: 100%;">
+  <button  data-dismiss="alert" (click)="finalLogout()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+  
+      OK</button>
+  <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+  
+  CANCEL</button>
+  </div>
+  
+</div>
 
 
 <mat-toolbar  class="header">
@@ -9,13 +21,13 @@
     <button type="button" style="margin-left:1.5vw;margin-top:0px;margin-right: 0px;" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
       <mat-icon aria-label="Side nav toggle icon" style="color:#000000;font-weight:bold;font-size:5vh;">menu</mat-icon>
     </button>
-    <a href="#" style="height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 3%;">
-      <img src="../../../assets/imgs/logo.png" style="height:100% !important;width:45% !important;">
+    <a  style="height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 3%;" [routerLink]="['homebranch']">
+      <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:100% !important;width:45% !important;">
     </a>
     
-    <div style="float: right;margin-left: 50%;margin-top: 0.2vh;">
-      <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;">DELHI NORTH BRANCH</p>
-      <button type="button" class="btn" style="margin-top: 0px;">logout</button>
+    <div style="float: right;margin-left: 60%;margin-top: 0.2vh;">
+      <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;" *ngIf="branchDate">{{branchDate}}</p>
+      <button type="button" class="btn" style="margin-top: 0px;" (click)="logout()">logout</button>
       <!-- <span style="padding:2px 3px;border-radius:4px;border:1px solid #000000;font-size:14px;float: right;">Logout</span> -->
       </div>
    
@@ -25,24 +37,36 @@
 
 
 <mat-sidenav-container  autosize >
-  <mat-sidenav #sidenav mode="side" class="example-container"  [(opened)]="opened" >
-  <br>
+  <mat-sidenav #sidenav mode="side" class="example-container"  [(opened)]="opened" fixedInViewport="true">
+  <br><br><br><br>
               
-                <a   [routerLink]="[{ outlets: { m2: ['homebranch'] } }]" [routerLinkActive]=" 'activeclass' "  class="text-nowrap display-4" >
+                <a   [routerLink]="['homebranch']" routerLinkActive="activeclass" style="text-decoration: none !important;" class=" text-nowrap display-4" >
                 <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
               </a>
               <br><br>
 
-              <a   [routerLink]="[{ outlets: { m2: ['downloadinvoice'] } }]" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4">
-                  <span class="material-icons">
+              <a   [routerLink]="['downloadinvoice']" [routerLinkActive]=" 'activeclass' " style="text-decoration: none !important;" class="text-nowrap display-4" >
+                  <span class="material-icons" style="padding:0px;display: inline;font-size: 19px !important; ">
                       cloud_download
                   </span>&nbsp; Download Invoice
               </a>
               <br><br>
-              <a   [routerLink]="[{ outlets: { m2: ['viewallorder'] } }]" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4">
-                <span class="glyphicon glyphicon-home"></span>&nbsp; View all order
+              <a   [routerLink]="['viewallorder']" [routerLinkActive]=" 'activeclass' " style="text-decoration: none !important;"  class="text-nowrap display-4">
+                <span class="material-icons" style="padding:0px;display: inline;font-size: 19px !important; ">
+                  list_alt
+              </span>&nbsp;<span style="margin-top: 0px;padding:0px;display: inline;font-size: 18px;"> View All Orders</span>
               </a>
               <br><br>
+              <!-- <a   [routerLink]="['homebranch']" routerLinkActive="activeclass"  class="activeclass text-nowrap display-4" [class.activeclass]="activecheck">
+                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
+              </a>
+              <br><br>
+              <a   [routerLink]="['downloadinvoice']" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4" (click)="closeactive()">
+                <span class="material-icons">
+                    cloud_download
+                </span>&nbsp; Download Invoice
+            </a> -->
+
              
 
 
@@ -52,7 +76,7 @@
   <mat-sidenav-content style="min-height:600px;">
 
 
-   <router-outlet name="m2"></router-outlet>
+   <router-outlet ></router-outlet>
 
 
   </mat-sidenav-content>

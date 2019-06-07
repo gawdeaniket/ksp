@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,9 +8,41 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardHoComponent implements OnInit {
   events: string[] = [];
   opened: boolean = true;
-  constructor() { }
+  activecheck:boolean =false;
+  alertcheck = false;
+  constructor(private _router:Router) {
+    var logininfo:any = JSON.parse( localStorage.getItem('loginInfo'));
+    if(!logininfo){
+      this._router.navigate(['home']);
+    }
+    if(logininfo.role !='HO'){
+      this._router.navigate(['home']);
+    }
+    // console.log(location.hash);
+    // if(location.hash == '#/dashboardHo'){
 
+    //   this.activecheck = true;
+    //   console.log(this.activecheck);
+    // }
+   }
+  //  closeactive(){
+  //   this.activecheck = false;
+  // }
   ngOnInit() {
+   // document.getElementById('focusmeplease').focus();
+  }
+
+  logout(){
+    this.alertcheck = true;
+    // console.log(this.alertcheck);
+    
+  }
+  
+  
+  
+  finalLogout(){
+    localStorage.removeItem('loginInfo');
+    this._router.navigate(['home']);
   }
 
 }

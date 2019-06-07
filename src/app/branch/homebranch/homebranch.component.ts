@@ -2,7 +2,7 @@ import { Component, OnInit ,ElementRef} from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import {HomeBranchService} from '../../services/branch/home-branch.service';
 import {ExcelService} from '../../services/excel.service';
-
+import {Router} from '@angular/router';
 
 @Component({
   host: {
@@ -44,10 +44,19 @@ export class HomebranchComponent implements OnInit {
   alertcheck: boolean = false;
   markItem:number = 0;
   receivedCount:number = 0 ;
+  loaders:boolean = true
  
-  constructor(private homebranch: HomeBranchService,private _eref: ElementRef,private excelService:ExcelService) {
+ 
+  constructor(private homebranch: HomeBranchService,private _eref: ElementRef,private excelService:ExcelService, private _router:Router) {
     this.datePickerConfig = Object.assign({}, { containerClass: 'theme-orange' });
-
+    var logininfo:any = JSON.parse( localStorage.getItem('loginInfo'));
+    
+    if(!logininfo){
+      this._router.navigate(['home']);
+    }
+    if(logininfo.role !='BRANCH'){
+      this._router.navigate(['home']);
+    }
     
   
 
@@ -55,14 +64,15 @@ export class HomebranchComponent implements OnInit {
 
  onClick(event) {
    this.alertBox = false;
-  if (!this._eref.nativeElement.contains(event.target)) // or some similar check
+  if (!this._eref.nativeElement.contains(event.target)) {
   
-   console.log("alert");
-   console.log(this.alertBox);
+  //  // // console.log("alert");
+  //  // // console.log(this.alertBox);
+  }
  }
 
 dateFilter(){
-  console.log("filter date");
+ // // // console.log("filter date");
   var DataCopy = this.NotRecived;
 
     if(this.startDate && this.endDate){
@@ -79,7 +89,7 @@ dateFilter(){
       this.NotRecived = DataCopy;
      
 }
-console.log(this.NotRecived);
+//// console.log(this.NotRecived);
 
 }
 mark(){
@@ -93,7 +103,7 @@ mark(){
     }
     if(i === this.NotRecived.length-1){
       if(!this.markItem){
-     alert("Please Select the Approve Order and Continue");
+     alert("Please select an order to mark received");
       }else{
    
         this.alertcheck = true;
@@ -116,12 +126,12 @@ tabcheck(activeTab){
   if(activeTab == 'Received'){
      this.recivedactive = true;
      this.notrecivedactive = false;
-     console.log(this.recivedactive);
+   //  // console.log(this.recivedactive);
   }else{
     
     this.recivedactive = false;
      this.notrecivedactive = true;
-     console.log(this.notrecivedactive);
+   //  // console.log(this.notrecivedactive);
   }
 }
 
@@ -131,16 +141,24 @@ reload(){
 
   ngOnInit() {
     
-console.log(this.recivedTab);
+//// console.log(this.recivedTab);
     this.homebranch.notReceived()
     .then((data:any)=>{
-      console.log(data);
-      
+     // // console.log(data);
+      if(!data|| data.delivered_data.length ==0 ){
+    
+        this.loaders = false;
+       // // console.log(this.loaders);
+      }
       for(let i=0;i<data.delivered_data.length;i++){
+        var datepart;
+        var year;
+        var month;
+        var day;
         if(data.delivered_data[i].status == 'RECEIVED')
         {
           this.receivedCount++;
-          console.log(this.receivedCount);
+         // // console.log(this.receivedCount);
           this.recived.push({
             
             order_id:data.delivered_data[i].order_id,
@@ -158,10 +176,12 @@ console.log(this.recivedTab);
             country:data.delivered_data[i].country,
             client_id:data.delivered_data[i].client_id,
             approval_id:data.delivered_data[i].approval_id,
-            invoice_id: data.delivered_data[i].invoice_id
+            invoice_id: data.delivered_data[i].invoice_id,
+            dateformat: data.delivered_data[i].order_date.match(/\d+/g).reverse().join('-')
             
 
           }) 
+         
 
         }else{
           this.glpCount++;
@@ -182,18 +202,25 @@ console.log(this.recivedTab);
             client_id:data.delivered_data[i].client_id,
             approval_id:data.delivered_data[i].approval_id,
             invoice_id: data.delivered_data[i].invoice_id,
-            selected:false
+            selected:false,
+            dateformat: data.delivered_data[i].order_date.match(/\d+/g).reverse().join('-')
 
           }) 
+        }
+
+        if(i == data.delivered_data.length -1 ){
+    
+          this.loaders = false;
+          // console.log(this.loaders);
         }
       }
     })
 
     
-console.log(this.NotRecived);
+//// console.log(this.NotRecived);
   //   this.homebranch.notReceived()
   //   .then((data:any)=>{
-  //  console.log(data);
+  //  // console.log(data);
   //    this.allData = data.delivered_data;
   //    for(let i=0;i<data.delivered_data.length;i++){
   //      this.allData[i].selected = false;
@@ -202,14 +229,14 @@ console.log(this.NotRecived);
   //    for(let i=0;i<data.delivered_data.length;i++){
          
   //    }
-  //    console.log(this.NotRecived);
+  //    // console.log(this.NotRecived);
 
 
   //   })
   }
 
   // tables(check){
-  //   console.log(check);
+  //   // console.log(check);
   //   if(check == "notrecived"){
   //     this.selectTable = false;
   //   }
@@ -220,12 +247,12 @@ console.log(this.NotRecived);
 
   // pagechanged(event){
   //   this.p = event;
-  //   console.log(event);
+  //   // console.log(event);
   // }
   
   Received_setOrder(value: string) {
-    console.log("s "+value);
-    console.log(value);
+    // // console.log("s "+value);
+    // // console.log(value);
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
@@ -252,14 +279,14 @@ console.log(this.NotRecived);
   }
 
   Notreceived_setOrder(value: string) {
-    console.log("s "+value);
-    console.log(value);
+    // // console.log("s "+value);
+    // // console.log(value);
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
    if(this.reverse){
     this.NotRecived.sort(function(a, b){
-      console.log(a[value]);
+      // // console.log(a[value]);
       var x =  a[value].toLowerCase()  ;
       var y = b[value].toLowerCase()  ;
       if (x < y) {return -1;}
@@ -294,10 +321,10 @@ DateFilter(){
   }
 }
   Selected(event,i){
-    console.log(event);
-    console.log(i);
+    // // console.log(event);
+    // // console.log(i);
     this.NotRecived[i].selected = !this.NotRecived[i].selected;
-    console.log(this.NotRecived[i]);
+    // // console.log(this.NotRecived[i]);
   }
   selectall(){
     for(let i = 0 ;i<this.NotRecived.length;i++){
@@ -335,20 +362,24 @@ markReceived(){
   this.alertcheck = false;
   // alertify.alert('Alert Title', 'Alert Message!', function(){ alertify.success('Ok'); });
    var markItem:any[] = []
+   var d = new Date();
+  var n = d.toISOString().substring(0, 10);
+  // // console.log(n);
   for(let i=0; i<this.NotRecived.length;i++){
     if(this.NotRecived[i].selected){
       markItem.push({
         order_id:this.NotRecived[i].order_id.toString(),
-        received_date:"2019-05-22"
+        received_date: n
 
       });
       
     }
     if(i === this.NotRecived.length-1){
-      console.log(markItem);
+      // // console.log(markItem);
        this.homebranch.markreceived(markItem)
        .then((data:any)=>{
-         console.log(data);
+         // // console.log(data);
+         this.reload();
          this.failures = data.failure;
          this.success = data.success;
          this.alertBox = true;

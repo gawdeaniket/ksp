@@ -4,19 +4,19 @@
  -->
 
 
-<div *ngIf="alertBox" class="alert alert-success alert-dismissible">
+<!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
     
-    <strong style="font-size: 18px;">Alert!!...</strong><br> You have {{failures.length}} Failures Results.<br>and {{success.length}} Success Results
+    <strong style="font-size: 18px;">Success!!...</strong><br> You have {{markItem}} order marked as received
     
     <button  data-dismiss="alert" (click)="reload()" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
     
     OK</button>
     
-  </div>
+  </div> -->
 
   <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;">
-    
-    <strong style="font-size: 18px;">You have {{markItem}} order mark as received <br>are you sure  you want to mark recived</strong><br> 
+      
+    <strong style="font-size: 18px;">Are you sure you want to mark {{markItem}} order as received?</strong><br> 
     <div style="width: 100%;">
     <button  data-dismiss="alert" (click)="markReceived()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
     
@@ -28,14 +28,17 @@
     
   </div>
   
+  <div style="width: 100%;height:100%;background-color: #ffffff;z-index: 1;" *ngIf="loaders">
+      <div class="loader"></div>
+      </div>
+      
+      
+      <div *ngIf="!loaders">
 
 
-
-  <br><br>
+  <br><br><br>
 <!-- card -->
 
- 
-  
   <div class="card-columns">
     <div class="card " >
       <div class="card-body text-center">
@@ -59,8 +62,8 @@
   <div class="container" style="padding:0px;">
   <div class="search-container">
       
-      <input type="text" style="font-size: 12px;" [(ngModel)]="receivedSearchText" autocomplete="off" placeholder="Search by invoice Id" name="search" style="border:none;">
-      <button type="submit" style="border-radius:10px;background-color: #eeeeee;border:none;">Submit</button>
+      <input type="text" style="font-size: 12px;" [(ngModel)]="receivedSearchText" autocomplete="off" placeholder="Enter the last 3 digits of invoice id" name="search" style="border:none;">
+      <!-- <button type="submit" style="border-radius:10px;background-color: #eeeeee;border:none;">Submit</button> -->
    
   </div>
   </div>
@@ -97,12 +100,12 @@
   <div class="container" style="padding:0px;" >
   <div class="search-container">
       
-      <input type="text" [(ngModel)]="notreceivedSearchText" autocomplete="off" placeholder="Search By Customer Name" name="search" style="border:none;">
-      <button type="submit" style="cursor: pointer;border-radius:10px;background-color: #eeeeee;border:none;">Submit</button>
+      <input type="text" [(ngModel)]="notreceivedSearchText" autocomplete="off" placeholder="Enter the last 3 digits of invoice id" name="search" style="border:none;">
+      <!-- <button type="submit" style="cursor: pointer;border-radius:10px;background-color: #eeeeee;border:none;">Submit</button> -->
    
   </div>
   </div>
-  <br><br>
+  
   <!-- <div class="row" style="width: 90%;margin-left: 5%;margin-right: 5%;">
     <div class="col-xs-4 col-sm-4 col-lg-2 text-style" style="text-align: center;">Order Date</div>
       <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows cursor" style="cursor: pointer;padding: 5px;background-color: #ffffff;">
@@ -164,18 +167,13 @@
                       <th (click)="Received_setOrder('invoice_id')">Invoice ID</th>
                       <th (click)="sortByDate()">Order Date</th>
                       <th (click)="Received_setOrder('order_date')">Product Name</th>
-                      <th (click)="Received_setOrder('product_name')">Branch Id</th>
                       <th (click)="Received_setOrder('branch_id')">Status</th>
                       <th (click)="Received_setOrder('status')">Name</th>
                       <th (click)="Received_setOrder('name')">Phone Number</th>
-                      <th (click)="Received_setOrder('phone_number')">Email</th>
                       <th >Address</th>
                       <th >City</th>
                       <th >State</th>
                       <th >Pincode</th>
-                      <th >Country</th>
-                      <th (click)="Received_setOrder('client_id')">Client Id</th>
-                      <th (click)="Received_setOrder('approval_id')">Approal Id</th>
                       
                     </tr>
                     <tr *ngIf="recived.length == 0 ">
@@ -187,25 +185,20 @@
                     <tr *ngFor="let item of recived | invoicesearch:receivedSearchText |searchByDate:received_startDate:received_endDate:received_datefiltercheck :'order_date'   | paginate: { itemsPerPage: 5, currentPage: p1  }; let i = index">
                        
                             <td >{{item.invoice_id}}</td>
-                            <td >{{item.order_date}}</td>
+                            <td >{{item.dateformat}}</td>
                             <td>{{item.product_name}}</td>
-                            <td >{{item.branch_id}}</td>
                             <td>{{item.status}}</td>
                             <td>{{item.name}}</td>
                             <td class="textnumber">{{item.phone_number}}</td>
-                            <td>{{item.email}}</td>
-                            <td>{{item.address}}</td>
+                            <td><div style="float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 13vw;margin: 0px;">{{item.address}}</div></td>
                             <td>{{item.city}}</td>
                             <td>{{item.state}}</td>
                             <td>{{item.zipcode}}</td>
-                            <td>{{item.country}}</td>
-                            <td>{{item.client_id}}</td>
-                            <td>{{item.approval_id}}</td>
                             
                           </tr>
                     </table>
                     </div>
-                    <div *ngIf="recived.length == receivedCount">
+                    <div *ngIf="recived.length == receivedCount" style="margin-left: 14vw;margin-right: auto;">
                     <pagination-controls  (pageChange)="p1 = $event" ></pagination-controls>
                     </div>
 
@@ -216,26 +209,23 @@
    -->
                     <button type="button" *ngIf="NotRecived.length != 0 " class="btn btn-default" (click)="selectall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;">Select All</button>
                     <button type="button" *ngIf="NotRecived.length != 0 " class="btn btn-default" (click)="clearall()" style="background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;">Clear All</button>
-   <div style="overflow:auto;padding-bottom: 2vh;">
+                    <button type="button" *ngIf="NotRecived != 0 " (click)="mark()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;margin:0vh 1vh;padding-left: 25px;padding-right: 25px;font-weight: bold;float: right;">Mark Received</button>
+
+                    <div style="overflow:auto;padding-bottom: 2vh;">
                     <table >
                         <tr>
-                            <th></th>
+                            <th style="min-width: 2vw !important"></th>
                             <th (click)="Notreceived_setOrder('order_id')">Invoice ID</th>
                             <th (click)="sortByDate()">Order Date</th>
                             <th (click)="Notreceived_setOrder('order_date')">Product Name</th>
-                            <th (click)="Notreceived_setOrder('product_name')">Branch Id</th>
+                            
                             <th (click)="Notreceived_setOrder('branch_id')">Status</th>
                             <th (click)="Notreceived_setOrder('status')">Name</th>
                             <th (click)="Notreceived_setOrder('name')">Phone Number</th>
-                            <th (click)="Notreceived_setOrder('phone_number')">Email</th>
-                          <th>Email</th>
                           <th>Address</th>
                           <th>City</th>
                           <th>State</th>
                           <th>Pincode</th>
-                          <th>Country</th>
-                          <th (click)="Received_setOrder('client_id')">Client Id</th>
-                          <th (click)="Received_setOrder('approval_id')">Approal Id</th>
                           
                         </tr>
                         <tr *ngIf="NotRecived.length == 0 ">
@@ -244,23 +234,18 @@
                             </td>
                         </tr>
                         <tr *ngFor="let item of NotRecived | invoicesearch:notreceivedSearchText |searchByDate:notreceived_startDate:notreceived_endDate:notreceived_datefiltercheck :'order_date' | paginate: { itemsPerPage: 5, currentPage: p2 }; let i = index">
-                            <td style="min-width:1vw;"><input type="checkbox" [checked]="item.selected" name="item.ProductName" value="item.order_id" (change)="Selected($event,i)" /></td>
+                            <td style="min-width: 2vw !important"><input type="checkbox" [checked]="item.selected" name="item.ProductName" value="item.order_id" (change)="Selected($event,i)" /></td>
                            
                                 <td>{{item.invoice_id}}</td>
-                                <td >{{item.order_date}}</td>
+                                <td >{{item.dateformat}}</td>
                                 <td>{{item.product_name}}</td>
-                                <td >{{item.branch_id}}</td>
                                 <td>{{item.status}}</td>
                                 <td>{{item.name}}</td>
                                 <td class="textnumber">{{item.phone_number}}</td>
-                                <td>{{item.email}}</td>
-                                <td>{{item.address}}</td>
+                                <td><div style="float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 13vw;margin: 0px;">{{item.address}}</div></td>
                                 <td>{{item.city}}</td>
                                 <td>{{item.state}}</td>
                                 <td>{{item.zipcode}}</td>
-                                <td>{{item.country}}</td>
-                                <td>{{item.client_id}}</td>
-                                <td>{{item.approval_id}}</td>
                                 
                               </tr>
                         </table>
@@ -268,7 +253,6 @@
                         <div style="margin-left:30%;margin-top:1.5vh;margin-bottom: 0%;">
                           <pagination-controls (pageChange)="p2 = $event"></pagination-controls>
                        </div>
-                        <button type="button"  (click)="mark()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;margin:0vh 3vh;padding-left: 25px;padding-right: 25px;font-weight: bold;">Mark Received</button>
 
                 </div>
                 
@@ -276,4 +260,5 @@
         </div>
     </div>
 
-  
+  </div>
+  </div>

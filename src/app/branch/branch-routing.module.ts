@@ -11,25 +11,26 @@ import {UploadinvoiceComponent} from './uploadinvoice/uploadinvoice.component';
 
 
 const routes: Routes = [
-   {path:'dashboard', component:DashboardComponent,
+  {path:'', component:DashboardComponent,
    
-     children:[
-     {
-       path:'', component:HomebranchComponent,outlet:'m2'
+  children:[
+    {
+      path:'',redirectTo:'homebranch',pathMatch:'full'
      },
-     {
-      path:'homebranch',component:HomebranchComponent, outlet:'m2'
-     },
-     {
-      path:'viewallorder',component:ViewallorderComponent, outlet:'m2'
-     },
-     {
-       path:'downloadinvoice', component:DownloadinvoiceComponent,outlet:'m2'
-     },
-     {
-       path:'uploadinvoice', component:UploadinvoiceComponent,outlet:'m2'
-     }
- ]},
+  {
+   path:'homebranch',component:HomebranchComponent
+  },
+  {
+   path:'viewallorder',component:ViewallorderComponent
+  },
+  
+  {
+    path:'downloadinvoice', component:DownloadinvoiceComponent
+  },
+  {
+    path:'uploadinvoice', component:UploadinvoiceComponent
+  }
+  ]}
   
 
 ];

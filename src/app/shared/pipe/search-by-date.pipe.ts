@@ -7,18 +7,18 @@ export class SearchByDatePipe implements PipeTransform {
 
   transform(value: any, startDate: any,endDate:any,datefiltercheck:boolean,type): any {
     startDate:endDate:datefiltercheck :'order_date'
-   // console.log(event);
+   // // console.log(event);
    
-  //  console.log(typeof this.date[0]);
-      console.log(value);
-      console.log(startDate);
-      console.log(endDate);
-      console.log(datefiltercheck);
-      console.log(type);
+  //  // console.log(typeof this.date[0]);
+      // console.log(value);
+      // console.log(startDate);
+      // console.log(endDate);
+      // console.log(datefiltercheck);
+      // console.log(type);
    var checkDate
 
     if (!value || !datefiltercheck || !startDate || !endDate ) {
-      console.log("invalid");
+      // console.log("invalid");
             return value;
         }
         else{
@@ -27,10 +27,10 @@ export class SearchByDatePipe implements PipeTransform {
           
          
         return value.filter(values =>{
-          console.log(new Date( values[type]) );
-          console.log(new Date( values[type]) > startDate);
+          // console.log(new Date( values[type]) );
+          // console.log(new Date( values[type]) > startDate);
           if(values[type]){
-            console.log(  new Date(values[type]) < endDate)
+            // console.log(  new Date(values[type]) < endDate)
          return    new Date( values[type] ) >= startDate && new Date(values[type] ) <= endDate;
           }
 

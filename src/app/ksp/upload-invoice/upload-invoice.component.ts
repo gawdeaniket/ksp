@@ -1,6 +1,6 @@
 import { Component, OnInit,ElementRef } from '@angular/core';
 import {BranchUploadInvoiceService} from '../../services/branch/branch-upload-invoice.service'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -24,10 +24,11 @@ export class UploadInvoiceComponent implements OnInit {
   successalert:boolean = false;
   heading: any;
   failurealert:boolean = false;
-  constructor(private branchuploadinvoiceservice: BranchUploadInvoiceService,public activatedRoute: ActivatedRoute,private _eref: ElementRef) { }
+  constructor(private _router:Router,private branchuploadinvoiceservice: BranchUploadInvoiceService,public activatedRoute: ActivatedRoute,private _eref: ElementRef) { }
 
   ngOnInit() {
      this.id = this.activatedRoute.snapshot.paramMap.get('id');
+     console.log(this.id);
      if( this.id =='markDeliverd'){
        this.heading = "Mark Deliverd";
      }else {
@@ -61,11 +62,14 @@ console.log(this.uploadAlert);
     }
     else{
       this.fileToUpload = undefined;
-      alert("please upload Correct File Format");
+      alert("Please upload a file in correct format (xls / xlsx)");
     }
     console.log(files);
     
     
+}
+home(){
+  this._router.navigate(['ksp/invoicemanagement']);
 }
 reload(){
   location.reload();
@@ -75,7 +79,8 @@ reload(){
     this.uploadAlert = false;
     console.log(this.id);
     if(!this.fileToUpload){
-      this.alerts = true;
+      // this.alerts = true;
+      alert("Please choose a file to upload");
     }
     else {
       this.branchuploadinvoiceservice.postFile(this.fileToUpload, this.id)

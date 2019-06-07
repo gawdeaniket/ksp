@@ -6,8 +6,8 @@
   
   <mat-card-header style="background-color:#fcdb04;padding: 0px;margin: 0px;height: 10vh;border-radius: 10px 10px 0px 0px;">
   
-  <a href="#" style="height:100%;margin:0px;padding: 10px;text-align: left ;margin-left: 25%;">
-      <img src="../../../assets/imgs/logo.png" style="height:90% !important;width:45% !important;">
+  <a  style="height:100%;margin:0px;padding: 10px;text-align: left ;margin-left: 25%;">
+      <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:90% !important;width:45% !important;">
     </a>
   
   
@@ -17,18 +17,21 @@
   <mat-card-content fxLayout="column">
     
       <form [formGroup]="loginform" (ngSubmit)="login(email.value,pass.value )" class="form-group">
-     <mat-form-field  style="width:90%;margin-left: 5%;margin-top: 3vh;margin-bottom: 0px;" appearance="outline">
+     <mat-form-field  style="margin: 0px;width:90%;margin-left: 5%;margin-top: 3vh;margin-bottom: 0px;" appearance="outline">
   
   
-               <mat-label>USERNAME</mat-label>
-               <input matInput #email formControlName="email" placeholder="Please enter username">
+               <mat-label>Username</mat-label>
+               <input matInput #email formControlName="email" placeholder="Please enter username" (keypress)="close($event,'username')">
               
              </mat-form-field>
 
              <span *ngIf="email_user" style="margin: 0px;padding:0px;">
               <div style="text-align: left;margin-left: 30px;color: red" *ngIf="loginform.controls['email'].hasError('required') ">
-                        USERNAME is Required
+                        Uesrname is Required
                    </div>
+                   <div style="text-align: left;margin-left: 30px;color: red;margin-top: 0px;padding-top: 0px;" *ngIf="loginform.controls['email'].hasError('pattern')">
+                    Special character and space are not allowed
+               </div>
                 
               </span>
      <br>
@@ -36,19 +39,20 @@
      <mat-form-field style="width:90%;margin-left: 5%;margin-bottom: 0px;" appearance="outline">
 
                <mat-label>Password</mat-label>
-               <input matInput  #pass formControlName="pass" placeholder="Please enter password">
-              
+               <input matInput #pass formControlName="pass"  (ngModelChange)="close($event,'pass')" placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+               <button type="button" style="background: transparent;border:none;" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+               </button>
              </mat-form-field>
-             <span *ngIf="pass_user">
-              <div style="text-align: left;margin-left: 30px;color: red" *ngIf="loginform.controls['pass'].hasError('required')"  >
+             <span *ngIf="pass_user" style="margin: 0px;padding:0px;">
+              <div style="text-align: left;margin-left: 30px;color: red;margin-top: 0px;padding-top: 0px;" *ngIf="loginform.controls['pass'].hasError('required')"  >
                          Please enter a password.
                 </div>
             </span>
-            <button type="submit" class="btn " style="width: 30%;margin-left: 35%;margin-top: 2vh;padding: 10px;background-color: #fcdb04;font-weight: bold;" >Login</button>
+            <button type="submit" class="btn " [disabled]="loginform.invalid" style="width: 30%;margin-left: 35%;margin-top: 2vh;padding: 10px;background-color: #fcdb04;font-weight: bold;" >Login</button>
 
              </form>
-             <p class="display-4 text-center" style="margin-top:1vh;color:#9e9e9e">Forget Login-Id or Password</p>
-            </mat-card-content>
+             </mat-card-content>
   
   
   <mat-card-actions align="center">

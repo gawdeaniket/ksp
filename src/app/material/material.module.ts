@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   
   MatCheckboxModule,
@@ -29,7 +28,7 @@ import {
   MatSidenavModule
 } from '@angular/material';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const materialModules = [
   MatCheckboxModule,
@@ -56,7 +55,7 @@ const materialModules = [
   MatSortModule,
   MatAutocompleteModule,
   MatExpansionModule,
-  BrowserAnimationsModule,MatIconModule,
+ MatIconModule,
    
 ];
 
@@ -65,7 +64,7 @@ const materialModules = [
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    
     materialModules
   ],
   exports:[

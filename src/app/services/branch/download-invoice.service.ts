@@ -15,8 +15,8 @@ export class DownloadInvoiceService {
     
   downloadInvoice(){
     //{{server}}mfi-branch/v1.0/disbursal/{{client_id}}?branch-id={{branch_id}}
-
-    const endpoint = this.commonValue.endpoint+'mfi-branch/v1.0/disbursal/'+this.commonValue.client_id+ '?branch-id=' + this.commonValue.branch_id;
+// console.log("get");
+    const endpoint = this.commonValue.endpoint+'mfi-branch/v1.0/get-disbursal/'+this.commonValue.client_id+ '?branch-id=' + this.commonValue.branch_id;
 
     // const formData: FormData = new FormData();
     // formData.append('invoice-file', fileToUpload);
