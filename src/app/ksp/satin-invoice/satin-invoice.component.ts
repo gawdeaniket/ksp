@@ -11,9 +11,7 @@ export class SatinInvoiceComponent implements OnInit {
 
   ngOnInit() {
   }
-  home(){
-    this._router.navigate(['ksp/invoicemanagement']);
-  }
+ 
 upload(value){
   console.log(value);
   this._router.navigate(['ksp/upload', value]);

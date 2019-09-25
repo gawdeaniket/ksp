@@ -1,0 +1,143 @@
+<div *ngIf="saveAlert" class="alert alert-success alert-dismissible" style="left: 40%;">
+    
+    <strong style="font-size: 18px;" >Are you sure you want to save changes ?  </strong><br> 
+    <div style="width: 100%;">
+    <button   (click)="saveChanged()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+        YES</button>
+    <button  (click)="saveChanged()"  style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    NO</button>
+    </div>
+    
+  </div>
+
+
+  <div style="width: 100%;height:100%;background-color: #ffffff;z-index: 1;" *ngIf="loaders">
+      <div class="loader"></div>
+      </div>
+      
+      
+      <div *ngIf="!loaders">
+<div class=" text-center" style="margin-top: 6vh;">
+    <span class="text-style "> Branch Details </span>
+</div>
+
+
+<div style="width: 90%;overflow:auto;margin-top: 10vh;margin-left: 5%;"> 
+    <input type="file" #file style="display:none" (change)="handleFile($event.target)"
+    id="file">
+     <button type="button" (click)="Download()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 0%;">Download </button>
+    <button type="button" (click)="uploadExcel()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File </button>
+    
+    <table style="width: 100%;overflow:auto"  >
+      <!-- [class.active]="order === 'branch_id'" -->
+                       <tr style="cursor: pointer;" >
+                         <th 
+                         (click)="setOrder('branch_id')">Branch Id 
+                            <i class="material-icons "  style="float: right;">
+                                swap_vert
+                                </i> 
+                         </th>
+                         <th [ngClass]="{'border-table': !Disabled}"
+                          (click)="setOrder('branch_name')">Branch Name
+                            <i class="material-icons " style="float: right;">
+                                swap_vert
+                                </i>
+                         </th>
+                         <th [ngClass]="{'border-table': !Disabled}"
+                          (click)="setOrder('region')">City
+                            <i class="material-icons " style="float: right;">
+                                swap_vert
+                                </i>
+                         </th>
+                         <th [ngClass]="{'border-table': !Disabled}"
+                          (click)="setOrder('state')">State
+                            <i class="material-icons " style="float: right;">
+                                swap_vert
+                                </i>
+                         </th>
+                         <th [ngClass]="{'border-table': !Disabled}"
+                          (click)="setOrder('status')">Status
+                            <i class="material-icons " style="float: right;">
+                                swap_vert
+                                </i>
+                         </th>
+                         
+                         
+                       </tr>
+                       <tr *ngIf="uploadOrderList.length == 0">
+                         <td colspan="5"> No data Available </td>
+
+                       </tr>
+                       <tr *ngIf="uploadOrderList.length != 0">
+                          <td  style="padding: 5px;">
+                              <input type="text" placeholder="Search by Branch Id" [(ngModel)]="branchId" style="border:2px solid #eeeeee;padding: 5px;width: 90%">
+                            </td>
+                            <td [ngClass]="{'border-table': !Disabled}">
+                                <input type="text" placeholder="Search by Branch name" [(ngModel)]="name" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                              </td>
+                              <td [ngClass]="{'border-table': !Disabled}">
+                                  <input type="text" placeholder="Search by City" [(ngModel)]="region" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                                </td>
+                                <td [ngClass]="{'border-table': !Disabled}">
+                                    <input type="text" placeholder="Search by State " [(ngModel)]="product" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                                  </td>
+                                  <td [ngClass]="{'border-table': !Disabled}">
+                                      <input type="text" placeholder="Search by Status " [(ngModel)]="state" style="border:2px solid #eeeeee;padding: 5px;;width: 80px;width: 90%;">
+                                    </td>
+                                  
+                       </tr>
+                       <tr *ngFor="let item of uploadOrderList  | mulipleSearch:branchId:name:region:product:state |paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                           
+                           <td >{{item.branch_id}}
+                              <!-- <input type="text" class="inputplace"   placeholder="Branch Id cannot be null"  [disabled]="Disabled" (ngModelChange)="changedValue('branch_id',$event,item.no)" [(ngModel)]="item.branch_id" style="height:100%;width: 100%;border: none;margin: 3px;" > -->
+                           
+                           <td [ngClass]="{'border-table': !Disabled}">
+                              <input type="text" class="inputplace" placeholder="Branch name cannot be null" [disabled]="Disabled" (ngModelChange)="changedValue('branch_name',$event,item.no,i)" [(ngModel)]="item.branch_name" style="height:100%;width: 100%;border: none;">
+                             </td>
+                           <td [ngClass]="{'border-table': !Disabled}">
+                              <input type="text" class="inputplace" placeholder="City cannot be null" [disabled]="Disabled" (ngModelChange)="changedValue('region',$event,item.no)" [(ngModel)]="item.region" style="height:100%;width: 100%;border: none;">
+                              </td>
+                           <td [ngClass]="{'border-table': !Disabled}">
+                              <input type="text" class="inputplace" placeholder="State cannot be null" [disabled]="Disabled" (ngModelChange)="changedValue('state',$event,item.no)" [(ngModel)]="item.state" style="height:100%;width: 100%;border: none;">
+                              </td>
+                           <td [ngClass]="{'border-table': !Disabled}">{{item.status}}
+                              <i class="material-icons" *ngIf="!Disabled" style="float: right;cursor:pointer;" (click)="statusChanged(i)">
+                                  unfold_more
+                                  </i>
+                          
+                          </td>
+                           <!-- <td >
+                             <div style="width: 150px;margin:0px;padding: 0px;">
+                             <div style="display: inline;float:left;overflow:hidden;width: 30px;margin-left: 5px;">
+                              <i class="material-icons " style="float:left;cursor: pointer;margin-left: 5px;margin-top: 3px;" (click)="decrease(item.no)">
+                              remove_circle_outline
+                              </i>
+                              </div>
+                              <div style="display: inline;float:left;overflow:hidden;width: 80px;">
+                              <input type="number" (ngModelChange)="changedValue($event,item.no)" [(ngModel)]="item.product_qty"  style="text-align: center ;width: 70px;">
+                             </div>
+                             <div style="display: inline;float:left;overflow:hidden;width: 30px;">
+                              <i class="material-icons" style="float: right;cursor: pointer;margin-right: 5px;margin-top: 3px;" (click)="increase(item.no)">
+                              add_circle_outline
+                              </i>
+                            </div>
+
+                              </div>
+                              </td> -->
+                           <!-- <td>{{item.current_stock}}</td> -->
+                        </tr>
+                      
+  </table>
+  </div>
+  <div style="margin-left:30%;margin-top:3vh;">
+      <pagination-controls *ngIf="uploadOrderList.length != 0" (pageChange)="p = $event"></pagination-controls>
+     </div>
+     <div style="width: 90% !important;margin-left:5%;">
+       
+        <button type="button" *ngIf="!saveButton" class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-bottom: 3vh;font-weight: bold;" (click)="edit()">Edit</button>
+        <button type="button" *ngIf="saveButton"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-bottom: 3vh;font-weight: bold; " (click)="save()">Save</button>
+
+       </div>
+</div>

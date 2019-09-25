@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/mfi-branch/",
-            "deployUrl": "/mfi-branch/",
+            "baseHref": "/",
+            "deployUrl": "/",
             "outputPath": "dist/Greenlight",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -52,10 +52,10 @@ export class MultipleSearchAllorderPipe implements PipeTransform {
             }
             if (customerPhone  ){
               customerPhonecheck = item.phone_number.startsWith(customerPhone);
-              console.log(customerPhonecheck);
+             // console.log(customerPhonecheck);
             }
             if (customerAddress){
-              cutomerAddressCheck = item.customer_address.toLowerCase().startsWith(customerAddress.toLowerCase());
+              cutomerAddressCheck = item.address.toLowerCase().indexOf(customerAddress.toLowerCase()) >-1;
            //    console.log("product name "+productNameCheck);
           }
           if (status){
@@ -81,7 +81,7 @@ export class MultipleSearchAllorderPipe implements PipeTransform {
         //     check = false;
         //     console.log(check);
         // }
-          console.log(check);
+         // console.log(check);
             return check;
             
        })

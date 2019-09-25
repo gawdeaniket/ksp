@@ -7,54 +7,40 @@ import {EnvironmentService} from '../environment/environment.service'
   providedIn: 'root'
 })
 export class JsonToCsvService {
-
   commonValue:any ;
-  constructor(private httpClient:HttpClient,private envir:EnvironmentService) {
-  this.commonValue =  this.envir.globalvalue();
-   }
-
-   stateWise(){
+  constructor(private httpClient: HttpClient,private envir: EnvironmentService) {
+    this.commonValue =  this.envir.globalvalue();
+  }
+  stateWise(){
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Accept', 'application/json');
-    
-        return new Promise((resolve, reject) => {
-          
-          this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/ho-state-summary/'+this.commonValue.client_id,  { headers: headers })
-          .subscribe((data)=>{
-             resolve(data);
-          })
-    
-        })
-
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/ho-state-summary/'+this.commonValue.client_id,  { headers: headers })
+      .subscribe((data)=>{
+        resolve(data);
+      },(err)=>{
+        reject(err);
+      })
+    })
    }
    branchWise(){
-
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Accept', 'application/json');
-    
-        return new Promise((resolve, reject) => {
-          
-          this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/ho-branch-summary/'+this.commonValue.client_id,  { headers: headers })
-          .subscribe((data)=>{
-             resolve(data);
-          })
-    
-        })
-
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/ho-branch-summary/'+this.commonValue.client_id,  { headers: headers })
+      .subscribe((data)=>{
+          resolve(data);
+      })
+    })
    }
    customerWise(){
-
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Accept', 'application/json');
-    
-        return new Promise((resolve, reject) => {
-          
-          this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/orders/'+this.commonValue.client_id,  { headers: headers })
-          .subscribe((data)=>{
-             resolve(data);
-          })
-    
-        })
-
+    return new Promise((resolve, reject) => {
+      this.httpClient.get(this.commonValue.endpoint+'mfi-branch/v1.0/orders/'+this.commonValue.client_id,  { headers: headers })
+      .subscribe((data)=>{
+        resolve(data);
+      })
+    })
    }
 }

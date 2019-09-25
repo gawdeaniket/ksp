@@ -5,6 +5,7 @@ import {DashboardHoComponent} from '../ho/dashboard/dashboard.component';
 import {UploadMslComponent} from '../ho/upload-msl/upload-msl.component';
 import {UploadOrdersComponent} from '../ho/upload-orders/upload-orders.component';
 import {HomeHoComponent} from '../ho/home-ho/home-ho.component';
+import {BranchEditComponent} from './branch-edit/branch-edit.component';
 const routes: Routes = [
   {path:'', component:DashboardHoComponent,
   
@@ -20,6 +21,9 @@ const routes: Routes = [
   },
   {
     path:'ApproveOrders', component:UploadOrdersComponent
+  },
+  {
+    path:'branchEdit', component:BranchEditComponent
   }
 ]}
  

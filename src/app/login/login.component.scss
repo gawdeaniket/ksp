@@ -1,9 +1,26 @@
-.loginCard{
-    margin-top: 10%;
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .loginCard
+{
+    margin-top: 30%;
     display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 35%;padding: 0px;
+  width: 90%;
+  height: 40%;
+  padding: 0px;
+  border-radius: 10px;
+  }
+}
+
+
+.loginCard{
+  margin-top: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+  padding: 0px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -15,7 +32,7 @@
     background-image: url("../../assets/imgs/bg.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
     width: 100% !important;
-    height: 700px !important;
+    height:100% !important;
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */

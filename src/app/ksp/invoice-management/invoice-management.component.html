@@ -1,27 +1,17 @@
-<div  class="header">
- 
-   
-      <a  style="height:5vh;margin:0px;padding: 0px;text-align: left ;margin-left: 4vw;padding-top:15px; ">
-        <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:80% !important;width:10% !important;margin-top: 5px;">
-      </a>
-     
-     
-    
-    
+<!-- <div  class="header">
+  <a  style="height:5vh;margin:0px;padding: 0px;text-align: left ;margin-left: 4vw;padding-top:15px; ">
+    <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:80% !important;width:10% !important;margin-top: 5px;">
+  </a>
+</div> -->
+<app-header [rootFlag]="flagToHeader"></app-header>
+<div class="container" >
+  <span class="text-style"> Invoice Management</span>
+  <div class="selection">
+    <select (change)="ChangingValue($event)" class="select-container">
+      <option value="dis" hidden>Select Your Partner</option>
+      <option  value="satin" class="select-option">SATIN</option>
+      <option  value="bfil">BFIL</option>
+    </select>   
+    <button type="button" class="btn btn-primary"(click)="select()">SUBMIT</button>
   </div>
-
-
-  <div class="container" >
-    <span class="text-style"> Invoice Management </span>
-  <div style="display: block;float: left;width: 100%;margin-top:4vh;">
-     <select (change)="ChangingValue($event)"   style="background-color:#fcdb04;width: 25%;padding:1vh 3vh;color: #000000;font-size: 3vh;">
-          <option value="dis" hidden>Select Your Partner</option>
-          <option  value="satin" style="font-size: 16px;padding:7px;border-bottom: 1px solid #000000;background-color: #fcdb04;">SATIN</option>
-          <option  value="bfil">BFIL</option>
-        </select>
-        
-      <button type="button" class="btn btn-primary" style="cursor: pointer;display: block;margin-top:10%;width: 10%;background-color:#fcdb04;color: black;" (click)="select()">SUBMIT</button>
-
-
-
-      </div>
+</div>

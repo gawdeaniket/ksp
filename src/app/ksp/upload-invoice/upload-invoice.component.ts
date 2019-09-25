@@ -28,34 +28,27 @@ export class UploadInvoiceComponent implements OnInit {
 
   ngOnInit() {
      this.id = this.activatedRoute.snapshot.paramMap.get('id');
-     console.log(this.id);
+    // console.log(this.id);
      if( this.id =='markDeliverd'){
        this.heading = "Mark Deliverd";
      }else {
       this.heading = "Upload Invoice";
      }
-  
   }
-  
   upload(){
     this.uploadAlert = true;
     this.fileToUpload = null;
-//this.uploadAlert = !this.uploadAlert;
-console.log(this.uploadAlert);
   }
-  
   onClick(event) {
-   
    if (!this._eref.nativeElement.contains(event.target)) {
    this.uploadAlert = false;
-   console.log(this.uploadAlert );
-    console.log("in");
-    //console.log(this.alertBox);
   }
 }
 
  handleFile(files: FileList) {
+  // console.log(files);
    this.alerts = false;
+   this.failurealert = false;
     if(files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
       this.fileToUpload = files.item(0);
       this.alerts = false;
@@ -64,9 +57,7 @@ console.log(this.uploadAlert);
       this.fileToUpload = undefined;
       alert("Please upload a file in correct format (xls / xlsx)");
     }
-    console.log(files);
-    
-    
+   
 }
 home(){
   this._router.navigate(['ksp/invoicemanagement']);
@@ -77,7 +68,7 @@ reload(){
   handleFileInput() {
 
     this.uploadAlert = false;
-    console.log(this.id);
+   // console.log(this.id);
     if(!this.fileToUpload){
       // this.alerts = true;
       alert("Please choose a file to upload");
@@ -85,7 +76,7 @@ reload(){
     else {
       this.branchuploadinvoiceservice.postFile(this.fileToUpload, this.id)
     .then((data:any)=>{
-   console.log(data);
+  // console.log(data);
    this.successResponse = data.success;
    if(this.successResponse.length){
     this.successalert =true;
@@ -96,12 +87,12 @@ reload(){
       this.failurealert = true;
      }
      
-     console.log(this.failureResponse);
+    // console.log(this.failureResponse);
 
 
     },(error:any)=>{
       var errorsMessage =error.error.Error.MessageToUser; 
-      console.log(errorsMessage);
+     // console.log(errorsMessage);
       alert(errorsMessage);
     }).catch(error => console.log(error));
       

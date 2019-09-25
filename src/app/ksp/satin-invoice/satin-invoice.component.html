@@ -1,35 +1,22 @@
-<div  class="header">
- 
-    
-    <button type="button" (click)="home()"  class="btn btn-default" style="background-color: #000000;color: #fcdb04;padding-left: 2vw;padding-right: 2vw;font-weight: bold;margin-left: 6vw;margin-top: 1vh;border: none;" >Home</button>
+<!-- <div  class="header">
+ <button type="button" (click)="home()"  class="btn btn-default" style="background-color: #000000;color: #fcdb04;padding-left: 2vw;padding-right: 2vw;font-weight: bold;margin-left: 6vw;margin-top: 1vh;border: none;" >Home</button>
         
   
     <a  style="height:5vh;margin:0px;padding: 0px;text-align: left ;margin-left: 2vw;padding-top:15px; ">
       <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:80% !important;width:10% !important;margin-top: 5px;">
     </a>
-   
-   
-  
-  
-</div>
+    
+</div> -->
 
-
-  <div class="container" >
-      <span class="text-style" style="margin-left: 1.5vw;"> Satin Invoice Management </span>
-     
-      </div>
-
-<div class="container" style="margin-top:4vh;">
- 
-  
-      <div (click)="upload('uploadInvoice')" style="cursor: pointer;margin-left: 38%;width: 23% !important;height:20% !important;border:1px solid #000000;padding: 5vh;border-radius: 10px;text-align: center;font-weight: bold;font-size: 20px;margin-top: 5vh; background-color:#fcdb04 ;
-      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);">
-        Upload Invoice
-         
-      </div>
-      <div (click)="upload('markDeliverd')" style="cursor:pointer;margin-left: 38%;width: 23% !important;height:20% !important;border:1px solid #000000;padding: 5vh;border-radius: 10px;text-align: center;font-weight: bold;font-size: 20px;margin-top: 6vh; background-color:#fcdb04 ;
-      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);">
-          Mark Delivered
-           
-        </div>
+<app-header></app-header>
+  <div class="container">
+    <span class="text-style"> Satin Invoice Management </span>
+  </div>
+  <div class="container" style="margin-top:6vh;">
+    <div class="category" (click)="upload('uploadInvoice')">
+      Upload Invoice
+    </div>
+    <div (click)="upload('markDeliverd')" class="category">
+      Mark Delivered
+    </div>
   </div>

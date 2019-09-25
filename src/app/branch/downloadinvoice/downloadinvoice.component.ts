@@ -24,12 +24,12 @@ export class DownloadinvoiceComponent implements OnInit {
   loaders:boolean = true;
   bsConfig: Partial<BsDatepickerConfig>;
   constructor(private download_service:DownloadInvoiceService, private _router:Router) {
-    this.bsConfig = Object.assign({}, { containerClass: 'theme-orange' });
+    this.bsConfig = Object.assign({}, { containerClass: 'theme-orange',showWeekNumbers: false });
     var logininfo:any = JSON.parse( localStorage.getItem('loginInfo'));
     if(!logininfo){
       this._router.navigate(['home']);
     }
-    if(logininfo.role !='BRANCH'){
+    if(logininfo.role != 'BRANCH'){
       this._router.navigate(['home']);
     }
   }
@@ -83,7 +83,7 @@ ngOnInit() {
     }
 
   }).catch((error)=>{
-    alert(error);
+    this.loaders = false;
   })
 
  

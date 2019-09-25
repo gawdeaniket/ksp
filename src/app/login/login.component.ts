@@ -2,21 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {LoginService} from '../services/login/login.service'
-
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  
+  
   public loginform:FormGroup ;
   pass_user: boolean = false;
   email_user: boolean= false;
   hide = true;
   patterns = '^(?=.*[a-zA-Z])[a-zA-Z0-9]+$';
   specialchar = false;
-  constructor(private _router: Router,public formbuilder:FormBuilder,public details:LoginService) { 
+  username:any ;
+  password;any;
+  constructor(private deviceService: DeviceDetectorService,private _router: Router,public formbuilder:FormBuilder,public details:LoginService) { 
+    localStorage.removeItem('loginInfo');
+    const isMobile = this.deviceService.isMobile();
+    if(isMobile){
+      this._router.navigate(['404']);
+    };
     this.loginform = this.formbuilder.group({
       email:['',[Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
       pass: ['',[Validators.required] ],
@@ -26,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 close(event, value){
   // console.log(event);
@@ -73,6 +82,7 @@ close(event, value){
   	 this.details.login(obj ).then((result:any) => {
      // var data:any ={username:result.username,client_id:result.client_id,branch_id:result.branch_id,role:result.role};
       localStorage.setItem('loginInfo', JSON.stringify(result));
+     console.log( localStorage.getItem('loginInfo') );
      // console.log(data);
       if(result.role == 'HO'){
       //  var check:any =JSON.parse( localStorage.getItem('loginInfo') );
@@ -86,7 +96,9 @@ close(event, value){
     }, (err) => {
       // console.log(err);
      alert(err.error.Error.MessageToUser);
-     location.reload();
+    //  this.username = '';
+    //  this.password = '';
+    // location.reload();
     });
   	}
  }

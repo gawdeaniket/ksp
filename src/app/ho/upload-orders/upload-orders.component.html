@@ -1,39 +1,65 @@
-
-
-<!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
-    
-    <strong style="font-size: 18px;">Success!!...</strong><br> Product Updated Succefully!!......
-    
-    <button  data-dismiss="alert" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-    
-    OK</button>
-    
+<!-- <div style="width: 100%;height:100%;background-color: transparent;z-index: 1;" *ngIf="loaderscheck">
+  <div class="loader" style="top: 45%;width: 50px;height: 50px;"></div>
   </div> -->
-  <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible" style="width:26%;left:46%;border-radius: 10px; ">
-      
-      <strong style="font-size: 18px;">File uploaded successfully <br> Want to approved the file ?</strong><br> 
-      <div style="width: 100%;">
-      <button  data-dismiss="alert" (click)="approvedupload()"  style="display:inline;float: left;width:30%;margin-left:15%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 14px; ">
-      
-          Yes</button>
-      <button  data-dismiss="alert" (click)="cancelapproved()" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 15px; ">
-      
+
+<!-- All alerts (4) -->
+
+<!-- Alert(1)   after successfully approving the data display on UI with total count -->
+<div *ngIf="alert1" class="alert alert1 alert-success alert-dismissible">
+  <strong >You have approved {{totalApproveCount}} orders successfully</strong>
+  <button data-dismiss="alert"> OK</button>
+</div>
+<!-- Alert(2)  failure and success message after approval of the File (mostly failure mesaage will not come)-->
+<div *ngIf="alert2" class=" alert alert2 alert-success alert-dismissible ">
+<strong> {{alertmessage}}</strong>
+<button data-dismiss="alert" aria-label="close" (click)=cancelapproved()> {{alertbutton}}</button>
+</div>
+<!-- Alert(3) error mesaage while uploading file -->
+<div *ngIf="alert3" class="alert3">
+<strong >Error while uploading the file</strong>
+  <strong  *ngIf="failurelength">{{failurelength}} incorrect orders found</strong>
+</div>
+<!-- Alert(4) ask if user want to appoved the  order listed in table-->
+<div *ngIf="alert4" class="alert alert4 alert-success alert-dismissible" style="left: 40%;">
+    <strong >Are you sure you want to approve {{totalApproveCount}} orders? </strong><br>
+      <div  class="button-Container">
+        <button (click)="UploadApprove()" class="buttons"> OK</button>
+        <button data-dismiss="alert" (click)="alert4 = false" class="buttons">CANCEL</button>
+      </div>
+</div>
+<!-- Alert(5) -->
+<!-- <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible"
+  style="width:26%;left:46%;border-radius: 10px; ">
+
+  <strong style="font-size: 18px;">File uploaded successfully <br> Want to approve the file ?</strong><br>
+  <div style="width: 100%;">
+    <button data-dismiss="alert" (click)="approvedupload()"
+      style="display:inline;float: left;width:30%;margin-left:15%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 14px; ">
+
+      Yes</button>
+    <button data-dismiss="alert" (click)="cancelapproved()"
+      style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 15px; ">
+
       No</button>
-      </div>
-      
+  </div>
+
+</div> -->
+
+
+<!--successfull upload of file and asked for approved -->
+<div class="whole-container" *ngIf="downloads">
+  <div class="loaderContainer" *ngIf="loaders">
+    <div class="loader"></div>
+  </div>
+  <div *ngIf="!loaders">
+    <!-- Main Heading -->
+    <div class=" text-center" style="margin-top: 5vh;">
+      <span class="text-style "> Branch Wise Order List </span>
+      <span class="text-style text-center dateOrder" *ngIf="dateOrder"> Orders Generated
+        at&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{dateOrder}} </span>
     </div>
-  <div style="width: 100%;height:100%" *ngIf="downloads">
-     
-      <div class=" text-center" style="margin-top: 5vh;">
-          <span class="text-style "> Branch Wise Order List </span>
-      </div>
-    
-     <div class=" text-center"  style="margin-top: 2vh;">
-          <span class="text-style text-center" style="font-size: 1.2vw;" *ngIf="dateOrder"> Orders Generated at &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{dateOrder}} </span>
-     
-        </div>
-          <br><br>
-        <!-- <div *ngIf="boxupload">
+    <br><br>
+    <!-- <div *ngIf="boxupload">
           <div  class="container" >
               <span *ngIf="fileToUpload" style="overflow: hidden;float: left;width:70%;height:100%;background-color:#ffffff;margin: 0px;text-align: center;padding-top:10px;font-size: 16px; ">{{fileToUpload.name}}</span>
               <input type="file" style="display:none"
@@ -46,65 +72,60 @@
           <button type="button" class="btn btn-primary" (click)="handleFileInput()" style="padding:1vh 2vw;margin-left: 34%;margin-right: auto;margin-top: 6vh;font-size: 1.4vw;background-color: #fcdb04;color: #000000;border: 1px solid rgba(0, 0, 0, 0.19);box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);font-weight: bold;">Upload File</button>
           <button type="button" class="btn btn-primary" (click)="closeupload()" style="padding:1vh 2.5vw;margin-left: 5%;margin-right: auto;margin-top: 6vh;font-size: 1.4vw;background-color: #fcdb04;color: #000000;border: 1px solid rgba(0, 0, 0, 0.19);box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);font-weight: bold;">Cancel</button>
         </div>    -->
+    <div *ngIf="boxupload" class="box-shadows box-container">
+      <!-- <i class="material-icons" (click)="closeupload()" style="border-radius: 0px 10px 0px 0px;position: absolute;top:0px;right:0px;background-color:#000000;color:#fcdb04;cursor: pointer;"> clear </i> -->
+      <!-- file container -->
+      <div class="file-container">
+        <strong>File selected</strong><br>
+      </div>
+      <!-- fileName container -->
+      <div class="filename-container">
+        <div class="file-innerContainer">
+          <span *ngIf="fileToUpload" class="filename">{{fileToUpload.name}}</span>
+        </div>
+      </div>
+      <!-- Approved message -->
+      <div class="approved-messaage-container">
+        <strong *ngIf="uploadFileSuccess">{{uploadFileSuccess}} orders uploaded successfully</strong>
+        <strong>Do you want to approve them?</strong>
+      </div>
+      <!-- Button container (yes/no) -->
+      <div class="button-container">
+        <button type="button" (click)="approvedupload()"> Yes</button>
+        <button type="button" style="float: right" (click)="cancelapproved()"> No</button>
+      </div>
 
-         <div *ngIf="boxupload" class="box-shadows" style="border-radius: 15px;width: 40% !important;height:270px !important;background-color:#fcdb04;border:1px solid rgba(0, 0, 0, 0.2);margin-left: 30%;margin-top: 4vh;position: relative;padding: 2vh 4vh;">
-           
-              <i class="material-icons" (click)="closeupload()" style="border-radius: 0px 10px 0px 0px;position: absolute;top:0px;right:0px;background-color:#000000;color:#fcdb04;cursor: pointer;">
-                  clear
-                  </i>
-                  <div style="width: 100%;text-align: center;margin-top: 1vh;font-size: 18px;font-weight: bold;">
-            <strong >File selected</strong><br> 
-                  </div>
-            <div style="width: 100%;margin-top: 1.5vh;padding-top: 1vh;">
-
-                <div style="height: 7vh;padding-top: 1vh;width: 100%;border: 1px solid #000000;overflow: hidden;font-size: 18px;text-align: center;">
-                    <span *ngIf="fileToUpload" style="background: transparent;text-align: center;font-size:20px;">{{fileToUpload.name}}</span>
-                  </div>
- 
-            </div>
-            <div style="width: 100%;margin-top: 1.5vh;padding-top: 1vh;text-align:center;">
-                <strong style="display: block;font-size: 18px;font-weight: bold;">File uploaded successfully</strong>
-                <strong style="display: block;font-size: 18px;font-weight: bold;">Do you want to approved that ?</strong>
-            </div>
-
-            <div style="width: 100%;">
-                <button  type="button" (click)="approvedupload()"  style="display:inline;float: left;width:45%;margin-left:1%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 12px;">
-                Yes</button>
-                <button  type="button" (click)="cancelapproved()"   style="display:inline;float: right;width:45%;margin-left:6%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 12px; ">
-                No</button>
-                </div>
-          
-          </div>
+    </div>
 
 
 
-        <div class="containers" style="margin-top:8vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
-            <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
-            <div style="margin-top:1vh;" >
-            <table >
-                <tr>
-                  <th>Approvel ID</th>
-                  <th>Status</th>
-                  <th>Remarks</th>
-                  
-                </tr>
-                <tr *ngFor="let failure of failureResponse">
-                  <td>{{failure.approval_id}}</td>
-                  <td>{{failure.status}}</td>
-                  <td>{{failure.Remarks}}</td>
-                  
-                  
-                </tr>
-               
-                
-        
-               
-              
-              </table>
-              </div>
-              </div>
+    <!-- <div class="containers" style="margin-top:19vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
+      <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
+      <div style="margin-top:1vh;">
+        <table>
+          <tr>
+            <th>Approvel ID</th>
+            <th>Status</th>
+            <th>Remarks</th>
 
-          <!-- <div *ngIf="boxupload" class="box-shadows" style="border-radius: 15px;width: 40% !important;height:270px !important;background-color:#fcdb04;border:1px solid rgba(0, 0, 0, 0.2);margin-left: 30%;margin-top: 4vh;position: relative;padding: 2vh 4vh;">
+          </tr>
+          <tr *ngFor="let failure of failureResponse">
+            <td>{{failure.invoice_id}}</td>
+            <td>{{failure.status}}</td>
+            <td>{{failure.Remarks}}</td>
+
+
+          </tr>
+
+
+
+
+
+        </table>
+      </div>
+    </div> -->
+
+    <!-- <div *ngIf="boxupload" class="box-shadows" style="border-radius: 15px;width: 40% !important;height:270px !important;background-color:#fcdb04;border:1px solid rgba(0, 0, 0, 0.2);margin-left: 30%;margin-top: 4vh;position: relative;padding: 2vh 4vh;">
            
               <i class="material-icons" (click)="closeupload()" style="border-radius: 0px 10px 0px 0px;position: absolute;top:0px;right:0px;background-color:#000000;color:#fcdb04;cursor: pointer;">
                   clear
@@ -131,88 +152,77 @@
                 </div>
           
           </div> -->
-
-
-
-
   </div>
-  
+</div>
+<!--successfull upload of file and asked for approved closed -->
 
-  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;">
-    
-      <strong style="font-size: 18px;" >Are you sure you want to approve {{total}} orders?  </strong><br> 
-      <div style="width: 100%;">
-      <button   (click)="UploadApprove()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-      
-          OK</button>
-      <button  data-dismiss="alert" (click)="cancelapprove()" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-      
-      CANCEL</button>
-      </div>
-      
-    </div>
 
+
+
+<!-- Table UI -->
 <div *ngIf="!downloads">
-    <div style="width: 100%;height:100%;background-color: #ffffff;z-index: 1;" *ngIf="loaders">
-        <div class="loader"></div>
-        </div>
-        
-        
-        <div *ngIf="!loaders">
-  
-  <!-- Search bar -->
-  <div class=" text-center" style="margin-top: 5vh;">
-      <span class="text-style "> Branch Wise Order List </span>
+  <div class="loaderContainer" *ngIf="loaders">
+    <div class="loader"></div>
   </div>
+ <div *ngIf="!loaders">
+    <!--  -->
+    <div *ngIf="checks">
+      <!-- Main Heading  -->
+      <div class=" text-center" style="margin-top: 5vh;">
+        <span class="text-style "> Branch Wise Order List </span>
+      </div>
+      <div class=" text-center" *ngIf="!AllApprove" style="margin-top: 2vh;">
+        <span class="text-style text-center" style="font-size: 18px;"> No orders pending for approval </span>
+      </div>
+      <div class=" text-center" *ngIf="AllApprove" style="margin-top: 2vh;">
+        <span class="text-style text-center" style="font-size: 1.2vw;" *ngIf="dateOrder"> Orders Generated at
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{dateOrder}} </span>
 
-  <div class=" text-center" *ngIf="!AllApprove" style="margin-top: 2vh;" >
-      <span class="text-style text-center" style="font-size: 18px;"> No orders pending for approval </span>
-  </div>
-
-
-  <div class=" text-center" *ngIf="AllApprove" style="margin-top: 2vh;">
-      <span class="text-style text-center" style="font-size: 1.2vw;" *ngIf="dateOrder"> Orders Generated at &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{dateOrder}} </span>
- 
-    </div>
+      </div>
+      <!-- Main heading closed -->
       <br><br>
-     
-    
-      <div style="width: 50%;margin-left:26%;margin-bottom: 4vh;" *ngIf="AllApprove">
-        <table style="width: 100%;margin: 0px;" *ngIf="totalCount">
+
+      <!-- table 1  -->
+      <div class="table1" *ngIf="AllApprove">
+        <table *ngIf="totalCount">
           <tr>
             <th>STATE</th>
-          <th> ORDERS</th>
-          
-
+            <th> ORDERS</th>
           </tr>
-         
+
 
           <tr *ngFor="let item of uploadOrder">
             <td>{{item.state}}</td>
             <td>{{item.count}}</td>
-            
           </tr>
           <tr *ngIf="totalCount">
-              <td style="font-weight: bold;">Total</td>
-              <td style="font-weight: bold;" > {{totalCount}}</td>
+            <td style="font-weight: bold;">Total</td>
+            <td style="font-weight: bold;"> {{totalCount}}</td>
           </tr>
-         
 
-          </table>
-          <div *ngIf="totalCount">
-          <button type="button" *ngIf="modifybutton" class="btn btn-default" style="background-color: #fcdb04;padding-left: 20px;padding-right: 20px;float: left;margin-top: 3vh;font-weight: bold;" (click)="sendApprove()">Approve</button>
-          <button type="button" *ngIf="!modifybutton" class="btn btn-default" style="background-color: #fcdb04;padding-left: 20px;padding-right: 20px;float: left;margin-top: 3vh;font-weight: bold;" (click)="Download()">Download</button>
 
-          <button type="button" *ngIf="modifybutton" class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-top: 3vh;font-weight: bold;float: left;margin-left: 8vw;" (click)="Download()">Download</button>
-        
-          <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-top: 3vh;font-weight: bold;float: right;" (click)="modifyApproval()">Modify</button>
+        </table>
+
+        <!-- Table button  -->
+        <div class="table1-button" *ngIf="totalCount">
+          <button type="button" *ngIf="modifybutton" class="btn btn-default intialButton"
+            (click)="sendApprove()">Approve</button>
+          <button type="button" *ngIf="!modifybutton" class="btn btn-default intialButton"
+            (click)="Download()">Download</button>
+          <button type="button" *ngIf="modifybutton" class="btn btn-default modify-download"
+            (click)="Download()">Download</button>
+          <button type="button" class="btn btn-default intialButton" style="float: right"
+            (click)="modifyApproval()">Modify</button>
         </div>
-        </div>
-<br><br><br>
-      <!-- Table -->
+        <!-- table button closed -->
+      </div>
+      <!-- table 1 end  -->
+      <br><br><br>
+
+      <!--2nd Table main container -->
       <div *ngIf="AllApprove">
-      <div *ngIf="approvetable"  style="width: 98%;overflow:auto;padding-bottom: 2vh;margin-top: 6vh;padding-left: 3vw;width: 90%;margin-left: 1%;">
-        <!-- <div style="width: 90%;margin-left:5%;"> 
+        <div *ngIf="approvetable" class="table2Container">
+          <!-- <div style="width: 90%;margin-left:5%;"> 
         <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;" (click)="modifyApproval()">Modify</button>
           <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 5%;" (click)="download()">Download</button>
           <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default" style="background-color: #eeeeee;margin-top:2vh ;margin-left: 10%;padding-left: 20px;padding-right: 20px;float: right;" (click)="sendApprove()">Clear</button>
@@ -220,140 +230,166 @@
           <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default" style="background-color: #eeeeee;padding-left: 20px;padding-right: 20px;float: right;margin-bottom: 3vh;" (click)="sendApprove()">Approve</button>
 
         </div> -->
-        
-        <div style="width: 100%;overflow:auto"> 
-          <table style="width: 100%;overflow:auto">
-            <!-- [class.active]="order === 'branch_id'" -->
-                             <tr style="cursor: pointer;">
-                               <th 
-                               (click)="setOrder('branch_id')">Branch Id 
-                                  <i class="material-icons " style="float: right;">
-                                      swap_vert
-                                      </i>
-                               </th>
-                               <th (click)="setOrder('branch_name')">Branch Name
-                                  <i class="material-icons " style="float: right;">
-                                      swap_vert
-                                      </i>
-                               </th>
-                               <th (click)="setOrder('region')">Region
-                                  <i class="material-icons " style="float: right;">
-                                      swap_vert
-                                      </i>
-                               </th>
-                               <th (click)="setOrder('product_name')">Product Name
-                                  <i class="material-icons " style="float: right;">
-                                      swap_vert
-                                      </i>
-                               </th>
-                               <th (click)="setOrder('state')">State
-                                  <i class="material-icons " style="float: right;">
-                                      swap_vert
-                                      </i>
-                               </th>
-                               <th >Poduct Quantity
-                                  
-                               </th>
-                               
-                             </tr>
-                             <tr *ngIf="uploadOrderList.length == 0">
-                               <td colspan="5"> No data Available </td>
 
-                             </tr>
-                             <tr *ngIf="uploadOrderList.length != 0">
-                                <td style="padding: 0px;">
-                                    <input type="text" placeholder="Search by Id" [(ngModel)]="branchId" style="border:2px solid #eeeeee;padding: 5px;width: 90%">
-                                  </td>
-                                  <td>
-                                      <input type="text" placeholder="Search by name" [(ngModel)]="name" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="Search by region" [(ngModel)]="region" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
-                                      </td>
-                                      <td>
-                                          <input type="text" placeholder="Search by product " [(ngModel)]="product" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Search by state " [(ngModel)]="state" style="border:2px solid #eeeeee;padding: 5px;;width: 80px;width: 90%;">
-                                          </td>
-                                        <td>
-                                          </td>
-                             </tr>
-                             <tr *ngFor="let item of uploadOrderList  | mulipleSearch:branchId:name:region:product:state | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-                                 
-                                 <td>{{item.branch_id}}</td>
-                                 <td>{{item.branch_name}}</td>
-                                 <td>{{item.region}}</td>
-                                 <td>{{item.product_name}}</td>
-                                 <td>{{item.state}}</td>
-                                 <td >
-                                   <div style="width: 150px;margin:0px;padding: 0px;">
-                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;margin-left: 5px;">
-                                    <i class="material-icons " style="float:left;cursor: pointer;margin-left: 5px;margin-top: 3px;" (click)="decrease(i)">
-                                    remove_circle_outline
-                                    </i>
-                                    </div>
-                                    <div style="display: inline;float:left;overflow:hidden;width: 80px;">
-                                    <input type="number" (ngModelChange)="changedValue($event,i)" [(ngModel)]="item.product_qty"  style="text-align: center ;width: 70px;">
-                                   </div>
-                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;">
-                                    <i class="material-icons" style="float: right;cursor: pointer;margin-right: 5px;margin-top: 3px;" (click)="increase(i)">
-                                    add_circle_outline
-                                    </i>
-                                  </div>
+          <!-- Table -->
+          <div class="tableInnerContainer" style="width: 100%;overflow:auto">
+            <table>
+              <thead class="theads">
+              <!-- [class.active]="order === 'branch_id'" -->
+              <tr style="cursor: pointer;">
+                <th (click)="setOrder('branch_id')">Branch Id
+                  <button class="increment-decrement-button">
+                    <i class="material-icons ">
+                      swap_vert
+                    </i>
+                  </button>
+                </th>
+                <th (click)="setOrder('branch_name')">Branch Name
+                  <button class="increment-decrement-button">
 
-                                    </div>
-                                    </td>
-                                 <!-- <td>{{item.current_stock}}</td> -->
-                              </tr>
-                            
-        </table>
+                    <i class="material-icons ">
+                      swap_vert
+                    </i>
+                  </button>
+                </th>
+                <th (click)="setOrder('region')">Region
+                  <button class="increment-decrement-button">
+
+                    <i class="material-icons ">
+                      swap_vert
+                    </i>
+                  </button>
+                </th>
+                <th (click)="setOrder('product_name')">Product Name
+                  <button class="increment-decrement-button">
+
+                    <i class="material-icons ">
+                      swap_vert
+                    </i>
+                  </button>
+                </th>
+                <th (click)="setOrder('state')">State
+                  <button class="increment-decrement-button">
+
+                    <i class="material-icons ">
+                      swap_vert
+                    </i>
+                  </button>
+                </th>
+                <th>Poduct Quantity
+
+                </th>
+
+              </tr>
+              
+              <tr *ngIf="uploadOrderList.length != 0">
+                <td>
+                  <input type="text" placeholder="Search by Id" class="searchInput" [(ngModel)]="branchId">
+                </td>
+                <td>
+                  <input type="text" placeholder="Search by name" [(ngModel)]="name" class="searchInput">
+                </td>
+                <td>
+                  <input type="text" placeholder="Search by region" [(ngModel)]="region" class="searchInput">
+                </td>
+                <td>
+                  <input type="text" placeholder="Search by product " [(ngModel)]="product" class="searchInput">
+                </td>
+                <td>
+                  <input type="text" placeholder="Search by state " [(ngModel)]="state" class="searchInput">
+                </td>
+                <td>
+                </td>
+              </tr>
+              </thead>
+              <tbody class="tbodys">
+                  <tr *ngIf="uploadOrderList.length == 0">
+                      <td colspan="5"> No data Available </td>
+      
+                    </tr>
+              
+              <tr
+                *ngFor="let item of uploadOrderList  | mulipleSearch:branchId:name:region:product:state |paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+
+                <td>{{item.branch_id}}</td>
+                <td>{{item.branch_name}}</td>
+                <td>{{item.region}}</td>
+                <td>{{item.product_name}}</td>
+                <td>{{item.state}}</td>
+                <td>
+                  <div class="productQuantity">
+                    <div class="increment-decrement-button-container">
+                      <button>
+                        <i class="material-icons " (click)="decrease(item.no)">
+                          remove_circle_outline
+                        </i>
+                      </button>
+                    </div>
+                    <div class="inputField">
+                      <input type="number" (ngModelChange)="changedValue($event,item.no)"
+                        [(ngModel)]="item.product_qty">
+                    </div>
+                    <div class="increment-decrement-button-container">
+                      <button>
+                        <i class="material-icons" (click)="increase(item.no)">
+                          add_circle_outline
+                        </i>
+                      </button>
+
+                    </div>
+
+                  </div>
+                </td>
+                <!-- <td>{{item.current_stock}}</td> -->
+              </tr>
+              <div class="empty">
+                  No data available
+                </div>
+            </tbody>
+            </table>
+          </div>
+          <div class="paginationContainer">
+            <pagination-controls *ngIf="uploadOrderList.length != 0" (pageChange)="p = $event"></pagination-controls>
+          </div>
+          <input type="file" #file style="display:none" (change)="handleFile($event.target)" id="file">
+          <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default Approve"
+            (click)="sendApprove()">Approve</button>
+          <button type="button" class="btn btn-default upload-excel" (click)="file.click()">Upload Excel</button>
+          <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default clear"
+            (click)="clearValue()">Clear</button>
+
         </div>
-        <div style="margin-left:30%;margin-top:3vh;">
-            <pagination-controls *ngIf="uploadOrderList.length != 0" (pageChange)="pagechanged($event)"></pagination-controls>
-           </div>
-           <input type="file" #file style="display:none" (change)="handleFile($event.target.files)"
-                 id="file"
-                 >
-           <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-bottom: 3vh;font-weight: bold;" (click)="sendApprove()">Approve</button>
-           <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-bottom: 3vh;font-weight: bold;margin-left:1.5vw " (click)="uploadmsl()">Upload Excel</button>
-
-           <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-bottom: 3vh;margin-left: 1vw;font-weight: bold;" (click)="clearValue()">Clear</button>
-             
-                             </div>
-
-                             <div class="container" style="margin-top:8vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
-                                <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
-                                <div style="margin-top:1vh;" >
-                                <table >
-                                    <tr>
-                                      <th>LoanProposal ID</th>
-                                      <th>Status</th>
-                                      <th>Remarks</th>
-                                      
-                                    </tr>
-                                    <tr *ngFor="let failure of failureResponse">
-                                      <td>{{failure.OrderID}}</td>
-                                      <td>{{failure.status}}</td>
-                                      <td>{{failure.Remarks}}</td>
-                                      
-                                      
-                                    </tr>
-                                   
-                                    
-                            
-                                   
-                                  
-                                  </table>
-                                  </div>
-                                  </div>
-                              
-    
-                         
+      </div>
+      <!--2nd table  main container closed -->
     </div>
-      
-      
-    
-</div>
+    <!-- checks closed -->
+
+
+    <!-- failure container -->
+    <div class="failureContainer" *ngIf="failurealert">
+      <label class="text-danger">Failure Reasons </label>
+      <div class="table-container">
+        <table>
+          <thead [style.width.%]="!macCheck ? 'calc( 100% - 1.2vw )' : '100'">
+            <tr>
+              <th>Approvel ID</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let failure of failureResponses">
+              <td>{{failure.approval_id}}</td>
+              <td>{{failure.Remarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-default back-button" (click)="back()">Back</button>
+      </div>
+    </div>
+    <!-- failure container closed -->
+  </div>
+
+
 
 </div>
+<!-- Table UI closed  -->

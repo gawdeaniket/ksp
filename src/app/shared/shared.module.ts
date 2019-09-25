@@ -9,26 +9,24 @@ import { MaterialModule } from '../material/material.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { MutipleSearchMslPipe } from './pipe/mutiple-search-msl.pipe';
+import {HeaderComponent} from '../shared/components/header/header.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     MulipleSearchPipe,
     MultipleSearchAllorderPipe,
     SearchByDatePipe,
-    InvoicesearchPipe
+    InvoicesearchPipe,
+    MutipleSearchMslPipe,
+    HeaderComponent
   ],
   imports: [
-    // NgxPaginationModule,
-    // FilterPipeModule,
-    // Ng2SearchPipeModule,
-    // MaterialModule,
-    // BsDatepickerModule.forRoot()
-    
-    
+    RouterModule,
+    CommonModule
   ],
   exports:[
-    
+    MutipleSearchMslPipe,
     InvoicesearchPipe,
     MulipleSearchPipe,
     MultipleSearchAllorderPipe,
@@ -37,7 +35,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FilterPipeModule,
     Ng2SearchPipeModule,
     MaterialModule,
-    
+    HeaderComponent
   ]
 })
 export class SharedModule { }

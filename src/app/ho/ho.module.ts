@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BranchEditComponent } from './branch-edit/branch-edit.component';
 @NgModule({
  
   imports: [
@@ -29,7 +30,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     DashboardHoComponent,
     UploadMslComponent,
     HomeHoComponent,
-    UploadOrdersComponent
+    UploadOrdersComponent,
+    BranchEditComponent
   ]
 })
 export class HoModule { }

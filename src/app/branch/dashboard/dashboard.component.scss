@@ -1,20 +1,69 @@
+// .header{
+//     background-color: #fcdb04;
+//     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//     position: sticky;
+//     top:0px;
+//     z-index: 1000;
+//     height: 5vh;
+   
+// }
 .header{
     background-color: #fcdb04;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: sticky;
     top:0px;
     z-index: 1000;
-    height: 5vh;
-   
-}
+    height: 10vh;
 
-.alert{
+}
+.logo{
+    height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 2%;
+    cursor: pointer;display: inline;
+    float: left;
+}
+.logo-img{
+    height:80% !important;margin-top: 8%;
+}
+.logout-button{
+    font-size: 14px;
+    padding: 5px 10px;
+    float: right;
+    border:1px solid #000000;
+    background: #000000;
+    color: #fcdb04;
+    margin-bottom: 0.5vh;
+    border-radius: 5px;
+    margin-top: 0px;
+}
+.header-logout-button{
+    display: inline;float: right;margin-right: 2vw;padding-top: 5px;
+}
+.branch-name{
+    font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;text-align: center;
+}
+.sidnav-button{
+    margin-left:1.5vw;margin-top:10px;margin-right: 0px;float: left;
+}
+.sidnav-icon{
+    color:#000000;font-weight:bold;font-size:5vh;
+}
+ //custom alert box
+ .alert{
     text-align: center;
     font-weight: bold;
-    min-height:10%;min-width:10%;position:fixed;top:40%;left:50%;z-index:1;
+    min-height:10%;min-width:10%;position:fixed;top:40%;left: 36%;z-index: 99;
     padding: 20px 40px;
     background-color:#fcdb04 ;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.alert-message{
+    font-size: 18px;
+}
+.alert-button-container{
+    width: 100%;
+    button{
+        display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
+    }
 }
 
 .activeclass{
@@ -25,7 +74,9 @@
     color: #000000;
     //text-shadow: 3px 4px #eeeeee;
 }
-
+.sidmenu-icon{
+    padding:0px;display: inline;font-size: 19px !important;
+}
 .example-container{
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

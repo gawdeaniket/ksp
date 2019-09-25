@@ -1,83 +1,98 @@
-
-<div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">
-      
+<div *ngIf="alertcheck" class="alert alert-success alert-dismissible">
+    <strong class="alert-message">Are you sure you want to logout?</strong><br> 
+    <div class="alert-button-container">
+      <button  data-dismiss="alert" (click)="finalLogout()">
+        OK
+      </button>
+      <button  data-dismiss="alert" (click)="alertcheck = false" style="margin-left:10%;">
+        CANCEL
+      </button>
+    </div>   
+  </div>
+<!--   
+<div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">    
   <strong style="font-size: 18px;">Are you sure you want to logout?</strong><br> 
   <div style="width: 100%;">
-  <button  data-dismiss="alert" (click)="finalLogout()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-  
-      OK</button>
-  <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-  
-  CANCEL</button>
+    <button  data-dismiss="alert" (click)="finalLogout()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; "> 
+        OK</button>
+    <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">  
+    CANCEL</button>
   </div>
-  
+</div> -->
+
+<div class="header">
+  <button type="button" class="sidnav-button" 
+            aria-label="Toggle sidenav" 
+            mat-icon-button 
+            (click)="sidenav.toggle()">
+      <mat-icon aria-label="Side nav toggle icon" class="sidnav-icon">menu</mat-icon>
+  </button>
+  <a class="logo">
+    <img src="../../../assets/imgs/logo.png" [routerLink]="['HO_Home']" class="logo-img" >
+  </a>
+  <span class="header-logout-button">
+    <p class="branch-name" *ngIf="branchDate">{{branchDate}}</p>
+    <button type="button" class="logout-button" 
+            (click)="alertcheck = true">logout
+    </button>
+  </span> 
 </div>
 
-
-<mat-toolbar  class="header">
- 
-  <mat-toolbar-row style="height: 100%;">
-
+<!-- <mat-toolbar  class="header">
+  <mat-toolbar-row style="height: 100%;width: 100%;padding: 0px;margin: 0px">
+  <div style="height: 100%;width: 100%;padding: 0px;margin: 0px;padding-right: 3%;">
     <button type="button" style="margin-left:1.5vw;margin-top:0px;margin-right: 0px;" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
       <mat-icon aria-label="Side nav toggle icon" style="color:#000000;font-weight:bold;font-size:5vh;">menu</mat-icon>
     </button>
     <a  style="height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 3%;" [routerLink]="['homebranch']">
-      <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:100% !important;width:45% !important;">
+      <img src="../../../assets/imgs/logo.png" style="height:80% !important;margin-top: 5px;">
     </a>
     
-    <div style="float: right;margin-left: 60%;margin-top: 0.2vh;">
-      <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;" *ngIf="branchDate">{{branchDate}}</p>
-      <button type="button" class="btn" style="margin-top: 0px;" (click)="logout()">logout</button>
-      <!-- <span style="padding:2px 3px;border-radius:4px;border:1px solid #000000;font-size:14px;float: right;">Logout</span> -->
-      </div>
-   
+    <span style="display: inline;float: right;">
+        <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;" *ngIf="branchDate">{{branchDate}}</p>
+        <button type="button" class="btn" style="margin-top: 0px;" (click)="logout()">logout</button>
+    </span>
+</div>   
   </mat-toolbar-row>
   
-</mat-toolbar>
+</mat-toolbar> -->
 
 
-<mat-sidenav-container  autosize >
-  <mat-sidenav #sidenav mode="side" class="example-container"  [(opened)]="opened" fixedInViewport="true">
+<mat-sidenav-container  autosize>
+  <mat-sidenav #sidenav 
+               mode="side" 
+               class="example-container"  
+               [(opened)]="opened" 
+               fixedInViewport="true">
   <br><br><br><br>
-              
-                <a   [routerLink]="['homebranch']" routerLinkActive="activeclass" style="text-decoration: none !important;" class=" text-nowrap display-4" >
-                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
-              </a>
+  <a [routerLink]="['homebranch']" 
+     routerLinkActive="activeclass" 
+     style="text-decoration: none !important;" 
+     class=" text-nowrap display-4">
+    <span class="glyphicon glyphicon-home"></span>
+    &nbsp;&nbsp; Home
+  </a>
+  <br><br>
+  <a [routerLink]="['downloadinvoice']" 
+     [routerLinkActive]=" 'activeclass' " 
+     style="text-decoration: none !important;" 
+     class="text-nowrap display-4">
+     <span class="material-icons sidmenu-icon">
+     cloud_download
+    </span>&nbsp; Download Invoice
+  </a>
+  <br><br>
+  <a [routerLink]="['viewallorder']" 
+     [routerLinkActive]=" 'activeclass' " 
+     style="text-decoration: none !important;"  
+     class="text-nowrap display-4">
+     <span class="material-icons sidmenu-icon">
+        list_alt
+     </span>&nbsp;View All Orders
+  </a>
               <br><br>
-
-              <a   [routerLink]="['downloadinvoice']" [routerLinkActive]=" 'activeclass' " style="text-decoration: none !important;" class="text-nowrap display-4" >
-                  <span class="material-icons" style="padding:0px;display: inline;font-size: 19px !important; ">
-                      cloud_download
-                  </span>&nbsp; Download Invoice
-              </a>
-              <br><br>
-              <a   [routerLink]="['viewallorder']" [routerLinkActive]=" 'activeclass' " style="text-decoration: none !important;"  class="text-nowrap display-4">
-                <span class="material-icons" style="padding:0px;display: inline;font-size: 19px !important; ">
-                  list_alt
-              </span>&nbsp;<span style="margin-top: 0px;padding:0px;display: inline;font-size: 18px;"> View All Orders</span>
-              </a>
-              <br><br>
-              <!-- <a   [routerLink]="['homebranch']" routerLinkActive="activeclass"  class="activeclass text-nowrap display-4" [class.activeclass]="activecheck">
-                <span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; Home
-              </a>
-              <br><br>
-              <a   [routerLink]="['downloadinvoice']" [routerLinkActive]=" 'activeclass' " class="text-nowrap display-4" (click)="closeactive()">
-                <span class="material-icons">
-                    cloud_download
-                </span>&nbsp; Download Invoice
-            </a> -->
-
-             
-
-
-
   </mat-sidenav>
-
-  <mat-sidenav-content style="min-height:600px;">
-
-
+  <mat-sidenav-content style="min-height:100vh;">
    <router-outlet ></router-outlet>
-
-
   </mat-sidenav-content>
 </mat-sidenav-container>

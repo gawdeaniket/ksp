@@ -6,37 +6,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchByDatePipe implements PipeTransform {
 
   transform(value: any, startDate: any,endDate:any,datefiltercheck:boolean,type): any {
-    startDate:endDate:datefiltercheck :'order_date'
-   // // console.log(event);
-   
-  //  // console.log(typeof this.date[0]);
-      // console.log(value);
-      // console.log(startDate);
-      // console.log(endDate);
-      // console.log(datefiltercheck);
-      // console.log(type);
-   var checkDate
-
+    var checkDate
     if (!value || !datefiltercheck || !startDate || !endDate ) {
-      // console.log("invalid");
-            return value;
+      return value;
+    }
+    else{
+      return value.filter(values =>{
+        if(values[type]){
+          return new Date( values[type] ) >= startDate && new Date(values[type] ) <= endDate;
         }
-        else{
-          let start = startDate.toISOString();
-          let end = endDate.toISOString();
-          
-         
-        return value.filter(values =>{
-          // console.log(new Date( values[type]) );
-          // console.log(new Date( values[type]) > startDate);
-          if(values[type]){
-            // console.log(  new Date(values[type]) < endDate)
-         return    new Date( values[type] ) >= startDate && new Date(values[type] ) <= endDate;
-          }
-
-        })
-         
-        }
-
-}
+      })
+    }
+  }
 }

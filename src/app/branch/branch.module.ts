@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { DashboardComponent } from './dashboard/dashboard.component';
 import {BranchRoutingModule} from  './branch-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HomebranchComponent} from './homebranch/homebranch.component';
@@ -12,9 +11,6 @@ import {UploadinvoiceComponent} from './uploadinvoice/uploadinvoice.component';
  import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {SearchByDatePipe} from '../shared/pipe/search-by-date.pipe';
-import {InvoicesearchPipe} from '../shared/pipe/invoicesearch.pipe';
-import {MulipleSearchPipe} from '../shared/pipe/muliple-search.pipe';
 import {SharedModule} from '../shared/shared.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
@@ -22,7 +18,12 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
    CommonModule,
     FormsModule,
     BranchRoutingModule,
-     MaterialModule,NgxPaginationModule,FilterPipeModule,Ng2SearchPipeModule,SharedModule, BsDatepickerModule.forRoot(),
+     MaterialModule,
+     NgxPaginationModule,
+     FilterPipeModule,
+     Ng2SearchPipeModule,
+     SharedModule, 
+     BsDatepickerModule.forRoot(),
   ],
   declarations: [
     DashboardComponent,

@@ -25,23 +25,15 @@ export class DashboardHoComponent implements OnInit {
     //   console.log(this.activecheck);
     // }
    }
-  //  closeactive(){
-  //   this.activecheck = false;
-  // }
   ngOnInit() {
-   // document.getElementById('focusmeplease').focus();
   }
 
   logout(){
     this.alertcheck = true;
-    // console.log(this.alertcheck);
-    
   }
-  
-  
-  
   finalLogout(){
     localStorage.removeItem('loginInfo');
+    localStorage.clear();
     this._router.navigate(['home']);
   }
 

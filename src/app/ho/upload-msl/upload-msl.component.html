@@ -1,6 +1,60 @@
 
 
 
+
+<div *ngIf="successUploadAlert"  class="alert alert-success alert-dismissible" style="left: 35%;top:25%;border-radius: 10px;padding:20px 40px; ">
+    
+    <strong style="display: inline-block;">MSL value updated successfully</strong>
+    <button data-dismiss="alert"   style="display:block;width:40%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 15px; ">
+        OK</button>
+</div>
+<div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 35%;top: 30%;">
+    
+    <strong style="font-size: 18px;" >Are you sure you want to update MSL ?  </strong><br> 
+    <div style="width: 100%;">
+    <button   (click)="updateMsl()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+        Yes</button>
+    <button  data-dismiss="alert" (click)="alertcheck = false;" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+    No</button>
+    </div>
+    
+  </div>
+  <div *ngIf="successupdate"  class="alert alert-success alert-dismissible" style="position: fixed;min-width: 20%;top:30%;left:45%;border-radius: 10px; ">
+    
+      <strong style="display:block;text-align: center">MSL value updated successfully</strong>
+      <button  data-dismiss="alert"  style="display:inline;float: left;width:30%;margin-left:35%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+          OK</button>
+ 
+    </div>
+
+  <div *ngIf="alertBoxs"  class="alert alert-success alert-dismissible" style="position: fixed;min-width: 20%;top:30%;left:45%;border-radius: 10px; ">
+    
+      <strong style="display:block;text-align: center">Error while uploading the file</strong>
+      <strong style="display: block;text-align: center;" *ngIf="failurelength">{{failurelength}} incorrect orders found</strong>
+      <button  data-dismiss="alert"  style="display:inline;float: left;width:30%;margin-left:35%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+    
+          OK</button>
+ 
+    </div>
+  <div *ngIf="updateAlert" class="alert alert-success alert-dismissible" style="position: fixed;left: 42%;top:30%;">
+    
+      <strong style="font-size: 18px;" >Do want to update MSL of {{successFileCount}} branch?  </strong><br> 
+      <div style="width: 100%;">
+      <button   (click)="approvedupload()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+      
+          YES</button>
+      <button  data-dismiss="alert" (click)="updateAlert =false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+      
+      NO</button>
+      </div>
+      
+    </div>
+
+
+
 <!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
     
     <strong>Alert!!...</strong> You have {{failures.length}} Failures Results.
@@ -13,47 +67,222 @@
   
   
   <!-- Search bar -->
-  <div class="container" >
+  <!-- <div class="container" >
   <span class="text-style"> Branch Wise MSL Values </span>
 
     
   
+  </div> --> 
+  <div style="width: 100%;height:100%;background-color: #ffffff;z-index: 1;" *ngIf="loaders">
+        <div class="loader"></div>
+      </div>
+      
+      
+      <div *ngIf="!loaders">
+  <div class=" text-center" style="margin-top: 5vh;">
+      <span class="text-style "> Branch Wise MSL Values </span>
   </div>
   <br><br>
  
   
   <!-- Table -->
-  <div class="justify-content-center" style="overflow:auto;padding-bottom: 2vh;margin-top: 6vh;padding-left: 3vw;">
-      <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;">Download </button>
-      <button type="button"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File For MSL Values</button>
+  <div *ngIf="!failurealert" class="justify-content-center" style="overflow:auto;padding-bottom: 2vh;margin-top: 4vh;padding-left: 3vw;">
+      <input type="file" #file style="display:none" (change)="handleFile($event.target)"
+                 id="file">
+                  <button type="button" (click)="Download()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 5%;">Download </button>
+      <button type="button" (click)="uploadmsl()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File For MSL Values</button>
         
     
-    <table >
-                         <tr style="cursor: pointer;"> 
-                           <th style="cursor: pointer">Branch Id</th>
-                           <th style="cursor: pointer">Branch Name</th>
-                           <th style="cursor: pointer">Region</th>
-                           <th style="cursor: pointer">Product</th>
-                           <th style="cursor: pointer">MSL Value</th>
-                           
-                         </tr>
-                         <tr *ngFor="let item of viewAllDelivery | filter:searchText |searchByDate:date  | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+      <div  style="overflow:auto;padding-bottom: 2vh;margin-top: 2vh;padding-left: 3vw;width: 90%;margin-left: 1%;"> 
+          <table style="width: 100%;overflow:auto">
+            <!-- [class.active]="order === 'branch_id'" -->
+            <thead class="theads">
+                             <tr style="cursor: pointer;">
+                               <th 
+                               (click)="setOrder('branch_id')">Branch Id 
+                               <button style="float: right;padding: 0px;background: transparent;border: none;cursor: pointer;">
+
+                                  <i class="material-icons " >
+                                      swap_vert
+                                      </i>
+                                      </button>
+                               </th>
+                               <th (click)="setOrder('branch_name')">Branch Name
+                                  <button style="float: right;padding: 0px;background: transparent;border: none;cursor: pointer;">
+
+                                  <i class="material-icons " >
+                                      swap_vert
+                                      </i>
+                                      </button>
+                               </th>
+                               <th (click)="setOrder('region')">Region
+                                  <button style="float: right;padding: 0px;background: transparent;border: none;cursor: pointer;">
+ 
+                                <i class="material-icons " >
+                                      swap_vert
+                                      </i>
+                                      </button>
+                               </th>
+                               <th (click)="setOrder('product_name')">Product Name
+                                  <button style="float: right;padding: 0px;background: transparent;border: none;cursor: pointer;">
+
+                                  <i class="material-icons " >
+                                      swap_vert
+                                      </i>
+                                      </button>
+                               </th>
+                               <!-- <th (click)="setOrder('state')">State
+                                  <i class="material-icons " style="float: right;">
+                                      swap_vert
+                                      </i>
+                               </th> -->
+                               <th >Msl Value
+                                  
+                               </th>
+                               
+                             </tr>
+                             
+                              <tr *ngIf="mslData.length != 0">
+                                <td style="padding: 0px;">
+                                    <input type="text" placeholder="Search by Id" [(ngModel)]="branchId" style="border:2px solid #eeeeee;padding: 5px;width: 90%">
+                                  </td>
+                                  <td>
+                                      <input type="text" placeholder="Search by name" [(ngModel)]="name" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Search by region" [(ngModel)]="region" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                                      </td>
+                                      <td>
+                                          <input type="text" placeholder="Search by product " [(ngModel)]="product" style="border:2px solid #eeeeee;padding: 5px;width: 90%;">
+                                        </td>
+                                       
+                                        <td>
+                                          </td>
+                             </tr> 
+                             </thead>
+                             <tbody class="tbodys">
+                             <tr *ngIf="mslData.length == 0">
+                                <td colspan="5"> No data Available </td>
+ 
+                              </tr>
+                             <tr *ngFor="let item of mslData  | mutipleSearchMsl:branchId:name:region:product |paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                 
+                                 <td>{{item.branch_id}}</td>
+                                 <td>{{item.branch_name}}</td>
+                                 <td>{{item.region}}</td>
+                                 <td>{{item.product_name}}</td>
+                                 <!-- <td>{{item.state}}</td> -->
+                                 <td >
+                                   <div style="margin:0px;padding: 0px;width: 100%;">
+                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;margin-left: 5px;">
+                                      <button style="padding: 0px;background: transparent;border: none;cursor: pointer;">
+
+                                    <i class="material-icons "  (click)="decrease(item.no)">
+                                    remove_circle_outline
+                                    </i>
+                                    </button>
+                                    </div>
+                                    <div style="display: inline;float:left;overflow:hidden;width: 80px;">
+                                    <input type="number" (ngModelChange)="changedValue($event,item.no)" [(ngModel)]="item.product_qty"  style="text-align: center ;width: 70px;">
+                                   </div>
+                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;">
+                                      <button style="padding: 0px;background: transparent;border: none;cursor: pointer;">
+                                   <i class="material-icons" (click)="increase(item.no)">
+                                    add_circle_outline
+                                    </i>
+                                    </button>
+
+                                  </div>
+
+                                    </div>
+                                    </td>
+                                 <!-- <td>{{item.current_stock}}</td> -->
+                              </tr>
+                              <div class="empty">
+                                  No data available
+                                </div>
+                            </tbody>
                             
-                             <td>{{item.invoice_id}}</td>
-                             <td>{{item.product_name}}</td>
-                             <td>{{item.customer_name}}</td>
-                             <td>{{item.customer_phone}}</td>
-                             <td>{{item.customer_address}}</td>
-                          </tr>
+        </table>
+        </div>
                         
-                         </table>
-                         </div>
-                         <div style="margin-left:30%;margin-top:3vh;">
-                         <pagination-controls (pageChange)="pagechanged($event)"></pagination-controls>
-                        </div>
-              <button type="button" class="btn btn-default" style="background-color: #eeeeee;margin:2vh 3.5vw;padding-left: 20px;padding-right: 20px;">Save</button>
+      
+      
+        <div *ngIf="mslData.length != 0" style="margin-left:35%;margin-top:0vh;">
+            <pagination-controls (pageChange)="pagechanged($event)"></pagination-controls>
+           </div>
 
-                     
+ <button type="button" *ngIf="mslData.length != 0" (click)="save()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;padding-left: 40px;padding-right: 40px;margin-left: 5%;font-weight: bold;">Save</button>
+ <button type="button" *ngIf="mslData.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-left: 1vw;font-weight: bold;" (click)="clearValue()">Reset</button>
+             
+      </div>
+                       
 
-  
-  
+        </div>        
+     <div  class="container" style="margin-top:2vh;width: 86%;margin-left: 7%;" *ngIf="failurealert">
+    <label style="margin-left:0vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
+    <div  style="margin-top:1vh;margin-bottom: 7vh; " >
+    <table >
+        <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;">
+        <tr >
+          <th >Branch ID</th>
+          
+          <th >Remarks</th>
+          
+        </tr>
+      </thead>
+      <tbody style="display:block;max-height:40vh !important; overflow-y:scroll;">
+        <tr *ngFor="let failure of failureResponses" style="display:table; width:100%; table-layout:fixed;">
+          <td >{{failure.approval_id}}</td>
+       
+          <td >{{failure.Remarks}}</td>
+         </tr>
+        </tbody>
+       
+        
+
+       
+      
+      </table>
+      <button type="button"  class="btn btn-default" style="width: 15%;background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-top: 3vh;font-weight: bold;margin-left: auto;margin-right: auto;" (click)="back()">Back</button>
+
+      </div>
+      <!-- <div class="containers" style="margin-top:2vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
+          <label style="margin-left:0vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
+          <div style="margin-top:1vh;margin-bottom: 7vh; " >
+          <table >
+              <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;">
+              <tr >
+                <th >Approvel ID</th>
+                
+                <th >Remarks</th>
+                
+              </tr>
+            </thead>
+            <tbody style="display:block;max-height:40vh !important; overflow-y:scroll;">
+              <tr *ngFor="let failure of failureResponses" style="display:table; width:100%; table-layout:fixed;">
+                <td >{{failure.approval_id}}</td>
+             
+                <td >{{failure.Remarks}}</td>
+               </tr>
+              </tbody>
+             
+              
+      
+             
+            
+            </table>
+            <button type="button"  class="btn btn-default" style="width: 15%;background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-top: 3vh;font-weight: bold;margin-left: auto;margin-right: auto;" (click)="back()">Back</button>
+      
+            </div>
+            </div> -->
+     
+     
+     
+     
+     
+     
+     
+     
+     
+          </div> <!-- loaders -->

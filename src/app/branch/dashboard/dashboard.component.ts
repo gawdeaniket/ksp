@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,7 +8,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   events: string[] = [];
-  opened: boolean =true;
+  opened: boolean = true;
   branchDate:any;
   alertcheck = false;
   // activecheck:boolean =false;
@@ -41,7 +42,10 @@ logout(){
 
 finalLogout(){
   localStorage.removeItem('loginInfo');
-  this._router.navigate(['home']);
+  localStorage.clear();
+  this._router.navigate(['']);
+  // location.reload();
+  
 }
 
 // closeactive(){

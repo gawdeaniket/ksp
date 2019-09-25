@@ -14,7 +14,7 @@ export class MulipleSearchPipe implements PipeTransform {
     var productNameCheck:boolean= true;
     var statecheck:boolean = true
 
-  // console.log(state);
+  console.log(items);
 // console.log(branchId);
 // console.log(name);
     if (!branchId && !name && !region && !product && !state  ) {
@@ -40,12 +40,12 @@ export class MulipleSearchPipe implements PipeTransform {
               // console.log(check);
             }
             if (product){
-               productNameCheck = item.product_name.toLowerCase().startsWith(product.toLowerCase());
+               productNameCheck = item.state.toLowerCase().startsWith(product.toLowerCase());
                // console.log("product name "+productNameCheck);
           }
           if (state  ){
             // console.log(item.state);
-            statecheck = item.state.toLowerCase().startsWith(state.toLowerCase());
+            statecheck = item.status.toLowerCase().startsWith(state.toLowerCase());
             // console.log(check);
           }
            
