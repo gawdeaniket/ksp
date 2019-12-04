@@ -13,20 +13,24 @@
     position: sticky;
     top:0px;
     z-index: 1000;
-    height: 10vh;
+    min-height: 8vh;
+    display: flex;
+    padding: 0.5vh;
+    //justify-content: center;
+    align-items: center;
 
 }
 .logo{
-    height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 2%;
+    margin:0px;padding: 0px;text-align: left ;margin-left: 2%;
     cursor: pointer;display: inline;
     float: left;
 }
 .logo-img{
-    height:80% !important;margin-top: 8%;
+    height:6vh !important;width: 7vw;
 }
 .logout-button{
-    font-size: 14px;
-    padding: 5px 10px;
+    font-size: 1.1vw;
+    padding: 0.5vh 1vw;
     float: right;
     border:1px solid #000000;
     background: #000000;
@@ -36,13 +40,13 @@
     margin-top: 0px;
 }
 .header-logout-button{
-    display: inline;float: right;margin-right: 2vw;padding-top: 5px;
+    display: inline-block;float: right;margin-right: 2vw;padding-top: 5px;margin-left: 78%;text-align: center;
 }
 .branch-name{
-    font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;text-align: center;
+    font-size:1.1vw;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;text-align: center;
 }
 .sidnav-button{
-    margin-left:1.5vw;margin-top:10px;margin-right: 0px;float: left;
+    margin-left:1.5vw;margin-right: 0px;float: left;height: 100%;padding-top: 0.5vh;
 }
 .sidnav-icon{
     color:#000000;font-weight:bold;font-size:5vh;
@@ -51,18 +55,19 @@
  .alert{
     text-align: center;
     font-weight: bold;
-    min-height:10%;min-width:10%;position:fixed;top:40%;left: 36%;z-index: 99;
+    min-height:10%;min-width:10%;position:fixed;top:38%;z-index: 99;
     padding: 20px 40px;
     background-color:#fcdb04 ;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .alert-message{
     font-size: 18px;
+    color: #000000;
 }
 .alert-button-container{
     width: 100%;
     button{
-        display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
+        display:inline;float: left;width:30%;margin-left:16%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
     }
 }
 

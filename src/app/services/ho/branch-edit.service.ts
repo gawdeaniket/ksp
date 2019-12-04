@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {  HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable, Subscriber } from 'rxjs';
 import {EnvironmentService} from '../environment/environment.service'
 
 @Injectable({
@@ -9,7 +8,7 @@ import {EnvironmentService} from '../environment/environment.service'
 export class BranchEditService {
 
   commonValue:any ;
-  constructor(private httpClient:HttpClient,private envir:EnvironmentService) {
+  constructor(private httpClient: HttpClient,private envir: EnvironmentService) {
     this.commonValue =  this.envir.globalvalue();
    }
    getList(){
@@ -54,7 +53,6 @@ export class BranchEditService {
       })
     })
   }
-
   Approvefile(fileToUpload){
     this.commonValue =  this.envir.globalvalue();
     const formData: FormData = new FormData();

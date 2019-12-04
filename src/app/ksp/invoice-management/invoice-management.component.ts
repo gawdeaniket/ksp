@@ -16,13 +16,13 @@ export class InvoiceManagementComponent implements OnInit {
   }
 
   ChangingValue(events){
-    if(events.target.value && events.target.value == 'satin'){
+    if(events.target.value && events.target.value == 'bfil'){
       this.selectOption = events.target.value;
     }
   }
 
   select(){
-    if(this.selectOption == 'satin'){
+    if(this.selectOption == 'bfil'){
       this._router.navigate(['ksp/satininvoice']);
     }else{
       alert("Please Select Below Mention Option");

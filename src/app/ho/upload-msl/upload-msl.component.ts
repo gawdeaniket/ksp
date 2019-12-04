@@ -39,7 +39,7 @@ export class UploadMslComponent implements OnInit {
   ngOnInit() {
     this.macCheck = false;
   var isMacLike = /(Mac|iPhone|iPod|iPad|MAC|MacIntel)/i.test(navigator.platform);
-  console.log(isMacLike);
+  //console.log(isMacLike);
  if(isMacLike) this.macCheck = true;
     this.getdata();
 
@@ -49,13 +49,13 @@ export class UploadMslComponent implements OnInit {
   getdata(){
     this.loaders = true;
     this.mslData = [];
-   console.log("refresh");
+  // console.log("refresh");
     this.mslServices.getList().then((data:any)=>{
       if(!data ||data.msl_list.length == 0   ){
         
         this.loaders = false;
       }
-      console.log(data);
+    //  console.log(data);
      
       var j=0;
       for(let i=0;i<data.msl_list.length;i++){
@@ -74,14 +74,14 @@ export class UploadMslComponent implements OnInit {
         if(i == data.msl_list.length - 1 || data.msl_list.length  == 0 ){
           
          this.loaders = false;
-          console.log(this.loaders);
+        //  console.log(this.loaders);
         }
       }
      // this.uploadOrderList = data;
       // console.log(this.uploadOrderList);
       // console.log(this.AllApprove);
     }).catch((error)=>{
-      console.log(error)
+     // console.log(error)
       this.loaders = false;
     })
 
@@ -94,14 +94,14 @@ export class UploadMslComponent implements OnInit {
     this.failurealert = false;
     // this.downloads = true;
      var files = document.getElementById('file');
-     console.log(files);
+    // console.log(files);
      files.click();
    
     // console.log(this.downloads);
    }
    setOrder(value: string) {
-    console.log("s "+value);
-    console.log(value);
+   // console.log("s "+value);
+   // console.log(value);
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
@@ -131,7 +131,7 @@ export class UploadMslComponent implements OnInit {
     var files = target.files
     this.alerts = false;
     this.failurealert = false;
-    console.log(this.failurealert);
+   // console.log(this.failurealert);
      if(files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
        this.fileToUpload = files.item(0);
        this.alerts = false;
@@ -143,7 +143,7 @@ export class UploadMslComponent implements OnInit {
        this.loaderscheck = false;
        alert("Please upload a file in correct format (xls / xlsx)");
      }
-     console.log(files);
+    // console.log(files);
      
      target.value = '';
  }
@@ -152,7 +152,7 @@ export class UploadMslComponent implements OnInit {
     this.failureResponses = [];
     this.loaderscheck = true;
     this.failurealert = false;
-     console.log(this.fileToUpload);
+   //  console.log(this.fileToUpload);
     // this.uploadAlert = false;
     this.failurealert = false;
     this.alertBoxs = false;
@@ -167,13 +167,13 @@ export class UploadMslComponent implements OnInit {
       // this.boxupload = false;
       this.mslServices.uploadApprove(this.fileToUpload)
     .then((data:any)=>{
-   console.log(data);
+  // console.log(data);
    this.loaderscheck = false;
    if(data.success && data.success.length && !data.failure.length ){
         this.updateAlert = true;
         this.successFileCount = data.success.length;
-        console.log(this.updateAlert)
-        console.log(this.successFileCount);
+      //  console.log(this.updateAlert)
+      //  console.log(this.successFileCount);
    }
    if(data.failure && data.failure.length){
     
@@ -220,7 +220,7 @@ export class UploadMslComponent implements OnInit {
     },(error:any)=>{
       this.loaderscheck = false;
       var errorsMessage =error.error.Error.MessageToUser; 
-      console.log(errorsMessage);
+    //  console.log(errorsMessage);
       alert(errorsMessage);
     }).catch(error => console.log(error));
       
@@ -230,18 +230,18 @@ export class UploadMslComponent implements OnInit {
 
 Download(){
   var wrongApprovalId =[];
-  console.log(wrongApprovalId);
+ // console.log(wrongApprovalId);
   for(let i=0; i<this.mslData.length;i++){
-  console.log(this.mslData[i].product_qty);
+ // console.log(this.mslData[i].product_qty);
   if(  this.mslData[i].product_qty < 0){
     wrongApprovalId.push(this.mslData[i].approval_id);
    // alert("please enter a correct no for "+this.uploadOrderList[i].approval_id +"Approval Id" );
 
   }
   if(i == this.mslData.length-1){
-    console.log("in");
+  //  console.log("in");
        if(wrongApprovalId.length){
-       console.log("lebgth "+ wrongApprovalId.length);
+     //  console.log("lebgth "+ wrongApprovalId.length);
         alert(' Please enter a correct quantity greater then 0');
        }else{
         //  for(let i=0;i<this.uploadOrderList.length;i++){
@@ -271,7 +271,7 @@ Download(){
         
         
         this.filename = "SATIN_Update_MSL"+n;
-        console.log(obj);
+       // console.log(obj);
         this.excelService.exportAsExcelFile(obj, this.filename);
           //   this.csvExporter = new ExportToCsv(this.options);
         
@@ -290,7 +290,7 @@ Download(){
 }
 
 changedValue(event,i){
-  console.log(event);
+ // console.log(event);
   if(event > 0 ){
     this.mslData[i].product_qty= event;
   }
@@ -299,8 +299,8 @@ changedValue(event,i){
   //  alert("please enter Value In Multiple Of 5");
   }
   
-  console.log(typeof event)
- console.log( this.mslData[i].product_quantity_proposed)
+ // console.log(typeof event)
+// console.log( this.mslData[i].product_quantity_proposed)
 
 } 
 
@@ -330,13 +330,13 @@ save(){
    
     }
     if(i == this.mslData.length-1){
-      console.log("in");
+    //  console.log("in");
          if(j>0){
         
           alert(' Please enter a correct MSL value ' ) ;
          }else{
           this.alertcheck =true;
-          console.log(this.alertcheck)
+        //  console.log(this.alertcheck)
          }
   
   
@@ -353,8 +353,8 @@ save(){
   var sendItem:any[] = []
 
   for(let i=0; i<this.mslData.length;i++){
-    console.log(this.mslData[i].product_quantity_proposed);
-      console.log(this.mslData[i].product_qty);
+   // console.log(this.mslData[i].product_quantity_proposed);
+    //  console.log(this.mslData[i].product_qty);
 
     sendItem.push({
         "branch_id":this.mslData[i].branch_id.toString(),
@@ -365,9 +365,9 @@ save(){
 
           if(i == this.mslData.length-1){
             
-            console.log(sendItem);
+          //  console.log(sendItem);
             this.mslServices.PostList(sendItem).then((data:any)=>{
-              console.log(data.failure);
+            //  console.log(data.failure);
               if(data.failure.length == 0 ){
                 this.alertcheck = false;
                 this.loaders = true;
@@ -427,7 +427,7 @@ approvedupload(){
   
 this.mslServices.Approvefile(this.fileToUpload).then((data:any)=>{
   this.loaderscheck = false;
-console.log(data);
+//console.log(data);
 this.loaders = false;
 
 if(data.success){

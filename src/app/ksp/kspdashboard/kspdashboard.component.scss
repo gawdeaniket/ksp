@@ -4,39 +4,8 @@
 //     position: sticky;
 //     top:0px;
 //     z-index: 1000;
-//     height: 10vh;
-
-// }
-// .logo{
-//     height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 2%;
-//     cursor: pointer;display: inline;
-//     float: left;
-// }
-// .logo-img{
-//     height:80% !important;margin-top: 8%;
-// }
-// .logout-button{
-//     font-size: 14px;
-//     padding: 5px 10px;
-//     float: right;
-//     border:1px solid #000000;
-//     background: #000000;
-//     color: #fcdb04;
-//     margin-bottom: 0.5vh;
-//     border-radius: 5px;
-//     margin-top: 0px;
-// }
-// .header-logout-button{
-//     display: inline;float: right;margin-right: 2vw;padding-top: 5px;
-// }
-// .branch-name{
-//     font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;text-align: center;
-// }
-// .sidnav-button{
-//     margin-left:1.5vw;margin-top:10px;margin-right: 0px;float: left;
-// }
-// .sidnav-icon{
-//     color:#000000;font-weight:bold;font-size:5vh;
+//     height: 5vh;
+   
 // }
 .header{
     background-color: #fcdb04;
@@ -44,7 +13,7 @@
     position: sticky;
     top:0px;
     z-index: 1000;
-    min-height: 8vh;
+    min-height: 10vh;
     display: flex;
     padding: 0.5vh;
     //justify-content: center;
@@ -82,55 +51,37 @@
 .sidnav-icon{
     color:#000000;font-weight:bold;font-size:5vh;
 }
-
-.parentDisable{
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #000;
-    opacity: 0.2;
-    z-index: 998;
-    height: 100%;
-    width: 100%;
-}
-
-.box-shadows{
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-}
  //custom alert box
  .alert{
     text-align: center;
     font-weight: bold;
-    min-height:10%;min-width:10%;position:fixed;top:40%;left: 36%;z-index: 99;
+    min-height:10%;min-width:10%;position:fixed;top:38%;z-index: 99;
     padding: 20px 40px;
     background-color:#fcdb04 ;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .alert-message{
-    font-size: 1.3vw;
+    font-size: 18px;
     color: #000000;
 }
 .alert-button-container{
     width: 100%;
     button{
-        display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
+        display:inline;float: left;width:30%;margin-left:16%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
     }
 }
+
 .activeclass{
     width: 100%;
     font-weight: bolder;
     font-size: 18px;
-    text-align: left;
    // background-color: #fcdb04;
     color: #000000;
-    text-decoration: none;
-    // display: block;
-
     //text-shadow: 3px 4px #eeeeee;
 }
-
-
+.sidmenu-icon{
+    padding:0px;display: inline;font-size: 19px !important;
+}
 .example-container{
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -138,12 +89,6 @@
     width: 19%;
     padding-top: 2.5vh;
     padding-left: 15px;
-    .sidemenu{
-        
-        text-decoration: none !important;
-        display: block;
-        float: left;
-    }
 }
 .btn-group-vertical{
     background: transparent;

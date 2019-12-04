@@ -11,7 +11,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BranchUploadInvoiceService} from '../app/services/branch/branch-upload-invoice.service';
 import {JsonToCsvService} from './services/jsonToCsv/json-to-csv.service';
-import { ErrorComponent } from './error/error.component'
+import { ErrorComponent } from './error/error.component';
+import { ExcelService } from './services/excel.service';
+import { NgxLoadingModule,ngxLoadingAnimationTypes } from 'ngx-loading';
+
 
 @NgModule({
   declarations: [
@@ -29,12 +32,21 @@ import { ErrorComponent } from './error/error.component'
     BsDatepickerModule.forRoot(),
     HttpClientModule,
      ReactiveFormsModule, 
+     NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circle,
+      backdropBackgroundColour: 'rgba(0,0,0,0.3)',
+      fullScreenBackdrop: true,
+      backdropBorderRadius: '4px',
+      primaryColour: '#fcdb04',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'
+    })
   ],
   exports:[
   ],
   providers: [
     BranchUploadInvoiceService,
-    // ExcelService,
+     ExcelService,
     JsonToCsvService,
   ],
   bootstrap: [AppComponent]

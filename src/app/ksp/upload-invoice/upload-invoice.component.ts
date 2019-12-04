@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./upload-invoice.component.scss']
 })
 export class UploadInvoiceComponent implements OnInit {
-  
+  loading:boolean = false;
   fileToUpload: File = null;
   fileName: any;
   failureResponse: any[];
@@ -49,13 +49,20 @@ export class UploadInvoiceComponent implements OnInit {
   // console.log(files);
    this.alerts = false;
    this.failurealert = false;
-    if(files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+   this.loading = true;
+   console.log(files[0].type);
+    if(files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || files[0].type == 'application/vnd.ms-excel'){
       this.fileToUpload = files.item(0);
       this.alerts = false;
+      this.loading = false;
     }
     else{
       this.fileToUpload = undefined;
-      alert("Please upload a file in correct format (xls / xlsx)");
+      this.loading = false;
+      setTimeout(() => {
+        alert("Please upload a file in correct format (xls / xlsx)");
+      }, 600);
+      
     }
    
 }
@@ -66,17 +73,22 @@ reload(){
   location.reload();
 }
   handleFileInput() {
-
+    this.loading = true;
     this.uploadAlert = false;
    // console.log(this.id);
     if(!this.fileToUpload){
       // this.alerts = true;
-      alert("Please choose a file to upload");
+      this.loading = false;
+      setTimeout(() => {
+        alert("Please choose a file to upload");
+      }, 600);
+      
     }
     else {
       this.branchuploadinvoiceservice.postFile(this.fileToUpload, this.id)
     .then((data:any)=>{
-  // console.log(data);
+   console.log(data);
+   this.loading = false;
    this.successResponse = data.success;
    if(this.successResponse.length){
     this.successalert =true;
@@ -91,9 +103,13 @@ reload(){
 
 
     },(error:any)=>{
+      this.loading = false;
       var errorsMessage =error.error.Error.MessageToUser; 
-     // console.log(errorsMessage);
-      alert(errorsMessage);
+      console.log(errorsMessage);
+      setTimeout(() => {
+        alert(errorsMessage);
+      }, 600);
+      
     }).catch(error => console.log(error));
       
     }//else

@@ -20,7 +20,7 @@
     No</button>
     </div>
     
-  </div>
+</div>
   <div *ngIf="successupdate"  class="alert alert-success alert-dismissible" style="position: fixed;min-width: 20%;top:30%;left:45%;border-radius: 10px; ">
     
       <strong style="display:block;text-align: center">MSL value updated successfully</strong>
@@ -84,17 +84,16 @@
   </div>
   <br><br>
  
-  
   <!-- Table -->
-  <div *ngIf="!failurealert" class="justify-content-center" style="overflow:auto;padding-bottom: 2vh;margin-top: 4vh;padding-left: 3vw;">
+  <div *ngIf="!failurealert" class="justify-content-center" style="overflow:auto;padding-bottom: 2vh;margin-top: 4vh;padding-left: 3vw;font-size: 1.1vw;">
       <input type="file" #file style="display:none" (change)="handleFile($event.target)"
                  id="file">
-                  <button type="button" (click)="Download()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 5%;">Download </button>
-      <button type="button" (click)="uploadmsl()"  class="btn btn-default" style="background-color: #fcdb04;padding-left: 2vw;padding-right: 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File For MSL Values</button>
+      <button type="button" (click)="Download()"  class="btn btn-default" style="background-color: #fcdb04;padding:1vh 2vw;;margin-bottom: 3vh;font-weight: bold;">Download </button>
+      <button type="button" (click)="uploadmsl()"  class="btn btn-default" style="background-color: #fcdb04;padding:1vh 2vw;margin-bottom: 3vh;font-weight: bold;margin-left: 3vw;">Upload File For MSL Values</button>
         
     
-      <div  style="overflow:auto;padding-bottom: 2vh;margin-top: 2vh;padding-left: 3vw;width: 90%;margin-left: 1%;"> 
-          <table style="width: 100%;overflow:auto">
+      <div  style="overflow:auto;padding-bottom: 2vh;margin-top: 1.7vh;width: 96%;"> 
+          <table style="width: 100%;overflow:auto;font-size: 1.1vw;">
             <!-- [class.active]="order === 'branch_id'" -->
             <thead class="theads">
                              <tr style="cursor: pointer;">
@@ -174,18 +173,17 @@
                                  <!-- <td>{{item.state}}</td> -->
                                  <td >
                                    <div style="margin:0px;padding: 0px;width: 100%;">
-                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;margin-left: 5px;">
+                                   <div style="display: inline;float:left;overflow:hidden;width: 12%;margin-left: 5px;">
                                       <button style="padding: 0px;background: transparent;border: none;cursor: pointer;">
-
-                                    <i class="material-icons "  (click)="decrease(item.no)">
-                                    remove_circle_outline
-                                    </i>
-                                    </button>
+                                        <i class="material-icons "  (click)="decrease(item.no)">
+                                        remove_circle_outline
+                                        </i>
+                                      </button>
                                     </div>
-                                    <div style="display: inline;float:left;overflow:hidden;width: 80px;">
+                                    <div style="display: inline;float:left;overflow:hidden;width: 65%;">
                                     <input type="number" (ngModelChange)="changedValue($event,item.no)" [(ngModel)]="item.product_qty"  style="text-align: center ;width: 70px;">
                                    </div>
-                                   <div style="display: inline;float:left;overflow:hidden;width: 30px;">
+                                   <div style="display: inline;float:left;overflow:hidden;width: 12%;">
                                       <button style="padding: 0px;background: transparent;border: none;cursor: pointer;">
                                    <i class="material-icons" (click)="increase(item.no)">
                                     add_circle_outline
@@ -212,8 +210,8 @@
             <pagination-controls (pageChange)="pagechanged($event)"></pagination-controls>
            </div>
 
- <button type="button" *ngIf="mslData.length != 0" (click)="save()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;padding-left: 40px;padding-right: 40px;margin-left: 5%;font-weight: bold;">Save</button>
- <button type="button" *ngIf="mslData.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding-left: 30px;padding-right: 30px;margin-left: 1vw;font-weight: bold;" (click)="clearValue()">Reset</button>
+ <button type="button" *ngIf="mslData.length != 0" (click)="save()" class="btn btn-default" style="background-color: #fcdb04;color: #000000;padding: 0.6vh 2vw;font-weight: bold;font-size: 1.1vw;">Save</button>
+ <button type="button" *ngIf="mslData.length != 0" class="btn btn-default" style="background-color: #fcdb04;padding: 1vh 2vw;margin-left: 1vw;font-weight: bold;font-size: 1.1vw;" (click)="clearValue()">Reset</button>
              
       </div>
                        
@@ -223,7 +221,7 @@
     <label style="margin-left:0vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
     <div  style="margin-top:1vh;margin-bottom: 7vh; " >
     <table >
-        <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;">
+        <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;" [style.width.%]="!macCheck ? 'calc( 100% - 1.2vw )' : '100'">
         <tr >
           <th >Branch ID</th>
           

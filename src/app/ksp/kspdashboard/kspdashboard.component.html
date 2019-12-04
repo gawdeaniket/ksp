@@ -1,0 +1,98 @@
+<div style="background: transparent;width:100%;height:100%;display: flex;align-items: center;justify-content: center;">
+
+  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible">
+      <strong class="alert-message">Are you sure you want to logout?</strong><br> 
+      <div class="alert-button-container">
+        <button  data-dismiss="alert" (click)="finalLogout()">
+          OK
+        </button>
+        <button  data-dismiss="alert" (click)="alertcheck = false" style="margin-left:10%;">
+          CANCEL
+        </button>
+      </div>   
+    </div>
+  </div>
+  <!--   
+  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">    
+    <strong style="font-size: 18px;">Are you sure you want to logout?</strong><br> 
+    <div style="width: 100%;">
+      <button  data-dismiss="alert" (click)="finalLogout()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; "> 
+          OK</button>
+      <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">  
+      CANCEL</button>
+    </div>
+  </div> -->
+  
+  <div class="header">
+    <button type="button" class="sidnav-button" 
+              aria-label="Toggle sidenav" 
+              mat-icon-button 
+              (click)="sidenav.toggle()">
+        <mat-icon aria-label="Side nav toggle icon" class="sidnav-icon">menu</mat-icon>
+    </button>
+    <a class="logo">
+      <img src="../../../assets/imgs/logo.png" [routerLink]="['HO_Home']" class="logo-img" >
+    </a>
+    <!-- <span class="header-logout-button float-right">
+      <p class="branch-name" *ngIf="branchDate">{{branchDate}}</p>
+      <button type="button" class="logout-button" 
+              (click)="alertcheck = true">logout
+      </button>
+    </span>  -->
+  </div>
+  <!-- <mat-toolbar  class="header">
+    <mat-toolbar-row style="height: 100%;width: 100%;padding: 0px;margin: 0px">
+    <div style="height: 100%;width: 100%;padding: 0px;margin: 0px;padding-right: 3%;">
+      <button type="button" style="margin-left:1.5vw;margin-top:0px;margin-right: 0px;" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary">
+        <mat-icon aria-label="Side nav toggle icon" style="color:#000000;font-weight:bold;font-size:5vh;">menu</mat-icon>
+      </button>
+      <a  style="height:80%;margin:0px;padding: 0px;text-align: left ;margin-left: 3%;" [routerLink]="['homebranch']">
+        <img src="../../../assets/imgs/logo.png" style="height:80% !important;margin-top: 5px;">
+      </a>
+      
+      <span style="display: inline;float: right;">
+          <p style="font-size:14px;font-weight:bold;font-style: italic;margin: 0px;padding: 0px;" *ngIf="branchDate">{{branchDate}}</p>
+          <button type="button" class="btn" style="margin-top: 0px;" (click)="logout()">logout</button>
+      </span>
+  </div>   
+    </mat-toolbar-row>
+    
+  </mat-toolbar> -->
+  <mat-sidenav-container  autosize>
+    <mat-sidenav #sidenav 
+                 mode="side" 
+                 class="example-container"  
+                 [(opened)]="opened" 
+                 fixedInViewport="true">
+      <br><br><br><br>
+      <a [routerLink]="['invoicemanagement']" 
+        routerLinkActive="activeclass" 
+        style="text-decoration: none !important;" 
+        class=" text-nowrap display-4">
+        <span class="glyphicon glyphicon-home"></span>
+        &nbsp;&nbsp; KSP
+      </a>
+      <br><br>
+      <a [routerLink]="['homeRegistration']" 
+        [routerLinkActive]=" 'activeclass' " 
+        style="text-decoration: none !important;" 
+        class="text-nowrap display-4">
+        <span class="material-icons sidmenu-icon">
+        cloud_download
+        </span>&nbsp; Registration
+      </a>
+      <br><br>
+      <!-- <a [routerLink]="['viewallorder']" 
+        [routerLinkActive]=" 'activeclass' " 
+        style="text-decoration: none !important;"  
+        class="text-nowrap display-4">
+        <span class="material-icons sidmenu-icon">
+            list_alt
+        </span>&nbsp;View All Orders
+      </a> -->
+      <!-- <br><br> -->
+    </mat-sidenav>
+    <mat-sidenav-content style="min-height:100vh;background-color: #fafafa;">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

@@ -233,12 +233,12 @@ export class HomebranchComponent implements OnInit {
     this.alertcheck = false;
     var markItem: any[] = []
     var d = new Date();
-    var n = d.toISOString().substring(0, 10);
+    var date_format = d.toISOString().substring(0, 10);
     for (let i = 0; i < this.NotRecived.length; i++) {
       if (this.NotRecived[i].selected) {
         markItem.push({
           order_id: this.NotRecived[i].order_id.toString(),
-          received_date: n
+          received_date: date_format
         });
       }
       if (i === this.NotRecived.length - 1) {

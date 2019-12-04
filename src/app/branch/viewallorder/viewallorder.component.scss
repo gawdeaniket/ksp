@@ -26,8 +26,11 @@
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
   }
-  .row{
-    width: 90%;margin-left: 5%;margin-right: 5%;
+  // .row{
+  //   width: 90%;margin-left: 5%;margin-right: 5%;
+  // }
+  .dateContain{
+    width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 10vh;padding-left: 0px;
   }
   .date-icon{
     float:right;padding-top: 0.4vh;
@@ -129,7 +132,11 @@
 }
 
 .text-style{
-    display:inline;float:left;font-weight: bold;font-size: 1.3vw;margin-top: 1vh; 
+    display:inline;float:left;font-weight: bold;font-size: 1.4vw;margin-top: 0.5vh;margin-left: 0px;padding-left: 0px; 
+    }
+    .btn{
+      padding: 1vh 1.1vw;
+      font-size: 1.1vw;
     }
 .center-block {
     font-size:1.2vw;
@@ -142,7 +149,9 @@
       cursor: pointer;
   }
 .card {
-    display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
     overflow: hidden;
     font-size: 1.5vw;
     width: 19%;
@@ -153,9 +162,7 @@
     padding-left: 2.5vw;
     padding-right: 2.5vw;
     padding-bottom: 1vh;
-  //  border: 0.5px solid rgba(0, 0, 0, 0.2);
- // box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);    //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
     border-radius: 3px;
     
 }
@@ -189,7 +196,7 @@
     float: right;
 }
 .table-container{
-  width: 90%;overflow:auto;padding-bottom: 2vh;margin-top: 3vh;margin-left: 5%;
+  width: 90%;overflow:auto;padding-bottom: 2vh;margin-top: 8vh;margin-left: 5%;
 }
 .table-address-field{
   float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 14vw;margin: 0px;

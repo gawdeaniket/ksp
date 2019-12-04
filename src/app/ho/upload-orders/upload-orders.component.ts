@@ -84,14 +84,14 @@ export class UploadOrdersComponent implements OnInit {
    
     this.macCheck = false;
     var isMacLike = /(Mac|iPhone|iPod|iPad|MAC|MacIntel)/i.test(navigator.platform);
-    console.log(isMacLike);
+   // console.log(isMacLike);
    if(isMacLike) this.macCheck = true;
     
     var logininfo: any = JSON.parse(localStorage.getItem('loginInfo'));
     if (!logininfo) {
       this._router.navigate(['home']);
     }
-    console.log(this.downloads);
+   // console.log(this.downloads);
 
   }
   closeupload() {
@@ -104,7 +104,7 @@ export class UploadOrdersComponent implements OnInit {
       if (data.pending_approval_list.length == 0 || data.proposed_count_by_state.length == 0) {  //if one of the table length is zero
         this.AllApprove = false;   //both table will be not visible and no oder message will be displayed
         this.loaders = false;       //loaders will be closed
-        console.log('loader ' + this.loaders);
+      //  console.log('loader ' + this.loaders);
       }
       else {
         this.dateOrder = data.pending_approval_list[0].approval_generated_date.match(/\d+/g).reverse().join('-')
@@ -124,7 +124,7 @@ export class UploadOrdersComponent implements OnInit {
           })
           if (i == data.pending_approval_list.length - 1) { //last data 
             this.loaders = false;
-            console.log(this.loaders);
+          //  console.log(this.loaders);
           }
         }  // for loop closed
         for (let i = 0; i < data.proposed_count_by_state.length; i++) {
@@ -139,11 +139,11 @@ export class UploadOrdersComponent implements OnInit {
         }
       }
       // this.uploadOrderList = data;
-      console.log(this.uploadOrderList);
-      console.log(this.AllApprove);
+     // console.log(this.uploadOrderList);
+     // console.log(this.AllApprove);
     }).catch((error) => {
       this.loaders = false;
-      console.log(error);
+     // console.log(error);
     })
 
 
@@ -435,7 +435,7 @@ export class UploadOrdersComponent implements OnInit {
     var files = target.files
     // this.alerts = false;
     // this.failurealert = false;
-    console.log(this.failurealert);
+   // console.log(this.failurealert);
     if (files[0].type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
       this.fileToUpload = files.item(0);
       // this.alerts = false;
@@ -447,13 +447,13 @@ export class UploadOrdersComponent implements OnInit {
       // this.loaderscheck = false;
       alert("Please upload a file in correct format (xls / xlsx)");
     }
-    console.log(files);
+   // console.log(files);
     target.value = '';
   }
 
   handleFileInput() {
     // this.loaderscheck = true;
-    console.log(this.fileToUpload);
+  //  console.log(this.fileToUpload);
     this.uploadAlert = false;
     this.failurealert = false;
     this.failureResponses = [];

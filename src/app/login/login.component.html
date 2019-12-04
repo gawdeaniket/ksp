@@ -7,7 +7,7 @@
   <mat-card-header style="background-color:#fcdb04;padding: 0px;margin: 0px;height: 10vh;border-radius: 10px 10px 0px 0px;">
   
   <a  style="height:100%;margin:0px;padding: 10px;text-align: left ;margin-left: 25%;">
-      <img src="../../../assets/imgs/logo.png" style="height:90% !important;width:45% !important;">
+      <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:90% !important;width:45% !important;">
     </a>
   
   
@@ -21,7 +21,10 @@
   
   
                <mat-label>Username</mat-label>
-               <input matInput #email formControlName="email" [(ngModel)]="username" placeholder="Please enter username" (keypress)="close($event,'username')">
+               <input matInput #email formControlName="email" 
+               [(ngModel)]="username" 
+               placeholder="Please enter username" 
+               (keypress)="close($event,'username')">
               
              </mat-form-field>
 
@@ -51,7 +54,7 @@
             </span>
             <button type="submit" class="btn " [disabled]="loginform.invalid" style="width: 30%;margin-left: 35%;margin-top: 2vh;padding: 10px;background-color: #fcdb04;font-weight: bold;" >Login</button>
 
-             </form>
+      </form>
              </mat-card-content>
   
   

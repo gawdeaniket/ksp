@@ -15,7 +15,7 @@ export class DashboardHoComponent implements OnInit {
     if(!logininfo){
       this._router.navigate(['home']);
     }
-    if(logininfo.role !='HO'){
+    if(logininfo.role != 'HO'){
       this._router.navigate(['home']);
     }
     // console.log(location.hash);

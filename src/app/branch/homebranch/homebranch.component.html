@@ -1,5 +1,6 @@
 
 <!--custom Dialog box for confirming mark recived -->
+<div style="background: transparent;width:100%;height:100%;display: flex;align-items: center;justify-content: center;">
 <div *ngIf="alertcheck" class="alert alert-success alert-dismissible">
   <strong style="font-size: 18px;">
     Are you sure you want to mark {{markItem}} order as received?
@@ -17,6 +18,7 @@
     </button>
   </div>
 </div>
+</div>
 
 <!-- Custom loader to hide all content and wait till data gets loaded -->
 <div class="loader-container" *ngIf="loaders">
@@ -24,8 +26,8 @@
   <div class="loader"></div>
 </div>
 <!-- All content after data gets loader from server -->
-<div *ngIf="!loaders">
-  <br><br><br>
+<div class="min-width:100%;min-height:100vh;display:flex;align-items: center;" *ngIf="!loaders">
+  <br><br><br><br>
   <!-- card -->
   <div class="card-columns">
     <div class="card ">

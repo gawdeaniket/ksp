@@ -1,13 +1,11 @@
 <div class="loaderContanier" *ngIf="loaders">
   <div class="loader"></div>
 </div>
-<div *ngIf="!loaders">
+<div  *ngIf="!loaders">
   <!-- Date selection-->
   <div>
-    <br><br>
     <div class="row dateContain" >
-      <div class="col-xs-4 col-sm-4 col-lg-2 text-style" 
-           style="text-align: center;">
+      <div class="col-xs-4 col-sm-4 col-lg-2 text-style" >
         Order Date
       </div>
       <div class="col-xs-4 col-sm-4 col-lg-3 box-shadows dateContainer">
@@ -44,9 +42,9 @@
            date_range
         </i>
       </div>
-      <div class="col-xs-4 col-sm-4 col-lg-2 date-button-container">
-        <button type="button" class="btn" (click)="DateFilter()">Submit</button>
-        <button type="button" class="btn " (click)="clearDate()"
+      <div style="margin-left:4vw;" class="col-xs-4 col-sm-4 col-lg-2 date-button-container">
+        <button type="button" class="btn " (click)="DateFilter()">Submit</button>
+        <button type="button" class="btn pull-right" (click)="clearDate()"
           style="margin-left: 5px;">Clear</button>
       </div>
     </div>

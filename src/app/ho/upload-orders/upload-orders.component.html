@@ -1,9 +1,6 @@
-<!-- <div style="width: 100%;height:100%;background-color: transparent;z-index: 1;" *ngIf="loaderscheck">
-  <div class="loader" style="top: 45%;width: 50px;height: 50px;"></div>
-  </div> -->
 
 <!-- All alerts (4) -->
-
+<div  style="background: transparent;width:100%;height:100%;display: flex;align-items: center;justify-content: center;z-index: 100;">
 <!-- Alert(1)   after successfully approving the data display on UI with total count -->
 <div *ngIf="alert1" class="alert alert1 alert-success alert-dismissible">
   <strong >You have approved {{totalApproveCount}} orders successfully</strong>
@@ -27,6 +24,7 @@
         <button data-dismiss="alert" (click)="alert4 = false" class="buttons">CANCEL</button>
       </div>
 </div>
+</div>
 <!-- Alert(5) -->
 <!-- <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible"
   style="width:26%;left:46%;border-radius: 10px; ">
@@ -44,7 +42,6 @@
   </div>
 
 </div> -->
-
 
 <!--successfull upload of file and asked for approved -->
 <div class="whole-container" *ngIf="downloads">
@@ -96,9 +93,6 @@
       </div>
 
     </div>
-
-
-
     <!-- <div class="containers" style="margin-top:19vh;width: 80%;margin-left: 10%;" *ngIf="failurealert">
       <label style="margin-left:2vw;font-size: 1.5vw;" class="text-danger">Failure Reasons </label>
       <div style="margin-top:1vh;">
@@ -124,7 +118,6 @@
         </table>
       </div>
     </div> -->
-
     <!-- <div *ngIf="boxupload" class="box-shadows" style="border-radius: 15px;width: 40% !important;height:270px !important;background-color:#fcdb04;border:1px solid rgba(0, 0, 0, 0.2);margin-left: 30%;margin-top: 4vh;position: relative;padding: 2vh 4vh;">
            
               <i class="material-icons" (click)="closeupload()" style="border-radius: 0px 10px 0px 0px;position: absolute;top:0px;right:0px;background-color:#000000;color:#fcdb04;cursor: pointer;">
@@ -156,16 +149,12 @@
 </div>
 <!--successfull upload of file and asked for approved closed -->
 
-
-
-
 <!-- Table UI -->
 <div *ngIf="!downloads">
   <div class="loaderContainer" *ngIf="loaders">
     <div class="loader"></div>
   </div>
  <div *ngIf="!loaders">
-    <!--  -->
     <div *ngIf="checks">
       <!-- Main Heading  -->
       <div class=" text-center" style="margin-top: 5vh;">
@@ -189,8 +178,6 @@
             <th>STATE</th>
             <th> ORDERS</th>
           </tr>
-
-
           <tr *ngFor="let item of uploadOrder">
             <td>{{item.state}}</td>
             <td>{{item.count}}</td>
@@ -199,26 +186,39 @@
             <td style="font-weight: bold;">Total</td>
             <td style="font-weight: bold;"> {{totalCount}}</td>
           </tr>
-
-
         </table>
 
         <!-- Table button  -->
         <div class="table1-button" *ngIf="totalCount">
-          <button type="button" *ngIf="modifybutton" class="btn btn-default intialButton"
-            (click)="sendApprove()">Approve</button>
-          <button type="button" *ngIf="!modifybutton" class="btn btn-default intialButton"
-            (click)="Download()">Download</button>
-          <button type="button" *ngIf="modifybutton" class="btn btn-default modify-download"
-            (click)="Download()">Download</button>
-          <button type="button" class="btn btn-default intialButton" style="float: right"
-            (click)="modifyApproval()">Modify</button>
+          <button type="button" 
+                  *ngIf="modifybutton" 
+                  class="btn btn-default intialButton"
+                  (click)="sendApprove()">
+            Approve
+          </button>
+          <button type="button" 
+                  *ngIf="!modifybutton" 
+                  class="btn btn-default intialButton"
+                  (click)="Download()">
+            Download
+          </button>
+          <button type="button" 
+                  *ngIf="modifybutton" 
+                  class="btn btn-default modify-download"
+                  (click)="Download()">
+            Download
+          </button>
+          <button type="button" 
+                  class="btn btn-default intialButton" 
+                  style="float: right"
+                  (click)="modifyApproval()">
+            Modify
+          </button>
         </div>
         <!-- table button closed -->
       </div>
       <!-- table 1 end  -->
       <br><br><br>
-
       <!--2nd Table main container -->
       <div *ngIf="AllApprove">
         <div *ngIf="approvetable" class="table2Container">
@@ -236,112 +236,107 @@
             <table>
               <thead class="theads">
               <!-- [class.active]="order === 'branch_id'" -->
-              <tr style="cursor: pointer;">
-                <th (click)="setOrder('branch_id')">Branch Id
-                  <button class="increment-decrement-button">
-                    <i class="material-icons ">
-                      swap_vert
-                    </i>
-                  </button>
-                </th>
-                <th (click)="setOrder('branch_name')">Branch Name
-                  <button class="increment-decrement-button">
+                <tr style="cursor: pointer;">
+                  <th (click)="setOrder('branch_id')">Branch Id
+                    <button class="increment-decrement-button">
+                      <i class="material-icons ">
+                        swap_vert
+                      </i>
+                    </button>
+                  </th>
+                  <th (click)="setOrder('branch_name')">Branch Name
+                    <button class="increment-decrement-button">
 
-                    <i class="material-icons ">
-                      swap_vert
-                    </i>
-                  </button>
-                </th>
-                <th (click)="setOrder('region')">Region
-                  <button class="increment-decrement-button">
+                      <i class="material-icons ">
+                        swap_vert
+                      </i>
+                    </button>
+                  </th>
+                  <th (click)="setOrder('region')">Region
+                    <button class="increment-decrement-button">
 
-                    <i class="material-icons ">
-                      swap_vert
-                    </i>
-                  </button>
-                </th>
-                <th (click)="setOrder('product_name')">Product Name
-                  <button class="increment-decrement-button">
+                      <i class="material-icons ">
+                        swap_vert
+                      </i>
+                    </button>
+                  </th>
+                  <th (click)="setOrder('product_name')">Product Name
+                    <button class="increment-decrement-button">
 
-                    <i class="material-icons ">
-                      swap_vert
-                    </i>
-                  </button>
-                </th>
-                <th (click)="setOrder('state')">State
-                  <button class="increment-decrement-button">
+                      <i class="material-icons ">
+                        swap_vert
+                      </i>
+                    </button>
+                  </th>
+                  <th (click)="setOrder('state')">State
+                    <button class="increment-decrement-button">
 
-                    <i class="material-icons ">
-                      swap_vert
-                    </i>
-                  </button>
-                </th>
-                <th>Poduct Quantity
+                      <i class="material-icons ">
+                        swap_vert
+                      </i>
+                    </button>
+                  </th>
+                  <th>Poduct Quantity
 
-                </th>
+                  </th>
 
-              </tr>
-              
-              <tr *ngIf="uploadOrderList.length != 0">
-                <td>
-                  <input type="text" placeholder="Search by Id" class="searchInput" [(ngModel)]="branchId">
-                </td>
-                <td>
-                  <input type="text" placeholder="Search by name" [(ngModel)]="name" class="searchInput">
-                </td>
-                <td>
-                  <input type="text" placeholder="Search by region" [(ngModel)]="region" class="searchInput">
-                </td>
-                <td>
-                  <input type="text" placeholder="Search by product " [(ngModel)]="product" class="searchInput">
-                </td>
-                <td>
-                  <input type="text" placeholder="Search by state " [(ngModel)]="state" class="searchInput">
-                </td>
-                <td>
-                </td>
-              </tr>
+                </tr>
+                <tr *ngIf="uploadOrderList.length != 0">
+                  <td>
+                    <input type="text" placeholder="Search by Id" class="searchInput" [(ngModel)]="branchId">
+                  </td>
+                  <td>
+                    <input type="text" placeholder="Search by name" [(ngModel)]="name" class="searchInput">
+                  </td>
+                  <td>
+                    <input type="text" placeholder="Search by region" [(ngModel)]="region" class="searchInput">
+                  </td>
+                  <td>
+                    <input type="text" placeholder="Search by product " [(ngModel)]="product" class="searchInput">
+                  </td>
+                  <td>
+                    <input type="text" placeholder="Search by state " [(ngModel)]="state" class="searchInput">
+                  </td>
+                  <td>
+                  </td>
+                </tr>
               </thead>
               <tbody class="tbodys">
-                  <tr *ngIf="uploadOrderList.length == 0">
+                <tr *ngIf="uploadOrderList.length == 0">
                       <td colspan="5"> No data Available </td>
-      
-                    </tr>
-              
-              <tr
+                </tr>    
+                <tr
                 *ngFor="let item of uploadOrderList  | mulipleSearch:branchId:name:region:product:state |paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                  <td>{{item.branch_id}}</td>
+                  <td>{{item.branch_name}}</td>
+                  <td>{{item.region}}</td>
+                  <td>{{item.product_name}}</td>
+                  <td>{{item.state}}</td>
+                  <td>
+                    <div class="productQuantity">
+                      <div class="increment-decrement-button-container">
+                        <button>
+                          <i class="material-icons " (click)="decrease(item.no)">
+                            remove_circle_outline
+                          </i>
+                        </button>
+                      </div>
+                      <div class="inputField">
+                        <input type="number" (ngModelChange)="changedValue($event,item.no)"
+                          [(ngModel)]="item.product_qty">
+                      </div>
+                      <div class="increment-decrement-button-container">
+                        <button>
+                          <i class="material-icons" (click)="increase(item.no)">
+                            add_circle_outline
+                          </i>
+                        </button>
 
-                <td>{{item.branch_id}}</td>
-                <td>{{item.branch_name}}</td>
-                <td>{{item.region}}</td>
-                <td>{{item.product_name}}</td>
-                <td>{{item.state}}</td>
-                <td>
-                  <div class="productQuantity">
-                    <div class="increment-decrement-button-container">
-                      <button>
-                        <i class="material-icons " (click)="decrease(item.no)">
-                          remove_circle_outline
-                        </i>
-                      </button>
-                    </div>
-                    <div class="inputField">
-                      <input type="number" (ngModelChange)="changedValue($event,item.no)"
-                        [(ngModel)]="item.product_qty">
-                    </div>
-                    <div class="increment-decrement-button-container">
-                      <button>
-                        <i class="material-icons" (click)="increase(item.no)">
-                          add_circle_outline
-                        </i>
-                      </button>
+                      </div>
 
                     </div>
-
-                  </div>
-                </td>
-                <!-- <td>{{item.current_stock}}</td> -->
-              </tr>
+                  </td>
+                </tr>
               <div class="empty">
                   No data available
                 </div>
@@ -351,20 +346,31 @@
           <div class="paginationContainer">
             <pagination-controls *ngIf="uploadOrderList.length != 0" (pageChange)="p = $event"></pagination-controls>
           </div>
-          <input type="file" #file style="display:none" (change)="handleFile($event.target)" id="file">
-          <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default Approve"
-            (click)="sendApprove()">Approve</button>
-          <button type="button" class="btn btn-default upload-excel" (click)="file.click()">Upload Excel</button>
-          <button type="button" *ngIf="uploadOrderList.length != 0" class="btn btn-default clear"
-            (click)="clearValue()">Clear</button>
-
+          <input type="file" 
+                 #file 
+                 style="display:none" 
+                 (change)="handleFile($event.target)" 
+                 id="file">
+          <button type="button" 
+                  *ngIf="uploadOrderList.length != 0" 
+                  class="btn btn-default Approve"
+                  (click)="sendApprove()">
+            Approve
+          </button>
+          <button type="button" 
+                  class="btn btn-default upload-excel" 
+                  (click)="file.click()">
+            Upload Excel
+          </button>
+          <button type="button" 
+                  *ngIf="uploadOrderList.length != 0" 
+                  class="btn btn-default clear"
+                  (click)="clearValue()">Clear</button>
         </div>
       </div>
       <!--2nd table  main container closed -->
     </div>
     <!-- checks closed -->
-
-
     <!-- failure container -->
     <div class="failureContainer" *ngIf="failurealert">
       <label class="text-danger">Failure Reasons </label>
@@ -388,8 +394,5 @@
     </div>
     <!-- failure container closed -->
   </div>
-
-
-
 </div>
 <!-- Table UI closed  -->

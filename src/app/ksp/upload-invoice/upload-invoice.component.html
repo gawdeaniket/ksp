@@ -12,16 +12,20 @@
   
   
 </div> -->
-<app-header></app-header>
+<!-- <app-header></app-header> -->
   <!-- success alert box -->
-  <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible">
-    <strong style="font-size: 18px;" >  
-      {{successResponse.length}} order have been approved.
-    </strong>
-    <button  data-dismiss="alert" (click)="reload()" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
- 
-    OK</button>
-    
+  <ngx-loading [show]="loading"></ngx-loading>
+  <div *ngIf="successalert" 
+        style="position: relative;top:0;width:100%;min-height:100vh;z-index:1000">
+    <div *ngIf="successalert" class="alert alertss alert-success alert-dismissible">
+      <strong style="font-size: 18px;" >  
+        {{successResponse.length}} order have been approved.
+      </strong>
+      <button  data-dismiss="alert" (click)="reload()" aria-label="close" style="display:block;width:30%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+  
+      OK</button>
+      
+    </div>
   </div>
 
   <!-- <div *ngIf="alerts" class="alert alertss alert-success alert-dismissible" style="left:42%;padding: 10px 45px;top:25%;">
@@ -39,43 +43,43 @@
     <strong>File Not Upload</strong>&nbsp;&nbsp; Please upload the File.
   </div> -->
 
-
-<div class="text-style"> {{heading }} </div>
-     
-<div style="margin-top: 23vh;display: block;width: 100%;">
-  <div class="container">
-    <span *ngIf="fileToUpload" class="filename">{{fileToUpload.name}}</span>
-    <input type="file" style="display:none"
-           id="file"
-          (change)="handleFile($event.target.files)">
-    <label for="file" class="choosefile-label" >Choose File</label>                     
-  </div>
-  <button type="button" 
-          class="btn btn-primary upload-button" 
-          (click)="handleFileInput()">Upload File
-  </button>
-  <div class="download-template-container">
-    <a>Download Template File</a>
-  </div>
-</div> 
-    
-<div class="failure-container" *ngIf="failurealert">
-  <label class="text-danger">Failure Reasons </label>
-  <div class="table-container">
-    <table>
-      <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;">
-        <tr>
-          <th style="width: 16vw;">LoanProposal ID</th>             
-          <th>Remarks</th>       
-        </tr>
-      </thead>
-      <tbody style="display:block;max-height:40vh !important; overflow-y:scroll;">
-        <tr *ngFor="let failure of failureResponse" style="display:table; width:100%; table-layout:fixed;">
-          <td style="width: 16vw;">{{failure.OrderID}}</td>      
-          <td>{{failure.Remarks}}</td>           
-        </tr>
-      </tbody>  
-    </table>
+<div style="width: 100%;height:100%;position: absolute;top:0px;z-index: 1;">
+  <app-header></app-header>
+  <div class="text-style"> {{heading }} </div>   
+  <div style="margin-top: 23vh;display: block;width: 100%;">
+    <div class="container">
+      <span *ngIf="fileToUpload" class="filename">{{fileToUpload.name}}</span>
+      <input type="file" style="display:none"
+            id="file"
+            (change)="handleFile($event.target.files)">
+      <label for="file" class="choosefile-label" >Choose File</label>                     
+    </div>
+    <button type="button" 
+            class="btn btn-primary upload-button" 
+            (click)="handleFileInput()">Upload File
+    </button>
+    <!-- <div   class="download-template-container">
+      <a>Download Template File</a>
+    </div> -->
+  </div>    
+  <div class="failure-container" *ngIf="failurealert">
+    <label class="text-danger">Failure Reasons </label>
+    <div class="table-container">
+      <table>
+        <thead style="width: calc( 100% - 1.2vw );display:table;table-layout:fixed;">
+          <tr>
+            <th style="width: 16vw;">Order ID</th>             
+            <th>Remarks</th>       
+          </tr>
+        </thead>
+        <tbody style="display:block;max-height:40vh !important; overflow-y:scroll;">
+          <tr *ngFor="let failure of failureResponse" style="display:table; width:100%; table-layout:fixed;">
+            <td style="width: 16vw;">{{failure.order_id}}</td>      
+            <td>{{failure.remarks}}</td>           
+          </tr>
+        </tbody>  
+      </table>
+    </div>
   </div>
 </div>  
   <!-- <div *ngIf="uploadAlert"  class="alert alert-success alert-dismissible alerts" style="left: 35%;border-radius: 10px;">

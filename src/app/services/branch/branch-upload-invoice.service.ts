@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable, Subscriber,throwError } from 'rxjs';
+//import { Observable, Subscriber,throwError } from 'rxjs';
 import {EnvironmentService} from '../environment/environment.service';
 
 @Injectable({
@@ -15,9 +15,11 @@ export class BranchUploadInvoiceService {
 
   postFile(fileToUpload: File, state) {
     var endpoint;
+   // http://52.205.99.171:8000/amigo/v1.0/sales/kenya?role=CL
     const formData: FormData = new FormData();
     if(state == 'uploadInvoice'){
-       endpoint = 'http://52.205.99.171:7777/mfi-branch/v1.0/upload-invoice/CL001';
+      // endpoint = 'http://52.205.99.171:7777/mfi-branch/v1.0/upload-invoice/CL001';
+        endpoint = 'https://lmd.glpapps.com/mfi-lmd/v1.0/invoices/upload-invoice/fullerton';
        formData.append('invoice-file', fileToUpload);
     }else{
       endpoint = 'http://52.205.99.171:7777/mfi-branch/v1.0/upload-delivery/CL001';

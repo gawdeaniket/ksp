@@ -3,7 +3,7 @@
 //Table Container
 
 .tableContainer{
-  overflow:auto;margin-top: 4vh;
+  overflow:auto;margin-top: 5vh;
   table {
     margin-top: 10vh;
       margin-right: 2%;
@@ -12,6 +12,8 @@
       background-color: #ffffff;
       border: 1px solid #dddddd;
       width: 90%;margin-left: auto;margin-right: auto;
+      height: 40vh;
+      font-size: 1.1vw;
     }
     td, th { 
       border: 1px solid #dddddd;
@@ -35,7 +37,7 @@
 .dropdown{
   float: right;margin-right:5%;
   .btn{
-    width: 12vw;background-color: #fcdb04;color: #000000;padding-left: 0vw;
+    width: 12vw;background-color: #fcdb04;color: #000000;padding-left: 0vw;font-weight:bold;
     .caret{
       float: right;margin-top:1vh;font-size: 30px;
     }

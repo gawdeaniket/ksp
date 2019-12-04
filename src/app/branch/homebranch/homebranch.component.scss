@@ -1,3 +1,4 @@
+
 ::-webkit-input-placeholder {
    // color: peachpuff;
     font-size: 11px;
@@ -15,7 +16,6 @@
     font-size: 12px;
     
   }
-
   .loader {
     position:absolute;
     top:30%;
@@ -59,9 +59,9 @@
   .clearAll{
     background:transparent;margin-left:3vh;padding-left: 20px;padding-right: 20px;
   }
-  .TableAddressField{
-    float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 13vw;margin: 0px;
-  }
+  // .TableAddressField{
+  //   float: left;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;height: 80%;width: 13vw;margin: 0px;
+  // }
   .paginationContainer{
     margin-left: 14vw;margin-right: auto;
   }
@@ -107,8 +107,6 @@
     display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
   }
 }
-
-
 .container{
    margin-top: 3vh; 
     width: 90%;
@@ -130,7 +128,9 @@ display:inline;float:left;font-weight: bold;font-size: 20px;margin-top: 1vh;
       
   }
 .card {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding-top: 2vh;
     width: 45%;
     height: 100%;
@@ -141,23 +141,22 @@ display:inline;float:left;font-weight: bold;font-size: 20px;margin-top: 1vh;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
-
 .textnumber{
     color: #3f51b5;
 
 }
 .card-text{
-    font-size: 14px;
+    font-size: 1.2vw;
     font-weight: bold;
 }
-.centerline{
+// .centerline{
 
-    padding: 8px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-    border: 0px solid #ffffff;
-}
+//     padding: 8px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     border-radius: 10px;
+//     border: 0px solid #ffffff;
+// }
 .icons{
     font-size: 18px;
 }

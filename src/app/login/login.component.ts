@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
     this.loginform = this.formbuilder.group({
       email:['',[Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
       pass: ['',[Validators.required] ],
-      
-  
    });
   }
 

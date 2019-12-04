@@ -21,6 +21,8 @@ export class DownloadInvoiceService {
       this.httpClient.get(endpoint,  { headers: headers })
       .subscribe((data)=>{
         resolve(data);
+      }, (err) =>{
+        reject(err);
       })
     }) 
   }
