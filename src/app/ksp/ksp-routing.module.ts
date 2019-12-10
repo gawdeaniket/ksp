@@ -26,27 +26,8 @@ import {HomeRegistrationComponent} from '../ksp/home-registration/home-registrat
  
 
 // ];
-const routes: Routes = [
-    { path:'',redirectTo:'invoicemanagement',pathMatch:'full'}, 
-    { 
-      path:'invoicemanagement', component:InvoiceManagementComponent,
-     },
-     {
-      path:'homeRegistration',component: HomeRegistrationComponent,
-     },
-     {
-      path:'satininvoice', component:SatinInvoiceComponent
-     },
-     {
-      path:'upload/:id',component: UploadInvoiceComponent,
-     }
-]
 // const routes: Routes = [
-//   {
-//     path:'', component:KspdashboardComponent, 
-//   children:[
-//     { path:'',redirectTo:'invoicemanagement',pathMatch:'full'},
-    
+//     { path:'',redirectTo:'invoicemanagement',pathMatch:'full'}, 
 //     { 
 //       path:'invoicemanagement', component:InvoiceManagementComponent,
 //      },
@@ -59,8 +40,27 @@ const routes: Routes = [
 //      {
 //       path:'upload/:id',component: UploadInvoiceComponent,
 //      }
-//   ]}
-// ];
+// ]
+const routes: Routes = [
+  {
+    path:'', component:KspdashboardComponent, 
+  children:[
+    { path:'',redirectTo:'invoicemanagement',pathMatch:'full'},
+    
+    { 
+      path:'invoicemanagement', component:InvoiceManagementComponent,
+     },
+     {
+      path:'homeRegistration',component: HomeRegistrationComponent,
+     },
+     {
+      path:'satininvoice', component:SatinInvoiceComponent
+     },
+     {
+      path:'upload/:id',component: UploadInvoiceComponent,
+     }
+  ]}
+];
 
 
 

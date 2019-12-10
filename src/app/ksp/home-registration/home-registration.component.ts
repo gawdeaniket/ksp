@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LmdService } from '../../services/ksp/lmd.service';
 import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-home-registration',
   templateUrl: './home-registration.component.html',
@@ -152,107 +154,194 @@ export class HomeRegistrationComponent implements OnInit {
     }
   ]
   singInDetails: FormGroup;
-  allAgent:any[] = [];
-  filterAgent:any [] = []
+  allAgent: any[] = [];
+  filterAgent: any[] = []
   valiadtionMessage = {
     Agentname: {
       'required': 'Agent name is required',
-      'minlength': 'Min 3 and max 10 char'
     },
     MobileNo: {
-      'required': 'Phone is required'
-    },
-    state: {
-      'required': 'state is required'
+      'required': 'Phone is required',
+      'pattern': 'Moblie no should be in 10 digits'
+
     },
     Hub: {
-      'required': 'Hub is required'
+      'required': 'Hub is required',
+      'hubSelectionValidation': 'Please select the correct Hub'
     }
   };
 
   formsError: any = {
     AgentName: '',
     MobileNo: '',
-    state: '',
     Hub: ''
   }
+  hubsValidation: boolean = true;
   filterState: any[] = [];
-  searchAgentName:string;
-  agentselection:any = {};
-  constructor(private lmd: LmdService, private fb: FormBuilder) {
-    
+  searchAgentName: string;
+  agentselection: any = {};
+  loginUserState: string = 'odisha'
+  deactivatedAlert: boolean = false;
+  hubs: any[] = [];
+  filterHubs: any[] = []
+  filterHubView: boolean = false;
+  createUserAlert: boolean = false;
+  CreateUserDetails:any;
+  newUser:any;
+  deleteeUserAlert:boolean = false;
+  newUserAlert:boolean = false;
+  constructor(private lmd: LmdService, private fb: FormBuilder, private _router: Router) {
+    if (!localStorage.getItem('kspState')) {
+      this._router.navigate(['login']);
+    } else {
+      this.loginUserState = JSON.parse(localStorage.getItem('kspState'));
+    }
+   // console.log(this.loginUserState);
+    this.lmd.getAllAgent(this.loginUserState)
+      .then((data: any) => {
+        this.allAgent = data;
+        //console.log(this.allAgent);
+
+      })
+    this.lmd.getHub(this.loginUserState).then((data: any[]) => {
+      this.hubs = data;
+      // console.log(this.hubs);
+    })
+    // console.log(this.hubs);
     this.singInDetails = this.fb.group({
-      Agentname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      MobileNo: ['', Validators.required],
-      state: ['', Validators.required],
-      Hub: ['', Validators.required],
+      Agentname: ['', [Validators.required]],
+      MobileNo: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
+      state: [''],
+      Hub: ['', [Validators.required]],
     });
-    this.singInDetails.get('Hub').disable();
-    //this.lmd.getState().then((data)=> console.log(data));
+
     this.singInDetails.valueChanges
       .subscribe((value) => {
-        console.log(value);
+         //console.log(value);
+        this.newUser = {};
         
-        if(value.state){
-          console.log(value.state);
-          
-          
+        this.CreateUserDetails = value;
+        // console.log(this.singInDetails);
+        if (value.state) {
+          // console.log(value.state);
         }
         this.loadData(this.singInDetails);
       });
-      
-    this.singInDetails.get('state').valueChanges
-      .subscribe((value) => {
-        console.log(value);
-        this.filterState = this.state.filter((data) => {
-          console.log(data.name.toLowerCase());
-         return data.name.toLowerCase().indexOf(value.toLowerCase()) != -1
-        });
-        console.log(this.filterState);
-        this.singInDetails.get('Hub').disable();
-          this.singInDetails.patchValue({
-            Hub: ''
-          })
-        if(value == '') return this.filterState = [];
+
+    // this.singInDetails.get('state').valueChanges
+    //   .subscribe((value:any) => {
+    //     console.log(value);
+    //     if(value){
+    //       this.filterState = this.state.filter((data) => {
+    //         console.log(data.name.toLowerCase());
+    //        return data.name.toLowerCase().indexOf(value.toLowerCase()) != -1
+    //       });
+    //     }
+
+    //     console.log(this.filterState);
+    //     // this.singInDetails.get('Hub').disable();
+    //     //   this.singInDetails.patchValue({
+    //     //     Hub: ''
+    //     //   })
+    //     if(value == '') return this.filterState = [];
+    //   })
+
+    this.singInDetails.get('Hub').valueChanges
+      .subscribe((value: any) => {
+        if (value) {
+          this.hubsValidation = false;
+          //this.filterHubView = false;
+          this.filterHubs = this.hubs.filter((data) => {
+            return data.toLowerCase().indexOf(value.toLowerCase()) !=-1
+          });
+          const filterData = this.hubs.find((data) => {
+            // console.log(data == value);
+            return data == value;
+          });
+          // if(filterData){
+          //    this.hubsValidation = true;
+          // }else{
+          //   this.hubsValidation = false;
+          // }
+          // // console.log(this.hubs);
+          // console.log(this.hubsValidation);
+        } else {
+          //this.filterHubView = true;
+          this.filterHubs = [];
+        }
+
       })
   }
 
-  ngOnInit() {
-    // this.lmd.getAllAgent()
-    // .then((data:any)=>{
-    //   this.allAgent = data;
-    // })
-    this.allAgent = [
-      { name:'a',MobileNo:22222222,state:'m',hub:'hub1'},
-      { name:'a1',MobileNo:22222222,state:'m',hub:'hub1'},
-      { name:'a12',MobileNo:22222222,state:'m',hub:'hub1'},
-      { name:'a123',MobileNo:22222222,state:'m',hub:'hub1'},
-      { name:'a1234',MobileNo:22222222,state:'m',hub:'hub1'},
-      { name:'a12345',MobileNo:22222222,state:'m',hub:'hub1'}
-    ]
-  }
-  selectState(stateName){
+  ngOnInit() { }
+  selectState(stateName) {
     this.singInDetails.patchValue({
-      state:stateName
+      state: stateName
     });
     this.singInDetails.get('Hub').enable();
     this.filterState = [];
   }
-  searchByAgent(event){
-    console.log(event);
-    this.agentselection = {};
-    if(!this.searchAgentName) return this.filterAgent = [];
-    this.filterAgent = this.allAgent.filter((data) => {
-     return data.name.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) != -1;
+  selectHub(stateName) {
+    this.singInDetails.patchValue({
+      Hub: stateName
     });
-    
+    this.filterHubView = false;
+    this.hubsValidation = true;
+    // console.log(this.hubsValidation);
+    //this.singInDetails.get('Hub').enable();
+    this.filterHubs = [];
   }
-  selectedAgent(item){
- this.agentselection.name = item.name;
- this.agentselection.state = item.state;
- this.agentselection.hub= item.hub;
- this.agentselection.mobileNo = item.mobileNo;
- this.filterAgent = []
+  searchByAgent(event) {
+    // console.log(event);
+    this.agentselection = {};
+    console.log(typeof this.searchAgentName);
+    if (!this.searchAgentName) return this.filterAgent = [];
+    this.filterAgent = this.allAgent.filter((data) => {
+      const firstName = data.name.split(" ")[0];
+      const lastName = data.name.split(" ")[1];
+      // console.log(firstName);
+      console.log(data.mobile);
+      console.log( data.mobile.toLowerCase().startsWith(this.searchAgentName) )
+     if(lastName){
+      return ( firstName.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) !=-1 || 
+      lastName.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) != -1 ||
+       data.name.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) !=-1  ) 
+     }else{
+       
+      return ( data.name.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) !=-1
+             || data.mobile.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) !=-1 
+             )
+     }
+      
+    });
+
+  }
+  reload(){
+    location.reload();
+  }
+  selectedAgent(item) {
+    this.agentselection.name = item.name;
+    this.agentselection.state = item.state;
+    this.agentselection.hub = item.hub;
+    this.agentselection.mobileNo = item.mobile;
+    this.filterAgent = []
+  }
+  deactivatedAgent() {
+    this.deleteeUserAlert = false;
+    this.lmd.deactivatedAgent(this.agentselection.mobileNo)
+      .then((data: any) => {
+        // console.log(data);
+        this.deactivatedAlert = true;
+        // console.log(this.deactivatedAgent);
+        //location.reload();
+        // setTimeout(() => {
+        //   this.deactivatedAlert = false;
+          
+        // }, 5000);
+      })
+      .catch((err) => {
+
+      })
   }
   loadData(group = this.singInDetails) {
     Object.keys(group.controls)
@@ -261,11 +350,9 @@ export class HomeRegistrationComponent implements OnInit {
         this.formsError[key] = '';
         if (abstractValue && !abstractValue.valid &&
           (abstractValue.touched || abstractValue.dirty)) {
-          // console.log(abstractValue.errors);
-          // console.log(this.valiadtionMessage[key]);
           for (let errorkey in abstractValue.errors) {
-            // console.log(errorkey);
             this.formsError[key] += this.valiadtionMessage[key][errorkey] + ' '
+            // console.log(errorkey);
           }
         }
         //console.log(abstractValue);
@@ -287,5 +374,74 @@ export class HomeRegistrationComponent implements OnInit {
       })
 
   }
+  newPassword(){
+    this.newUserAlert = false;
+    location.reload();
+  }
+  createUser(){
+    const createUser = {
+      name: this.CreateUserDetails.Agentname,
+      mobile: this.CreateUserDetails.MobileNo.toString(),
+      state: this.loginUserState,
+      hub: this.CreateUserDetails.Hub
+  }
+  
+    this.lmd.createUser(createUser)
+    .then((data: any)=>{
+      console.log(data);
+      if(data.ResponseData.Success){
+        this.newUser.username = this.CreateUserDetails.Agentname,
+        this.newUser.password = data.ResponseData.password
+        this.newUserAlert = true;
+        this.createUserAlert = false;
+      }else{
+        //console.log(data);
+        this.createUserAlert = false;
+        setTimeout(() => {
+          alert(data.ResponseData.error);
+        }, 500);
+        
+      }
+    })
+    .catch((err)=>{
+      //console.log(err);
+      this.createUserAlert = false;
+      setTimeout(() => {
+        alert(err.error.Error.MessageToUser)
+      }, 500);
+      
+    })
+  }
 
 }
+
+
+
+// function customHubSelectionValidation(hubs:any[] ){
+//   return (control): {[key: string ]: any } | null =>{
+//     if(control.value && hubs){
+//       const Hub = control.value;
+//       console.log(hubs);
+//     const validationCheck = hubs.find((data)=>{
+//       return data == Hub;
+//     });
+//     console.log(validationCheck);
+//     if(validationCheck) return null;
+//     return {'hubSelectionValidation': true}
+//     }  
+//   }
+// }
+
+// function customHubSelectionValidation(control): {[key:string]: any}| null {
+//   if(control.value){
+//     const Hub = control.value;
+//     console.log(this.hubs);
+//   const validationCheck = this.hubs.find((data)=>{
+//     return data == Hub;
+//   });
+//   console.log(validationCheck);
+//   if(validationCheck) return null;
+//   return {'hubSelectionValidation': true}
+//   }
+
+// }

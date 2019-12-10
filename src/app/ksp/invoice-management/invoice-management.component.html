@@ -3,14 +3,14 @@
     <img src="../../../mfi-branch/assets/imgs/logo.png" style="height:80% !important;width:10% !important;margin-top: 5px;">
   </a>
 </div> -->
-<app-header [rootFlag]="flagToHeader"></app-header>
+<!-- <app-header [rootFlag]="flagToHeader"></app-header> -->
 <div class="container" >
   <span class="text-style"> Invoice Management</span>
   <div class="selection">
     <select (change)="ChangingValue($event)" class="select-container">
       <option value="dis" hidden>Select Your Partner</option>
-      <option  value="satin" class="select-option">SATIN</option>
-      <option  value="bfil">BFIL</option>
+      <!-- <option  value="satin" class="select-option">SATIN</option> -->
+      <option  value="bfil" >Fullerton</option>
     </select>   
     <button type="button" class="btn btn-primary"(click)="select()">SUBMIT</button>
   </div>

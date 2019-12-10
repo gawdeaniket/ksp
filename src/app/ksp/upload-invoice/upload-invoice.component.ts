@@ -67,7 +67,7 @@ export class UploadInvoiceComponent implements OnInit {
    
 }
 home(){
-  this._router.navigate(['ksp/invoicemanagement']);
+  this._router.navigate(['dashboard/invoicemanagement']);
 }
 reload(){
   location.reload();
@@ -113,7 +113,7 @@ reload(){
     }).catch(error => console.log(error));
       
     }//else
-    
+
 }
 
 }

@@ -1,7 +1,14 @@
 *{
     font-size: 1.2vw;
 }
-.text-style{font-weight: bold;font-size: 2vw;margin-top: 3vh;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+.text-style{font-weight: bold;font-size: 1.8vw;margin-top: 3vh;padding-top: 1vh;
 }
 
 .btn{
@@ -21,9 +28,31 @@
 .help-block{
     color: red;
 }
+ //custom alert box
+ .alert{
+    text-align: center;
+    font-weight: bold;
+    min-height:10%;
+    min-width:10%;
+    position:fixed;
+    top:38%;z-index: 99;
+    padding: 20px 40px;
+    background-color:#fcdb04 ;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0px 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.alert-message{
+    font-size: 18px;
+    color: #000000;
+}
+.alert-button-container{
+    width: 100%;
+    button{
+        display:inline;float: left;width:30%;margin-left:16%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px;
+    }
+}
 .search-filter{
     width: 50%;
-    margin-left: 23%;
+    margin-left: 20%;
     display: inline;float: left;
     .form-control{
         padding: 1.5vw;
@@ -44,7 +73,7 @@
 }
 
 .table1Container{
-width: 60% !important;
+width: 50% !important;
 margin-left: 20%;
 margin-top: 5vh;
 font-size: 1.1vw;

@@ -22,10 +22,7 @@ export class InvoiceManagementComponent implements OnInit {
   }
 
   select(){
-    if(this.selectOption == 'bfil'){
-      this._router.navigate(['ksp/satininvoice']);
-    }else{
-      alert("Please Select Below Mention Option");
-    }
+    this._router.navigate(['dashboard/satininvoice']);
+    
   }
 }

@@ -12,11 +12,11 @@
       </div>   
     </div>
   </div>
-  <!--   
-  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">    
+    
+  <!-- <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 40%;z-index: 99;">    
     <strong style="font-size: 18px;">Are you sure you want to logout?</strong><br> 
     <div style="width: 100%;">
-      <button  data-dismiss="alert" (click)="finalLogout()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; "> 
+      <button  data-dismiss="alert" [routerLink]="['login']" routerLinkActive="router-link-active"   style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; "> 
           OK</button>
       <button  data-dismiss="alert" (click)="alertcheck = false" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">  
       CANCEL</button>
@@ -31,14 +31,14 @@
         <mat-icon aria-label="Side nav toggle icon" class="sidnav-icon">menu</mat-icon>
     </button>
     <a class="logo">
-      <img src="../../../assets/imgs/logo.png" [routerLink]="['HO_Home']" class="logo-img" >
+      <img src="../../../ksp/assets/imgs/logo.png" [routerLink]="['dashboard/invoicemanagement']" class="logo-img" >
     </a>
-    <!-- <span class="header-logout-button float-right">
+    <span class="header-logout-button float-right">
       <p class="branch-name" *ngIf="branchDate">{{branchDate}}</p>
       <button type="button" class="logout-button" 
               (click)="alertcheck = true">logout
       </button>
-    </span>  -->
+    </span> 
   </div>
   <!-- <mat-toolbar  class="header">
     <mat-toolbar-row style="height: 100%;width: 100%;padding: 0px;margin: 0px">
@@ -79,7 +79,7 @@
         class="text-nowrap display-4">
         <span class="material-icons sidmenu-icon">
         cloud_download
-        </span>&nbsp; Registration
+        </span>&nbsp;  Agent portal
       </a>
       <br><br>
       <!-- <a [routerLink]="['viewallorder']" 

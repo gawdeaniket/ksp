@@ -20,13 +20,13 @@ export class LoginComponent implements OnInit {
   username:any ;
   password;any;
   constructor(private deviceService: DeviceDetectorService,private _router: Router,public formbuilder:FormBuilder,public details:LoginService) { 
-    localStorage.removeItem('loginInfo');
+    localStorage.removeItem('lkspState');
     const isMobile = this.deviceService.isMobile();
     if(isMobile){
       this._router.navigate(['404']);
     };
     this.loginform = this.formbuilder.group({
-      email:['',[Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')]],
+      email:['',[Validators.required]],
       pass: ['',[Validators.required] ],
    });
   }
@@ -77,19 +77,27 @@ close(event, value){
     return;
   	}
   	else{
+      // this._router.navigate(['dashboard'])
+      // return
   	 this.details.login(obj ).then((result:any) => {
+       if(result.ResponseData.state){
+        localStorage.setItem('kspState', JSON.stringify(result.ResponseData.state));
+        this._router.navigate(['dashboard'])
+       }
+      
+      
      // var data:any ={username:result.username,client_id:result.client_id,branch_id:result.branch_id,role:result.role};
-      localStorage.setItem('loginInfo', JSON.stringify(result));
-     console.log( localStorage.getItem('loginInfo') );
-     // console.log(data);
-      if(result.role == 'HO'){
-      //  var check:any =JSON.parse( localStorage.getItem('loginInfo') );
-        //console.log(check);
-       // console.log(JSON.parse( localStorage.getItem('loginInfo')) );
-        this._router.navigate(['dashboardHo']);
-      }else if(result.role == 'BRANCH'){
-        this._router.navigate(['dashboard']);
-      }
+    //   localStorage.setItem('loginInfo', JSON.stringify(result));
+    //  console.log( localStorage.getItem('loginInfo') );
+    //  // console.log(data);
+    //   if(result.role == 'HO'){
+    //   //  var check:any =JSON.parse( localStorage.getItem('loginInfo') );
+    //     //console.log(check);
+    //    // console.log(JSON.parse( localStorage.getItem('loginInfo')) );
+    //     this._router.navigate(['dashboardHo']);
+    //   }else if(result.role == 'BRANCH'){
+    //     this._router.navigate(['dashboard']);
+    //   }
      
     }, (err) => {
       // console.log(err);

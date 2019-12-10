@@ -11,8 +11,12 @@ export class KspdashboardComponent implements OnInit {
   opened: boolean = true;
   branchDate:any;
   alertcheck = false;
+  
   // activecheck:boolean =false;
   constructor(private _router:Router) {
+    if(!localStorage.getItem('kspState')){
+      this._router.navigate(['login']);
+    }
     // console.log(location.hash);
     // if(location.hash == '#/dashboard'){
 
@@ -41,7 +45,7 @@ logout(){
 
 
 finalLogout(){
-  localStorage.removeItem('loginInfo');
+  localStorage.removeItem('kspState');
   localStorage.clear();
   this._router.navigate(['']);
   // location.reload();
