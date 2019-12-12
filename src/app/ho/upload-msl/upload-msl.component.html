@@ -2,25 +2,25 @@
 
 
 
-<div *ngIf="successUploadAlert"  class="alert alert-success alert-dismissible" style="left: 35%;top:25%;border-radius: 10px;padding:20px 40px; ">
-    
-    <strong style="display: inline-block;">MSL value updated successfully</strong>
-    <button data-dismiss="alert"   style="display:block;width:40%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 15px; ">
-        OK</button>
-</div>
-<div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 35%;top: 30%;">
-    
-    <strong style="font-size: 18px;" >Are you sure you want to update MSL ?  </strong><br> 
-    <div style="width: 100%;">
-    <button   (click)="updateMsl()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-    
-        Yes</button>
-    <button  data-dismiss="alert" (click)="alertcheck = false;" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
-    
-    No</button>
-    </div>
-    
-</div>
+  <div *ngIf="successUploadAlert"  class="alert alert-success alert-dismissible" style="left: 35%;top:25%;border-radius: 10px;padding:20px 40px; ">
+      
+      <strong style="display: inline-block;">MSL value updated successfully</strong>
+      <button data-dismiss="alert"   style="display:block;width:40%;margin-left:auto;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding:10px 15px; ">
+          OK</button>
+  </div>
+  <div *ngIf="alertcheck" class="alert alert-success alert-dismissible" style="left: 35%;top: 30%;">
+      
+      <strong style="font-size: 18px;" >Are you sure you want to update MSL ?  </strong><br> 
+      <div style="width: 100%;">
+      <button   (click)="updateMsl()"  style="display:inline;float: left;width:30%;margin-left:20%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+      
+          Yes</button>
+      <button  data-dismiss="alert" (click)="alertcheck = false;" style="display:inline;float: left;width:30%;margin-left:10%;margin-right:auto;margin-top:30px;background-color: #000000;color:#fcdb04;box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);border: none;padding: 7px; ">
+      
+      No</button>
+      </div>
+      
+  </div>
   <div *ngIf="successupdate"  class="alert alert-success alert-dismissible" style="position: fixed;min-width: 20%;top:30%;left:45%;border-radius: 10px; ">
     
       <strong style="display:block;text-align: center">MSL value updated successfully</strong>
@@ -28,7 +28,7 @@
     
           OK</button>
  
-    </div>
+  </div>
 
   <div *ngIf="alertBoxs"  class="alert alert-success alert-dismissible" style="position: fixed;min-width: 20%;top:30%;left:45%;border-radius: 10px; ">
     
@@ -38,7 +38,7 @@
     
           OK</button>
  
-    </div>
+  </div>
   <div *ngIf="updateAlert" class="alert alert-success alert-dismissible" style="position: fixed;left: 42%;top:30%;">
     
       <strong style="font-size: 18px;" >Do want to update MSL of {{successFileCount}} branch?  </strong><br> 
@@ -51,9 +51,7 @@
       NO</button>
       </div>
       
-    </div>
-
-
+  </div>
 
 <!-- <div *ngIf="alertBox" class="alert alert-success alert-dismissible">
     
@@ -63,9 +61,7 @@
     
     OK</button>
     
-  </div> -->
-  
-  
+  </div> --> 
   <!-- Search bar -->
   <!-- <div class="container" >
   <span class="text-style"> Branch Wise MSL Values </span>
@@ -74,11 +70,11 @@
   
   </div> --> 
   <div style="width: 100%;height:100%;background-color: #ffffff;z-index: 1;" *ngIf="loaders">
-        <div class="loader"></div>
-      </div>
+      <div class="loader"></div>
+  </div>
       
       
-      <div *ngIf="!loaders">
+<div *ngIf="!loaders">
   <div class=" text-center" style="margin-top: 5vh;">
       <span class="text-style "> Branch Wise MSL Values </span>
   </div>
@@ -101,7 +97,7 @@
                                (click)="setOrder('branch_id')">Branch Id 
                                <button style="float: right;padding: 0px;background: transparent;border: none;cursor: pointer;">
 
-                                  <i class="material-icons " >
+                                  <i class="material-icons" >
                                       swap_vert
                                       </i>
                                       </button>

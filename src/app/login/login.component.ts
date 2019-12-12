@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   username:any ;
   password;any;
   constructor(private deviceService: DeviceDetectorService,private _router: Router,public formbuilder:FormBuilder,public details:LoginService) { 
-    localStorage.removeItem('lkspState');
+    localStorage.removeItem('kspState');
     const isMobile = this.deviceService.isMobile();
     if(isMobile){
       this._router.navigate(['404']);

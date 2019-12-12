@@ -190,24 +190,20 @@ export class HomeRegistrationComponent implements OnInit {
   newUser:any;
   deleteeUserAlert:boolean = false;
   newUserAlert:boolean = false;
+
   constructor(private lmd: LmdService, private fb: FormBuilder, private _router: Router) {
     if (!localStorage.getItem('kspState')) {
       this._router.navigate(['login']);
     } else {
       this.loginUserState = JSON.parse(localStorage.getItem('kspState'));
     }
-   // console.log(this.loginUserState);
     this.lmd.getAllAgent(this.loginUserState)
       .then((data: any) => {
         this.allAgent = data;
-        //console.log(this.allAgent);
-
       })
     this.lmd.getHub(this.loginUserState).then((data: any[]) => {
       this.hubs = data;
-      // console.log(this.hubs);
     })
-    // console.log(this.hubs);
     this.singInDetails = this.fb.group({
       Agentname: ['', [Validators.required]],
       MobileNo: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
@@ -217,35 +213,13 @@ export class HomeRegistrationComponent implements OnInit {
 
     this.singInDetails.valueChanges
       .subscribe((value) => {
-         //console.log(value);
         this.newUser = {};
-        
         this.CreateUserDetails = value;
-        // console.log(this.singInDetails);
-        if (value.state) {
-          // console.log(value.state);
-        }
+        // if (value.state) {
+        //   // console.log(value.state);
+        // }
         this.loadData(this.singInDetails);
       });
-
-    // this.singInDetails.get('state').valueChanges
-    //   .subscribe((value:any) => {
-    //     console.log(value);
-    //     if(value){
-    //       this.filterState = this.state.filter((data) => {
-    //         console.log(data.name.toLowerCase());
-    //        return data.name.toLowerCase().indexOf(value.toLowerCase()) != -1
-    //       });
-    //     }
-
-    //     console.log(this.filterState);
-    //     // this.singInDetails.get('Hub').disable();
-    //     //   this.singInDetails.patchValue({
-    //     //     Hub: ''
-    //     //   })
-    //     if(value == '') return this.filterState = [];
-    //   })
-
     this.singInDetails.get('Hub').valueChanges
       .subscribe((value: any) => {
         if (value) {
@@ -273,7 +247,7 @@ export class HomeRegistrationComponent implements OnInit {
       })
   }
 
-  ngOnInit() { }
+  ngOnInit(){}
   selectState(stateName) {
     this.singInDetails.patchValue({
       state: stateName
@@ -287,21 +261,14 @@ export class HomeRegistrationComponent implements OnInit {
     });
     this.filterHubView = false;
     this.hubsValidation = true;
-    // console.log(this.hubsValidation);
-    //this.singInDetails.get('Hub').enable();
     this.filterHubs = [];
   }
   searchByAgent(event) {
-    // console.log(event);
     this.agentselection = {};
-    console.log(typeof this.searchAgentName);
     if (!this.searchAgentName) return this.filterAgent = [];
     this.filterAgent = this.allAgent.filter((data) => {
       const firstName = data.name.split(" ")[0];
       const lastName = data.name.split(" ")[1];
-      // console.log(firstName);
-      console.log(data.mobile);
-      console.log( data.mobile.toLowerCase().startsWith(this.searchAgentName) )
      if(lastName){
       return ( firstName.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) !=-1 || 
       lastName.toLowerCase().indexOf(this.searchAgentName.toLowerCase()) != -1 ||
@@ -330,18 +297,9 @@ export class HomeRegistrationComponent implements OnInit {
     this.deleteeUserAlert = false;
     this.lmd.deactivatedAgent(this.agentselection.mobileNo)
       .then((data: any) => {
-        // console.log(data);
         this.deactivatedAlert = true;
-        // console.log(this.deactivatedAgent);
-        //location.reload();
-        // setTimeout(() => {
-        //   this.deactivatedAlert = false;
-          
-        // }, 5000);
       })
-      .catch((err) => {
-
-      })
+      .catch((err) => {})
   }
   loadData(group = this.singInDetails) {
     Object.keys(group.controls)
@@ -385,8 +343,7 @@ export class HomeRegistrationComponent implements OnInit {
       state: this.loginUserState,
       hub: this.CreateUserDetails.Hub
   }
-  
-    this.lmd.createUser(createUser)
+  this.lmd.createUser(createUser)
     .then((data: any)=>{
       console.log(data);
       if(data.ResponseData.Success){
@@ -395,53 +352,18 @@ export class HomeRegistrationComponent implements OnInit {
         this.newUserAlert = true;
         this.createUserAlert = false;
       }else{
-        //console.log(data);
         this.createUserAlert = false;
         setTimeout(() => {
           alert(data.ResponseData.error);
         }, 500);
-        
       }
     })
     .catch((err)=>{
-      //console.log(err);
       this.createUserAlert = false;
       setTimeout(() => {
         alert(err.error.Error.MessageToUser)
       }, 500);
-      
     })
   }
 
-}
-
-
-
-// function customHubSelectionValidation(hubs:any[] ){
-//   return (control): {[key: string ]: any } | null =>{
-//     if(control.value && hubs){
-//       const Hub = control.value;
-//       console.log(hubs);
-//     const validationCheck = hubs.find((data)=>{
-//       return data == Hub;
-//     });
-//     console.log(validationCheck);
-//     if(validationCheck) return null;
-//     return {'hubSelectionValidation': true}
-//     }  
-//   }
-// }
-
-// function customHubSelectionValidation(control): {[key:string]: any}| null {
-//   if(control.value){
-//     const Hub = control.value;
-//     console.log(this.hubs);
-//   const validationCheck = this.hubs.find((data)=>{
-//     return data == Hub;
-//   });
-//   console.log(validationCheck);
-//   if(validationCheck) return null;
-//   return {'hubSelectionValidation': true}
-//   }
-
-// }
+} 

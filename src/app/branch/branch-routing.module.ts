@@ -8,13 +8,13 @@ import {DownloadinvoiceComponent} from './downloadinvoice/downloadinvoice.compon
 import {UploadinvoiceComponent} from './uploadinvoice/uploadinvoice.component';
 const routes: Routes = [
   {path:'', component:DashboardComponent, 
-  children:[
-    { path:'',redirectTo:'homebranch',pathMatch:'full'},
-    { path:'homebranch',component:HomebranchComponent },
-    { path:'viewallorder',component:ViewallorderComponent },
-    { path:'downloadinvoice', component:DownloadinvoiceComponent },
-    { path:'uploadinvoice', component:UploadinvoiceComponent }
-  ]}
+        children:[
+          { path:'',redirectTo:'homebranch',pathMatch:'full'},
+          { path:'homebranch',component:HomebranchComponent },
+          { path:'viewallorder',component:ViewallorderComponent },
+          { path:'downloadinvoice', component:DownloadinvoiceComponent },
+          { path:'uploadinvoice', component:UploadinvoiceComponent }
+        ]}
 ];
 
 @NgModule({
